@@ -103,7 +103,8 @@ if ("serviceWorker" in navigator) {
 }
 
 // ---------- Festive mode: a bouncing candy cane in the top-right of the nav bar.
-// Click it for Christmas mode: lights frame the window, the garland lights up, snow falls, and
+// Click it for Christmas mode: lights frame the window, the garland lights up, snow falls,
+// Santa flies across the page, and
 // Snoopy gets a Santa hat. The site always opens in light mode; the choice only carries
 // between pages during the same visit.
 const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -180,6 +181,13 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.setAttribute("aria-label", "Christmas mode");
   btn.innerHTML = '<img class="cane" src="icons/candy-cane.svg" alt="">';
   inner.appendChild(btn);
+  // Santa and his reindeer, flying back and forth over the page in Christmas mode.
+  // He floats above everything but can't be clicked and never moves anything.
+  const santa = document.createElement("div");
+  santa.id = "santa";
+  santa.setAttribute("aria-hidden", "true");
+  santa.innerHTML = '<img src="icons/santa-sleigh.svg" alt="">';
+  document.body.appendChild(santa);
   // Santa hat for Snoopy (only on pages that show him)
   const snoopy = document.querySelector(".mascot");
   if (snoopy) {
