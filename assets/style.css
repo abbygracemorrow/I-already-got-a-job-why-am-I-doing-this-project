@@ -649,5 +649,7 @@ body.festive .hero h1 {
   background: repeating-linear-gradient(135deg, #cc0011 0 11px, #fff 11px 20px, #f2a6ba 20px 31px, #fff 31px 40px);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-stroke: 1px rgba(120, 10, 30, .55);
-  text-shadow: none; filter: drop-shadow(0 0 6px rgba(22, 10, 18, .9)) drop-shadow(0 2px 2px rgba(0, 0, 0, .6));
+  text-shadow: none;
+  /* soft white-and-pink glow so the striped letters stand out on the night sky */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, .9)) drop-shadow(0 0 8px rgba(255, 190, 215, .85)) drop-shadow(0 0 18px rgba(255, 120, 170, .6));
 }
