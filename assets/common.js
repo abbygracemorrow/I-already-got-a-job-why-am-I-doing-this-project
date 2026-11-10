@@ -226,12 +226,15 @@ document.addEventListener("DOMContentLoaded", () => {
   inner.appendChild(btn);
   // A Christmas ornament with a photo inside, hanging from the top-left corner and
   // slowly spinning (Christmas mode). Clicks pass through it.
+  // only on the Today page (the page with Snoopy)
+  if (document.querySelector(".mascot")) {
   const orn = document.createElement("div");
   orn.id = "photo-ornament";
   orn.setAttribute("aria-hidden", "true");
   orn.innerHTML = '<span class="po-swing"><span class="po-string"></span><span class="po-cap"></span>' +
     '<span class="po-ball"><img src="assets/ornament-photo.jpg" alt=""><span class="po-shine"></span></span></span>';
   document.body.appendChild(orn);
+  }
   // Santa hat for Snoopy (only on pages that show him)
   const snoopy = document.querySelector(".mascot");
   if (snoopy) {

@@ -620,7 +620,7 @@ body.festive #photo-ornament { display: block; }
 
 
 /* keep the banner text readable over the village in Christmas mode */
-body.festive .hero-text h1, body.festive .hero-text p, body.festive .hero-cta .btn-link {
+body.festive .hero-text p, body.festive .hero-cta .btn-link {
   text-shadow: 0 0 6px rgba(22, 10, 18, .95), 0 0 16px rgba(22, 10, 18, .9), 0 2px 3px rgba(0, 0, 0, .8);
 }
 
@@ -644,7 +644,7 @@ body.festive .countdown::before { /* soft centre so the numbers read clearly */
 @media (prefers-reduced-motion: reduce) { body.festive .countdown { animation: none; } }
 
 /* Christmas mode: the "Today's job watch" letters look like candy canes */
-body.festive .hero h1 {
+body.festive .hero:has(.mascot) h1 {   /* Today page only */
   /* same red / white / pink / white stripes as the Christmas countdown, scaled to the letters */
   background: repeating-linear-gradient(135deg, #cc0011 0 14px, #fff 14px 24px, #f2a6ba 24px 38px, #fff 38px 48px);
   -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -659,3 +659,5 @@ body.festive .hero h1 {
   display: flex; flex-direction: column; justify-content: center; align-items: center; }
 body.festive .countdown { border-width: 2px; }
 .countdown { border: 2px solid transparent; }
+body.festive .hero:has(.mascot) .hero-text h1 { text-shadow: none; }
+body.festive .hero:not(:has(.mascot)) h1 { text-shadow: 0 0 6px rgba(22, 10, 18, .95), 0 0 16px rgba(22, 10, 18, .9); }
