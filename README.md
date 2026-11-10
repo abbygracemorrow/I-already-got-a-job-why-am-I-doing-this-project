@@ -174,7 +174,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme, plus its dark mode) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the top-right Christmas-tree toggle (dark mode with Christmas lights, snow, and a Santa hat on Snoopy) |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for dark mode with Christmas lights around the whole window and under the nav bar, snow, and a Santa hat on Snoopy; the site always opens in light mode) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
@@ -187,6 +187,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `icons/ornament.svg` | Striped ornament (one per day in the days-of-history tracker) |
 | `icons/garland.svg` | Garland at the top of the page banner |
 | `icons/santa-hat.svg` | Santa hat Snoopy wears when the lights are on |
+| `icons/candy-cane.svg` | The candy cane that turns dark mode and the lights on and off |
 | `requirements-dev.txt` | Test dependency (pytest) |
 | `.gitignore` | Keeps Python caches and half-written raw folders out of git |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are |

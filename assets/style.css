@@ -351,29 +351,29 @@ details.remote-more summary:hover { color: var(--rose-deep); }
 .ornaments .orn:last-child:hover .orn-tip, .ornaments .orn:last-child.open .orn-tip, .ornaments .orn:last-child:focus-visible .orn-tip { transform: translate(0, 0); }
 .ornaments .orn:last-child .orn-tip::after { left: auto; right: 14px; }
 
-/* ---------- Festive toggle (top-right of the nav, styled like a light/dark switch) ---------- */
+/* ---------- Festive toggle: a bouncing candy cane in the top-right of the nav ---------- */
 .festive-toggle {
-  margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 999px;
+  margin-left: 6px; width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
+  border-radius: 50%; display: grid; place-items: center; transition: background .2s;
 }
+.festive-toggle:hover { background: rgba(227, 98, 143, .1); }
 .festive-toggle:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
-.ft-track {
-  position: relative; display: flex; align-items: center; justify-content: space-between;
-  width: 64px; height: 32px; padding: 0 8px; border-radius: 999px;
-  background: #efe3e8; border: 1px solid #e3cfd8; transition: background .25s, border-color .25s, box-shadow .25s;
+.cane {
+  width: 22px; height: 31px; transform-origin: 50% 100%;
+  animation: cane-bounce 1.4s cubic-bezier(.28, .84, .42, 1) infinite;
+  filter: drop-shadow(0 2px 2px rgba(42, 26, 35, .2));
 }
-.ft-knob {
-  position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%;
-  display: grid; place-items: center; background: #fff; box-shadow: 0 1px 4px rgba(42, 26, 35, .25);
-  transition: left .25s, background .25s, box-shadow .25s;
+@keyframes cane-bounce {
+  0%, 100% { transform: translateY(0) rotate(-8deg) scale(1, 1); }
+  10%      { transform: translateY(0) rotate(-8deg) scale(1.1, .88); }
+  40%      { transform: translateY(-9px) rotate(8deg) scale(.95, 1.06); }
+  55%      { transform: translateY(-9px) rotate(10deg) scale(1, 1); }
+  85%      { transform: translateY(0) rotate(-6deg) scale(1.06, .94); }
 }
-.ft-icon { font-size: 13px; line-height: 1; }
-.ft-off { filter: grayscale(1) brightness(1.1); opacity: .6; } /* unlit tree */
-.ft-on { display: none; }
-.festive-toggle:hover .ft-track { border-color: var(--rose); }
-body.festive .ft-track { background: #0c0709; border-color: #5a3445; box-shadow: 0 0 14px rgba(255, 196, 92, .45); }
-body.festive .ft-knob { left: 35px; background: #fff7e0; box-shadow: 0 0 10px rgba(255, 210, 120, .9); }
-body.festive .ft-off { display: none; }
-body.festive .ft-on { display: block; filter: drop-shadow(0 0 3px rgba(255, 210, 120, .9)); } /* lit tree */
+.festive-toggle.boing .cane { animation: cane-spin .6s ease-out, cane-bounce 1.4s cubic-bezier(.28, .84, .42, 1) .6s infinite; }
+@keyframes cane-spin { 0% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-14px) rotate(200deg); } 100% { transform: translateY(0) rotate(352deg); } }
+body.festive .festive-toggle:hover { background: rgba(255, 210, 120, .12); }
+body.festive .cane { filter: drop-shadow(0 0 6px rgba(255, 210, 120, .9)) drop-shadow(0 0 2px rgba(255, 255, 255, .8)); }
 
 /* string of Christmas lights hanging under the nav bar */
 .lights {
@@ -385,19 +385,19 @@ body.festive .ft-on { display: block; filter: drop-shadow(0 0 3px rgba(255, 210,
   background: radial-gradient(ellipse 14px 8px at 50% 0, transparent 70%, #24563a 72%, #24563a 86%, transparent 88%) repeat-x 0 0 / 26px 8px;
   opacity: .8;
 }
-.lights i {
+.lights i, #light-frame i {
   position: relative; width: 8px; height: 12px; margin-top: 6px; border-radius: 50% 50% 45% 45%;
   background: var(--bulb); box-shadow: 0 0 6px 2px var(--bulb), 0 0 16px 4px var(--bulb-glow);
   animation: twinkle 1.6s ease-in-out infinite alternate;
 }
-.lights i::before { /* bulb cap */
+.lights i::before, #light-frame i::before { /* bulb cap */
   content: ""; position: absolute; top: -3px; left: 2px; width: 4px; height: 4px; border-radius: 1px; background: #3b4a3f;
 }
-.lights i:nth-child(5n+1) { --bulb: #ff5d7d; --bulb-glow: rgba(255, 93, 125, .55); }
-.lights i:nth-child(5n+2) { --bulb: #ffd166; --bulb-glow: rgba(255, 209, 102, .55); }
-.lights i:nth-child(5n+3) { --bulb: #5fd38d; --bulb-glow: rgba(95, 211, 141, .55); }
-.lights i:nth-child(5n+4) { --bulb: #ff9fc0; --bulb-glow: rgba(255, 159, 192, .55); }
-.lights i:nth-child(5n+5) { --bulb: #fff4d6; --bulb-glow: rgba(255, 244, 214, .6); }
+.lights i:nth-child(5n+1), #light-frame i:nth-child(5n+1) { --bulb: #ff5d7d; --bulb-glow: rgba(255, 93, 125, .55); }
+.lights i:nth-child(5n+2), #light-frame i:nth-child(5n+2) { --bulb: #ffd166; --bulb-glow: rgba(255, 209, 102, .55); }
+.lights i:nth-child(5n+3), #light-frame i:nth-child(5n+3) { --bulb: #5fd38d; --bulb-glow: rgba(95, 211, 141, .55); }
+.lights i:nth-child(5n+4), #light-frame i:nth-child(5n+4) { --bulb: #ff9fc0; --bulb-glow: rgba(255, 159, 192, .55); }
+.lights i:nth-child(5n+5), #light-frame i:nth-child(5n+5) { --bulb: #fff4d6; --bulb-glow: rgba(255, 244, 214, .6); }
 @keyframes twinkle { from { opacity: 1; filter: brightness(1.15); } to { opacity: .45; filter: brightness(.8); } }
 body.festive .lights { display: flex; }
 
@@ -424,7 +424,8 @@ body.festive .santa-hat { opacity: 1; transform: rotate(-6deg) translateY(0) sca
   .lights i:nth-child(n+25) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lights i { animation: none; }
+  .lights i, #light-frame i { animation: none; }
+  .cane, .festive-toggle.boing .cane { animation: none; }
 }
 
 /* ---------- Dark mode: when the lights-and-snow toggle is on, the site goes dark so the
@@ -486,3 +487,20 @@ body.festive .offline-note { background: var(--cream); }
 body.festive footer b { color: var(--ink); }
 body.festive #snow i { box-shadow: 0 0 6px rgba(255, 255, 255, .9); }
 body.festive .countdown { color: #fff; }
+
+/* lights framing the whole window in dark mode (stay put while scrolling) */
+#light-frame { position: fixed; inset: 0; z-index: 35; pointer-events: none; }
+#light-frame .lf { position: absolute; display: flex; justify-content: space-around; }
+#light-frame .lf::before { /* the wire */
+  content: ""; position: absolute; background: #24563a; opacity: .85; border-radius: 2px;
+}
+#light-frame .lf-top, #light-frame .lf-bottom { left: 0; right: 0; height: 20px; align-items: flex-start; }
+#light-frame .lf-top { top: 0; }
+#light-frame .lf-bottom { bottom: 0; transform: scaleY(-1); }
+#light-frame .lf-top::before, #light-frame .lf-bottom::before { left: 0; right: 0; top: 3px; height: 2px; }
+#light-frame .lf-left, #light-frame .lf-right { top: 0; bottom: 0; width: 20px; flex-direction: column; align-items: flex-start; }
+#light-frame .lf-left { left: 0; }
+#light-frame .lf-right { right: 0; transform: scaleX(-1); }
+#light-frame .lf-left::before, #light-frame .lf-right::before { top: 0; bottom: 0; left: 3px; width: 2px; }
+#light-frame .lf-left i, #light-frame .lf-right i { margin: 0 0 0 6px; width: 12px; height: 8px; border-radius: 45% 50% 50% 45%; }
+#light-frame .lf-left i::before, #light-frame .lf-right i::before { top: 2px; left: -3px; width: 4px; height: 4px; }

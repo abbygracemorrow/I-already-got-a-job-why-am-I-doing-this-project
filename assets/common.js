@@ -102,9 +102,10 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 }
 
-// ---------- Festive mode: a light/dark-style toggle in the top-right of the nav bar.
-// On: Christmas lights along the nav bar light up, snow falls, and Snoopy gets a Santa
-// hat. The choice is remembered in this browser.
+// ---------- Festive mode: a bouncing candy cane in the top-right of the nav bar.
+// Click it for dark mode: Christmas lights along the nav bar light up, snow falls, and
+// Snoopy gets a Santa hat. The site always opens in light mode; the choice only carries
+// between pages during the same visit.
 const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const FESTIVE_KEY = "jobwatch.festive";
 
@@ -128,12 +129,39 @@ function setSnow(on) {
   document.body.appendChild(layer);
 }
 
+// Strings of lights framing the whole window (top, right, bottom, left) in dark mode.
+function buildLightFrame() {
+  let frame = document.getElementById("light-frame");
+  if (frame) frame.remove();
+  if (!document.body.classList.contains("festive")) return;
+  frame = document.createElement("div");
+  frame.id = "light-frame";
+  frame.setAttribute("aria-hidden", "true");
+  const gap = window.innerWidth < 720 ? 30 : 36; // space between bulbs, in pixels
+  const sides = { top: window.innerWidth, bottom: window.innerWidth, left: window.innerHeight, right: window.innerHeight };
+  for (const [side, length] of Object.entries(sides)) {
+    const string = document.createElement("div");
+    string.className = "lf lf-" + side;
+    const n = Math.max(4, Math.floor(length / gap));
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement("i");
+      b.style.animationDelay = ((i * 3 + side.length) % 7) * 0.23 + "s";
+      string.appendChild(b);
+    }
+    frame.appendChild(string);
+  }
+  document.body.appendChild(frame);
+}
+let frameTimer;
+window.addEventListener("resize", () => { clearTimeout(frameTimer); frameTimer = setTimeout(buildLightFrame, 150); });
+
 function setFestive(on) {
   document.body.classList.toggle("festive", on);
+  buildLightFrame();
   const btn = document.getElementById("festive-toggle");
   if (btn) {
     btn.setAttribute("aria-pressed", String(on));
-    btn.title = on ? "Turn off the lights and snow" : "Turn on the lights and snow";
+    btn.title = on ? "Back to light mode" : "Dark mode with Christmas lights and snow";
   }
   setSnow(on);
 }
@@ -147,8 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.type = "button";
   btn.className = "festive-toggle";
   btn.setAttribute("aria-label", "Christmas lights and snow");
-  btn.innerHTML = '<span class="ft-track"><span class="ft-knob" aria-hidden="true">' +
-    '<span class="ft-icon ft-off">🎄</span><span class="ft-icon ft-on">🎄</span></span></span>';
+  btn.innerHTML = '<img class="cane" src="icons/candy-cane.svg" alt="">';
   inner.appendChild(btn);
   // the string of lights along the bottom of the nav bar
   const lights = document.createElement("div");
@@ -173,11 +200,12 @@ document.addEventListener("DOMContentLoaded", () => {
     hat.alt = "";
     wrap.appendChild(hat);
   }
-  const on = localStorage.getItem(FESTIVE_KEY) === "on" || localStorage.getItem("jobwatch.snow") === "on";
-  setFestive(on);
+  localStorage.removeItem(FESTIVE_KEY); localStorage.removeItem("jobwatch.snow"); // old settings
+  setFestive(sessionStorage.getItem(FESTIVE_KEY) === "on");
   btn.addEventListener("click", () => {
     const next = !document.body.classList.contains("festive");
-    localStorage.setItem(FESTIVE_KEY, next ? "on" : "off");
+    sessionStorage.setItem(FESTIVE_KEY, next ? "on" : "off");
     setFestive(next);
+    btn.classList.remove("boing"); void btn.offsetWidth; btn.classList.add("boing");
   });
 });

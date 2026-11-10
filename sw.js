@@ -1,13 +1,13 @@
 // Service worker: network first, cache as the fallback.
 // Online, every page and data file comes from the network (and the copy is saved).
 // Offline, the site still opens and shows the last data it loaded.
-const CACHE = "job-watcher-v27";
+const CACHE = "job-watcher-v29";
 const SHELL = [
   "./", "index.html", "browse.html", "market.html",
   "assets/style.css", "assets/common.js", "assets/charts.js",
   "assets/today.js", "assets/browse.js", "assets/market.js",
   "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png",
-  "icons/ornament.svg", "icons/garland.svg", "icons/favicon.svg", "icons/favicon-32.png", "icons/santa-hat.svg", "assets/snoopy.png",
+  "icons/ornament.svg", "icons/garland.svg", "icons/favicon.svg", "icons/favicon-32.png", "icons/santa-hat.svg", "icons/candy-cane.svg", "assets/snoopy.png",
 ];
 
 self.addEventListener("install", event => {
