@@ -41,7 +41,7 @@
   const done = Math.min(status.days_with_success, GOAL);
   // Dates for the 7-day goal. A day counts by its UTC date (course rule); the popup
   // shows it in Dallas time. Past days come from the history; future days follow the
-  // daily schedule (12:23 UTC = 6:23 am in Dallas).
+  // daily schedule (12:00 UTC = 6:00 am in Dallas).
   const runDays = [...new Set(rows.flatMap(r => [r.first_seen, r.last_seen, r.removed_date]).filter(Boolean))].sort();
   const lastDay = runDays[runDays.length - 1] || day;
   const dallasStamp = iso => new Date(iso).toLocaleString("en-US", { timeZone: "America/Chicago",
@@ -50,10 +50,10 @@
     if (i < done) {
       const d = runDays[i];
       const when = i === 0 && status.watching_since ? dallasStamp(status.watching_since)
-        : d === day ? dallasStamp(status.run_time) : dallasStamp(d + "T12:23:00Z");
+        : d === day ? dallasStamp(status.run_time) : dallasStamp(d + "T12:00:00Z");
       return { n: i + 1, done: true, when };
     }
-    return { n: i + 1, done: false, when: dallasStamp(dayStr(dayNum(lastDay) + (i - done + 1)) + "T12:23:00Z") };
+    return { n: i + 1, done: false, when: dallasStamp(dayStr(dayNum(lastDay) + (i - done + 1)) + "T12:00:00Z") };
   });
 
   app.innerHTML = `
@@ -66,7 +66,7 @@
       <div class="countdown">
         <div class="cd-label">Next check in</div>
         <div class="cd-time" id="cd">--:--:--</div>
-        <div class="cd-sub">every day at 6:23 am Dallas time</div>
+        <div class="cd-sub">every day at 6:00 am Dallas time</div>
       </div>
     </div>
 
@@ -231,9 +231,9 @@
   drawDallas();
   drawShortlist();
 
-  // ---------- countdown to the next scheduled check (12:23 UTC daily)
+  // ---------- countdown to the next scheduled check (12:00 UTC daily)
   function nextRun(now) {
-    const t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 23, 0));
+    const t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 0, 0));
     if (t <= now) t.setUTCDate(t.getUTCDate() + 1);
     return t;
   }
