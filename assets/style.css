@@ -348,3 +348,71 @@ details.remote-more summary:hover { color: var(--rose-deep); }
 .ornaments .orn:last-child .orn-tip { left: auto; right: 0; transform: translate(0, 6px); }
 .ornaments .orn:last-child:hover .orn-tip, .ornaments .orn:last-child.open .orn-tip, .ornaments .orn:last-child:focus-visible .orn-tip { transform: translate(0, 0); }
 .ornaments .orn:last-child .orn-tip::after { left: auto; right: 14px; }
+
+/* ---------- Festive toggle (top-right of the nav, styled like a light/dark switch) ---------- */
+.festive-toggle {
+  margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 999px;
+}
+.festive-toggle:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+.ft-track {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  width: 64px; height: 32px; padding: 0 8px; border-radius: 999px;
+  background: #efe3e8; border: 1px solid #e3cfd8; transition: background .25s, border-color .25s, box-shadow .25s;
+}
+.ft-knob {
+  position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center; background: #fff; box-shadow: 0 1px 4px rgba(42, 26, 35, .25);
+  transition: left .25s, background .25s, box-shadow .25s;
+}
+.ft-icon { font-size: 13px; line-height: 1; }
+.ft-off { filter: grayscale(1); opacity: .7; }
+.ft-on { display: none; }
+.festive-toggle:hover .ft-track { border-color: var(--rose); }
+body.festive .ft-track { background: var(--ink); border-color: var(--ink); box-shadow: 0 0 14px rgba(255, 196, 92, .45); }
+body.festive .ft-knob { left: 35px; background: #fff7e0; box-shadow: 0 0 10px rgba(255, 210, 120, .9); }
+body.festive .ft-off { display: none; }
+body.festive .ft-on { display: block; }
+
+/* string of Christmas lights hanging under the nav bar */
+.lights {
+  display: none; position: absolute; left: 0; right: 0; top: 100%; height: 22px; pointer-events: none;
+  justify-content: space-around; align-items: flex-start; padding: 0 6px;
+}
+.lights::before { /* the wire */
+  content: ""; position: absolute; left: 0; right: 0; top: 2px; height: 8px;
+  background: radial-gradient(ellipse 14px 8px at 50% 0, transparent 70%, #24563a 72%, #24563a 86%, transparent 88%) repeat-x 0 0 / 26px 8px;
+  opacity: .8;
+}
+.lights i {
+  position: relative; width: 8px; height: 12px; margin-top: 6px; border-radius: 50% 50% 45% 45%;
+  background: var(--bulb); box-shadow: 0 0 6px 2px var(--bulb), 0 0 16px 4px var(--bulb-glow);
+  animation: twinkle 1.6s ease-in-out infinite alternate;
+}
+.lights i::before { /* bulb cap */
+  content: ""; position: absolute; top: -3px; left: 2px; width: 4px; height: 4px; border-radius: 1px; background: #3b4a3f;
+}
+.lights i:nth-child(5n+1) { --bulb: #ff5d7d; --bulb-glow: rgba(255, 93, 125, .55); }
+.lights i:nth-child(5n+2) { --bulb: #ffd166; --bulb-glow: rgba(255, 209, 102, .55); }
+.lights i:nth-child(5n+3) { --bulb: #5fd38d; --bulb-glow: rgba(95, 211, 141, .55); }
+.lights i:nth-child(5n+4) { --bulb: #ff9fc0; --bulb-glow: rgba(255, 159, 192, .55); }
+.lights i:nth-child(5n+5) { --bulb: #fff4d6; --bulb-glow: rgba(255, 244, 214, .6); }
+@keyframes twinkle { from { opacity: 1; filter: brightness(1.15); } to { opacity: .45; filter: brightness(.8); } }
+body.festive .lights { display: flex; }
+
+/* Snoopy's Santa hat */
+.mascot-wrap { position: relative; display: inline-block; flex-shrink: 0; line-height: 0; }
+.mascot-wrap.hop { animation: hop .6s ease-out; }
+.santa-hat {
+  position: absolute; width: 46%; left: 31%; top: -11%; pointer-events: none;
+  transform: rotate(-8deg) translateY(-14px) scale(.85); transform-origin: 30% 90%;
+  opacity: 0; transition: opacity .3s, transform .35s cubic-bezier(.3, 1.6, .5, 1);
+  filter: drop-shadow(0 3px 4px rgba(42, 26, 35, .25));
+}
+body.festive .santa-hat { opacity: 1; transform: rotate(-8deg) translateY(0) scale(1); }
+
+@media (max-width: 720px) {
+  .lights i:nth-child(n+25) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lights i { animation: none; }
+}

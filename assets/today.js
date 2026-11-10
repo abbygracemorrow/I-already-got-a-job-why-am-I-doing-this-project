@@ -1,7 +1,7 @@
 // Today page: last run, source status, the four counts, new and removed lists,
 // plus the interactive extras: countdown to the next check, days of history, a filterable
 // list of Dallas credit jobs with a "surprise me" pick, the shortlist, Snoopy's money
-// rain and a snow switch.
+// rain (the lights-and-snow toggle lives in common.js).
 (async function () {
   const app = document.getElementById("app");
   let status, rows;
@@ -88,7 +88,6 @@
     <div class="card" id="history">
       <div class="goal-head">
         <h2>Days of history: ${fmt(daysWithData)}</h2>
-        <label class="switch"><input type="checkbox" id="snow-toggle"><span></span> Let it snow</label>
       </div>
       <p class="lede">The tool has ${fmt(daysWithData)} day${daysWithData === 1 ? "" : "s"} of job data, starting ${esc(status.watching_since ? shortDate(status.watching_since) : dayLabel(firstRunDay))}${missed ? `, with ${missed} day${missed === 1 ? "" : "s"} missed` : ""}.
         Each ornament is one day: lit means that day's check worked${missed ? ", grey means it was missed" : ""}, and the faded one is the next check. Hover over or tap one to see its date. Times are Dallas time.</p>
@@ -255,15 +254,6 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // ---------- snow switch (remembered in this browser)
-  const snowKey = "jobwatch.snow";
-  $("snow-toggle").checked = localStorage.getItem(snowKey) === "on";
-  setSnow($("snow-toggle").checked);
-  $("snow-toggle").addEventListener("change", e => {
-    localStorage.setItem(snowKey, e.target.checked ? "on" : "off");
-    setSnow(e.target.checked);
-  });
-
   // ---------- Snoopy: click for a money rain
   const snoopy = document.querySelector(".mascot");
   if (snoopy) {
@@ -272,13 +262,12 @@
     snoopy.setAttribute("role", "button");
     snoopy.setAttribute("aria-label", "Make it rain");
     snoopy.tabIndex = 0;
-    const go = () => { snoopy.classList.remove("hop"); void snoopy.offsetWidth; snoopy.classList.add("hop"); moneyRain(24); };
+    const hopper = snoopy.closest(".mascot-wrap") || snoopy; // the Santa hat hops along
+    const go = () => { hopper.classList.remove("hop"); void hopper.offsetWidth; hopper.classList.add("hop"); moneyRain(24); };
     snoopy.addEventListener("click", go);
     snoopy.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
   }
 })();
-
-const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function moneyRain(n) {
   if (calm()) return;
@@ -294,24 +283,4 @@ function moneyRain(n) {
     document.body.appendChild(b);
     setTimeout(() => b.remove(), 5000);
   }
-}
-
-function setSnow(on) {
-  let layer = document.getElementById("snow");
-  if (!on || calm()) { if (layer) layer.remove(); return; }
-  if (layer) return;
-  layer = document.createElement("div");
-  layer.id = "snow";
-  layer.setAttribute("aria-hidden", "true");
-  for (let i = 0; i < 60; i++) {
-    const f = document.createElement("i");
-    const size = 3 + Math.random() * 6;
-    f.style.left = Math.random() * 100 + "vw";
-    f.style.width = f.style.height = size + "px";
-    f.style.animationDuration = 6 + Math.random() * 8 + "s";
-    f.style.animationDelay = -Math.random() * 14 + "s";
-    f.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
-    layer.appendChild(f);
-  }
-  document.body.appendChild(layer);
 }

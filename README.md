@@ -174,9 +174,9 @@ by `posting_id` (`<source>:<source's own id>`).
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the top-right lights-and-snow toggle (Christmas lights, snow, Santa hat on Snoopy) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
-| `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain, snow switch |
+| `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
 | `assets/market.js` | Market page: the six findings and their charts |
 | `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
@@ -185,7 +185,8 @@ by `posting_id` (`<source>:<source's own id>`).
 | `icons/icon-192.png`, `icons/icon-512.png` | App icons used when the site is installed |
 | `icons/favicon.svg`, `icons/favicon-32.png` | Dollar-bill tab icon (SVG, with a PNG fallback) |
 | `icons/ornament.svg` | Striped ornament (one per day in the days-of-history tracker) |
-| `icons/garland.svg` | Garland under the navigation bar |
+| `icons/garland.svg` | Garland at the top of the page banner |
+| `icons/santa-hat.svg` | Santa hat Snoopy wears when the lights are on |
 | `requirements-dev.txt` | Test dependency (pytest) |
 | `.gitignore` | Keeps Python caches and half-written raw folders out of git |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are |

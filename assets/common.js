@@ -101,3 +101,83 @@ document.addEventListener("DOMContentLoaded", setOffline);
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 }
+
+// ---------- Festive mode: a light/dark-style toggle in the top-right of the nav bar.
+// On: Christmas lights along the nav bar light up, snow falls, and Snoopy gets a Santa
+// hat. The choice is remembered in this browser.
+const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FESTIVE_KEY = "jobwatch.festive";
+
+function setSnow(on) {
+  let layer = document.getElementById("snow");
+  if (!on || calm()) { if (layer) layer.remove(); return; }
+  if (layer) return;
+  layer = document.createElement("div");
+  layer.id = "snow";
+  layer.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 60; i++) {
+    const f = document.createElement("i");
+    const size = 3 + Math.random() * 6;
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.width = f.style.height = size + "px";
+    f.style.animationDuration = 6 + Math.random() * 8 + "s";
+    f.style.animationDelay = -Math.random() * 14 + "s";
+    f.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
+    layer.appendChild(f);
+  }
+  document.body.appendChild(layer);
+}
+
+function setFestive(on) {
+  document.body.classList.toggle("festive", on);
+  const btn = document.getElementById("festive-toggle");
+  if (btn) {
+    btn.setAttribute("aria-pressed", String(on));
+    btn.title = on ? "Turn off the lights and snow" : "Turn on the lights and snow";
+  }
+  setSnow(on);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector(".nav"), inner = document.querySelector(".nav-inner");
+  if (!nav || !inner) return;
+  // the toggle
+  const btn = document.createElement("button");
+  btn.id = "festive-toggle";
+  btn.type = "button";
+  btn.className = "festive-toggle";
+  btn.setAttribute("aria-label", "Christmas lights and snow");
+  btn.innerHTML = '<span class="ft-track"><span class="ft-knob" aria-hidden="true">' +
+    '<span class="ft-icon ft-off">💡</span><span class="ft-icon ft-on">🎄</span></span></span>';
+  inner.appendChild(btn);
+  // the string of lights along the bottom of the nav bar
+  const lights = document.createElement("div");
+  lights.className = "lights";
+  lights.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 48; i++) {
+    const b = document.createElement("i");
+    b.style.animationDelay = (i % 7) * 0.23 + "s";
+    lights.appendChild(b);
+  }
+  nav.appendChild(lights);
+  // Santa hat for Snoopy (only on pages that show him)
+  const snoopy = document.querySelector(".mascot");
+  if (snoopy) {
+    const wrap = document.createElement("span");
+    wrap.className = "mascot-wrap";
+    snoopy.parentNode.insertBefore(wrap, snoopy);
+    wrap.appendChild(snoopy);
+    const hat = document.createElement("img");
+    hat.className = "santa-hat";
+    hat.src = "icons/santa-hat.svg";
+    hat.alt = "";
+    wrap.appendChild(hat);
+  }
+  const on = localStorage.getItem(FESTIVE_KEY) === "on" || localStorage.getItem("jobwatch.snow") === "on";
+  setFestive(on);
+  btn.addEventListener("click", () => {
+    const next = !document.body.classList.contains("festive");
+    localStorage.setItem(FESTIVE_KEY, next ? "on" : "off");
+    setFestive(next);
+  });
+});
