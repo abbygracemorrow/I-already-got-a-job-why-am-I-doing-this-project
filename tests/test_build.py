@@ -112,3 +112,15 @@ def test_workday_board_over_limit_gets_a_note(tmp_path, monkeypatch):
     run = cli.do_fetch(tmp_path / "data", datetime(2026, 11, 10, 12, 0, tzinfo=timezone.utc))
     (entry,) = run["sources"]
     assert entry["ok"] and "2400" in entry["note"]
+
+
+def test_status_lists_the_days_of_history(tmp_path):
+    from watcher.status import make_status
+    raw = tmp_path / "raw"
+    put(raw, "2026-11-10", gh_raw("a", [(1, "X")]))
+    put(raw, "2026-11-11", gh_raw("a", [(1, "X")]))  # nothing changed this day
+    put(raw, "2026-11-13", gh_raw("a", [(1, "X")]))  # 11-12 was missed
+    rows = build_history(raw)
+    st = make_status(rows, raw, {"date": "2026-11-13", "run_time": "2026-11-13T12:00:00Z", "sources": []})
+    assert st["run_days"] == ["2026-11-10", "2026-11-11", "2026-11-13"]
+    assert st["days_with_success"] == 3

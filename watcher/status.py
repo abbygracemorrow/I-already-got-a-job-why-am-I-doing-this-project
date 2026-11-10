@@ -24,6 +24,7 @@ def make_status(rows: list[dict], raw_dir: Path, run: dict) -> dict:
         "first_run_date": days[0] if days else None,
         "watching_since": min(starts) if starts else None,  # UTC time of the first run
         "days_with_success": len(days),
+        "run_days": days,  # every date with a raw file (the days of history)
         "open": sum(1 for r in rows if r["status"] == "open"),
         "new_today": sum(1 for r in rows if r["first_seen"] == day and not r["first_run"]),
         "removed_today": sum(1 for r in rows if r["removed_date"] == day),

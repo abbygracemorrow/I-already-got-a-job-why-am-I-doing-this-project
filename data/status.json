@@ -4,6 +4,9 @@
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
   "days_with_success": 1,
+  "run_days": [
+    "2026-11-10"
+  ],
   "open": 19333,
   "new_today": 0,
   "removed_today": 0,
