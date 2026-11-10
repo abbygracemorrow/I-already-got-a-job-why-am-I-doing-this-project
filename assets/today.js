@@ -71,9 +71,9 @@
         <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p>
       </div>
       <div class="countdown">
-        <div class="cd-label" id="cd-label">Next check in</div>
+        <div class="cd-label" id="cd-label">Latest check</div>
         <div class="cd-time" id="cd">--:--:--</div>
-        <div class="cd-sub" id="cd-sub">every day at 6:00 am Dallas time</div>
+        <div class="cd-sub" id="cd-sub">sources answered</div>
       </div>
     </div>
 
@@ -96,9 +96,9 @@
           <img class="money plain-only" src="icons/favicon.svg" alt=""><img class="xmas-only" src="icons/ornament.svg" alt=""><small>${esc(shortDate(c.when))}</small>
           <span class="orn-tip" role="tooltip"><b>Day ${c.n}</b>${c.done ? "Checked" : "Check missed"} ${esc(dallasStamp(c.when))}${c.began && c.began !== c.when ? `<span>Watching began ${esc(dallasStamp(c.began))}</span>` : ""}<em class="${c.done ? "ok" : ""}">${c.done ? "✓ Data collected" : "✗ No data this day"}</em></span>
         </button>`).join("")}
-        <button type="button" class="orn next" aria-label="Next check: ${esc(dallasStamp(nextCheck))}">
+        <button type="button" class="orn next" aria-label="Next check: ${esc(shortDate(nextCheck))}, morning">
           <img class="money plain-only" src="icons/favicon.svg" alt=""><img class="xmas-only" src="icons/ornament.svg" alt=""><small>Next</small>
-          <span class="orn-tip" role="tooltip"><b>Next check</b>${esc(dallasStamp(nextCheck))}<em>Coming up</em></span>
+          <span class="orn-tip" role="tooltip"><b>Next check</b>${esc(shortDate(nextCheck))}, in the morning (Dallas time)<em>Coming up</em></span>
         </button></div>
     </div>
 
@@ -264,9 +264,11 @@
       $("cd").textContent = `${d} day${d === 1 ? "" : "s"}`;
       $("cd-sub").textContent = `and ${clock}`;
     } else {
-      $("cd-label").textContent = "Next check in";
-      $("cd").textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
-      $("cd-sub").textContent = "every day at 6:00 am Dallas time";
+      // Light mode: GitHub can start the daily run a little late, so no countdown.
+      // Show today's check instead: how many sources answered.
+      $("cd-label").textContent = "Latest check";
+      $("cd").textContent = `${okCount} / ${status.sources.length}`;
+      $("cd-sub").textContent = okCount === status.sources.length ? "✓ every source answered" : "sources answered";
     }
   }
   tick(); setInterval(tick, 1000);
