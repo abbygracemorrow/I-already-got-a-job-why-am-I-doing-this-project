@@ -38,6 +38,22 @@
 
   const GOAL = 7;
   const done = Math.min(status.days_with_success, GOAL);
+  // Dates for the 7-day goal. A day counts by its UTC date (course rule); the popup
+  // shows it in Dallas time. Past days come from the history; future days follow the
+  // daily schedule (12:23 UTC = 6:23 am in Dallas).
+  const runDays = [...new Set(rows.flatMap(r => [r.first_seen, r.last_seen, r.removed_date]).filter(Boolean))].sort();
+  const lastDay = runDays[runDays.length - 1] || day;
+  const dallasStamp = iso => new Date(iso).toLocaleString("en-US", { timeZone: "America/Chicago",
+    weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  const goalDays = Array.from({ length: GOAL }, (_, i) => {
+    if (i < done) {
+      const d = runDays[i];
+      const when = i === 0 && status.watching_since ? dallasStamp(status.watching_since)
+        : d === day ? dallasStamp(status.run_time) : dallasStamp(d + "T12:23:00Z");
+      return { n: i + 1, done: true, when };
+    }
+    return { n: i + 1, done: false, when: dallasStamp(dayStr(dayNum(lastDay) + (i - done + 1)) + "T12:23:00Z") };
+  });
 
   app.innerHTML = `
     <div class="card run-card">
@@ -66,10 +82,12 @@
         <label class="switch"><input type="checkbox" id="snow-toggle"><span></span> Let it snow</label>
       </div>
       <p class="lede">${done >= GOAL ? "Seven days of successful runs: goal reached!" :
-        `${done} of ${GOAL} days done. ${GOAL - done} more daily check${GOAL - done === 1 ? "" : "s"} to go. Hover an ornament to see its day.`}</p>
-      <div class="ornaments">${Array.from({ length: GOAL }, (_, i) =>
-        `<span class="orn ${i < done ? "lit" : ""}" title="Day ${i + 1}${i < done ? ": done" : ": coming up"}" tabindex="0">
-          <img src="icons/ornament.svg" alt=""><small>Day ${i + 1}</small></span>`).join("")}</div>
+        `${done} of ${GOAL} days done. ${GOAL - done} more daily check${GOAL - done === 1 ? "" : "s"} to go. Hover over or tap an ornament to see its date.`}</p>
+      <div class="ornaments" id="orns">${goalDays.map(g =>
+        `<button type="button" class="orn ${g.done ? "lit" : ""}" aria-label="Day ${g.n}: ${esc(g.when)}, ${g.done ? "done" : "coming up"}">
+          <img src="icons/ornament.svg" alt=""><small>Day ${g.n}</small>
+          <span class="orn-tip" role="tooltip"><b>Day ${g.n}</b>${esc(g.when)} Dallas time<em class="${g.done ? "ok" : ""}">${g.done ? "✓ Done" : "Coming up"}</em></span>
+        </button>`).join("")}</div>
     </div>
 
     <div class="card" id="dallas">
@@ -118,6 +136,15 @@
       </tbody></table></div></div>`;
 
   const $ = id => document.getElementById(id);
+
+  // ---------- ornaments: tap to open a popup (hover and keyboard focus open it too)
+  $("orns").addEventListener("click", e => {
+    const o = e.target.closest(".orn"); if (!o) return;
+    const open = !o.classList.contains("open");
+    $("orns").querySelectorAll(".orn").forEach(x => x.classList.remove("open"));
+    o.classList.toggle("open", open);
+  });
+  document.addEventListener("click", e => { if (!e.target.closest(".orn")) $("orns").querySelectorAll(".orn").forEach(x => x.classList.remove("open")); });
 
   // ---------- new / removed lists
   const filters = { all: () => true, role: r => r.in_role, focus: r => r.in_role && r.in_dallas };

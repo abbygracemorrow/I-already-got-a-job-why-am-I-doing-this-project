@@ -256,10 +256,29 @@ a.tile-link:hover, a.tile-link:focus-visible { transform: translateY(-3px); box-
 
 .goal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .ornaments { display: flex; gap: 14px; flex-wrap: wrap; }
-.orn { display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none; }
+.orn {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  font: inherit; background: none; border: 0; padding: 4px 2px; cursor: pointer; border-radius: 10px;
+}
+.orn:focus-visible { outline: 3px solid var(--mint); }
+.orn-tip {
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translate(-50%, 6px);
+  display: flex; flex-direction: column; gap: 2px; min-width: 170px; text-align: center;
+  background: var(--ink); color: var(--snow); font-size: .8rem; line-height: 1.35; font-weight: 500;
+  padding: 9px 12px; border-radius: 10px; box-shadow: 0 10px 24px rgba(42, 26, 35, .28);
+  opacity: 0; visibility: hidden; transition: opacity .15s, transform .15s, visibility .15s; z-index: 5; pointer-events: none;
+}
+.orn-tip::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ink); }
+.orn-tip b { font-size: .85rem; }
+.orn-tip em { font-style: normal; font-weight: 600; color: #f6c3d3; }
+.orn-tip em.ok { color: var(--mint); }
+.orn:hover .orn-tip, .orn:focus-visible .orn-tip, .orn.open .orn-tip { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.ornaments .orn:first-child .orn-tip { left: 0; transform: translate(0, 6px); }
+.ornaments .orn:first-child:hover .orn-tip, .ornaments .orn:first-child.open .orn-tip, .ornaments .orn:first-child:focus-visible .orn-tip { transform: translate(0, 0); }
+.ornaments .orn:first-child .orn-tip::after { left: 26px; }
 .orn img { width: 40px; height: 56px; filter: grayscale(1) opacity(.3); transition: filter .3s; transform-origin: top center; }
 .orn.lit img { filter: none; }
-.orn:hover img, .orn:focus-visible img { animation: swing .9s ease-in-out; }
+.orn:hover img, .orn:focus-visible img, .orn.open img { animation: swing .9s ease-in-out; }
 .orn small { font-size: .74rem; color: var(--ink-3); font-weight: 600; }
 .orn.lit small { color: var(--rose-deep); }
 @keyframes swing { 0%,100% { transform: rotate(0); } 25% { transform: rotate(12deg); } 75% { transform: rotate(-10deg); } }
