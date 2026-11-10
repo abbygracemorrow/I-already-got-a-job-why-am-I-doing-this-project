@@ -178,19 +178,28 @@ function fitVillage() {
     const s = snoopy.getBoundingClientRect(), pad = parseFloat(getComputedStyle(snoopy).paddingBottom) || 0;
     const x = s.left + s.width / 2 - box.left, ground = h - drop * x / w - depth;
     band.style.setProperty("--shift", Math.round((s.bottom - box.top - pad - 6) - ground) + "px");
-    // hang the photo ornament halfway between the houses (end at 988/1600 of the drawing) and Snoopy
-    const orn = document.getElementById("photo-ornament");
-    if (orn) {
-      if (orn.parentNode !== band) band.appendChild(orn);
-      orn.classList.add("in-band");
-      band.style.setProperty("--orn-x", Math.round((w * 988 / 1600 + (s.left - box.left + s.width * 0.12)) / 2 - 34) + "px");
-    }
-  } else {
-    const orn = document.getElementById("photo-ornament");
-    if (orn && orn.classList.contains("in-band")) { orn.classList.remove("in-band"); document.body.appendChild(orn); }
   }
 }
 window.addEventListener("resize", () => requestAnimationFrame(fitVillage));
+
+// Hang the photo ornament on the left of the page, between the side lights and the text.
+function placeOrnament() {
+  const orn = document.getElementById("photo-ornament"), band = document.querySelector(".hero-band");
+  const text = band && band.querySelector(".hero-text");
+  if (!orn || !text) return;
+  if (orn.parentNode !== band) band.appendChild(orn);
+  orn.classList.add("in-band");
+  const box = band.getBoundingClientRect(), t = text.getBoundingClientRect();
+  const frame = 24;                                    // width of the string of side lights
+  const gap = t.left - box.left - frame;               // room between the lights and the words
+  const ball = Math.max(44, Math.min(108, gap - 10));
+  orn.style.setProperty("--ball", ball + "px");
+  orn.style.setProperty("--orn-x", Math.round(frame + Math.max(gap, ball + 4) / 2) + "px");
+  // too narrow to fit beside the words: hang it below them instead
+  const len = gap >= ball + 4 ? 150 : Math.round(t.bottom - box.top + 10);
+  orn.style.setProperty("--len", len + "px");
+}
+window.addEventListener("resize", () => requestAnimationFrame(placeOrnament));
 
 function setFestive(on) {
   document.body.classList.toggle("festive", on);
@@ -202,6 +211,7 @@ function setFestive(on) {
   }
   setSnow(on);
   requestAnimationFrame(fitVillage);
+  requestAnimationFrame(placeOrnament);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
