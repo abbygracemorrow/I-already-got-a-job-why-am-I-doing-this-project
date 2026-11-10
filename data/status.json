@@ -1,10 +1,10 @@
 {
-  "run_time": "2026-11-10T00:39:12Z",
+  "run_time": "2026-11-10T01:20:51Z",
   "run_date": "2026-11-10",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
   "days_with_success": 1,
-  "open": 19323,
+  "open": 19333,
   "new_today": 0,
   "removed_today": 0,
   "open_in_role": 441,
@@ -15,7 +15,7 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1988,
+      "count": 1989,
       "error": ""
     },
     {
@@ -39,7 +39,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1605,
+      "count": 1611,
       "error": ""
     },
     {
@@ -47,7 +47,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1059,
+      "count": 1060,
       "error": ""
     },
     {
@@ -79,7 +79,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1402,
+      "count": 1401,
       "error": ""
     },
     {
@@ -87,7 +87,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1237,
+      "count": 1236,
       "error": ""
     },
     {
@@ -95,7 +95,7 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 986,
+      "count": 987,
       "error": ""
     },
     {
@@ -103,7 +103,7 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 576,
+      "count": 577,
       "error": ""
     },
     {
@@ -119,7 +119,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1082,
+      "count": 1084,
       "error": ""
     },
     {
