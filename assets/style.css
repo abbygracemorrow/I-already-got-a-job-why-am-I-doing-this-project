@@ -366,6 +366,17 @@ details.remote-more summary:hover { color: var(--rose-deep); }
   margin-left: 6px; width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer;
   border-radius: 50%; display: grid; place-items: center; transition: background .2s;
 }
+.festive-toggle { position: relative; }
+.festive-toggle::before { /* glowing halo behind the candy cane */
+  content: ""; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, rgba(255, 236, 210, .95) 0%, rgba(255, 196, 214, .7) 35%, rgba(255, 196, 214, 0) 70%);
+  animation: cane-glow 2.2s ease-in-out infinite alternate;
+}
+.cane { position: relative; z-index: 1; }
+@keyframes cane-glow { from { opacity: .65; transform: scale(.9); } to { opacity: 1; transform: scale(1.12); } }
+body.festive .festive-toggle::before {
+  background: radial-gradient(circle, rgba(255, 236, 170, .9) 0%, rgba(255, 200, 90, .55) 38%, rgba(255, 200, 90, 0) 72%);
+}
 .festive-toggle:hover { background: rgba(227, 98, 143, .1); }
 .festive-toggle:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
 .cane {
@@ -435,7 +446,7 @@ body.festive .santa-hat { opacity: 1; transform: rotate(-6deg) translateY(0) sca
 }
 @media (prefers-reduced-motion: reduce) {
   .lights i, #light-frame i, body.festive .garland::after { animation: none; }
-  .cane, .festive-toggle.boing .cane { animation: none; }
+  .cane, .festive-toggle.boing .cane, .festive-toggle::before { animation: none; }
 }
 
 /* ---------- Dark mode: when the lights-and-snow toggle is on, the site goes dark so the
