@@ -179,6 +179,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
 | `assets/market.js` | Market page: the six findings and their charts |
+| `assets/ornament-photo.jpg` | Photo shown inside the spinning ornament that hangs from the top left in Christmas mode |
 | `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
 | `manifest.webmanifest` | Web app manifest, so the site installs as an app |
 | `sw.js` | Service worker: network first, cached copy when offline |

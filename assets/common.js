@@ -165,17 +165,29 @@ function fitVillage() {
   const band = document.querySelector(".hero-band"), village = band && band.querySelector(".village");
   if (!village) return;
   const w = band.offsetWidth, h = band.offsetHeight, phone = window.innerWidth <= 720;
-  // Same angle as the light-mode banner: its slant drops 22% (12% on phones) of the light
-  // banner's height, which is this banner minus the extra room made for the village.
-  const extra = phone ? 270 - 120 : 400 - 150;
-  const drop = (phone ? 0.12 : 0.22) * Math.max(h - extra, 0);
-  band.style.setProperty("--drop", drop + "px");
+  // The banner has the same shape in both modes: its bottom edge slants up by 22% (12% on
+  // phones) of its height. Tilt the village ground to that slant (houses stay upright).
+  const drop = (phone ? 0.12 : 0.22) * h;
   band.style.setProperty("--slope", (-Math.atan(drop / w) * 180 / Math.PI) + "deg");
-  const snoopy = band.querySelector(".mascot-wrap");
-  if (snoopy) {
-    const box = band.getBoundingClientRect(), s = snoopy.getBoundingClientRect();
-    const mid = (s.left + s.width / 2 - box.left) / w;
-    band.style.setProperty("--rise", (mid * drop) + "px");
+  // Snoopy never moves: shift the village up or down so its snow surface meets his feet.
+  // In the drawing the snow surface is 144/380 of its height above its bottom edge.
+  const depth = w * 380 / 1600 * 144 / 380;
+  const snoopy = band.querySelector(".mascot"), box = band.getBoundingClientRect();
+  band.style.setProperty("--shift", "0px");
+  if (snoopy && !phone) {
+    const s = snoopy.getBoundingClientRect(), pad = parseFloat(getComputedStyle(snoopy).paddingBottom) || 0;
+    const x = s.left + s.width / 2 - box.left, ground = h - drop * x / w - depth;
+    band.style.setProperty("--shift", Math.round((s.bottom - box.top - pad - 6) - ground) + "px");
+    // hang the photo ornament halfway between the houses (end at 988/1600 of the drawing) and Snoopy
+    const orn = document.getElementById("photo-ornament");
+    if (orn) {
+      if (orn.parentNode !== band) band.appendChild(orn);
+      orn.classList.add("in-band");
+      band.style.setProperty("--orn-x", Math.round((w * 988 / 1600 + (s.left - box.left + s.width * 0.12)) / 2) + "px");
+    }
+  } else {
+    const orn = document.getElementById("photo-ornament");
+    if (orn && orn.classList.contains("in-band")) { orn.classList.remove("in-band"); document.body.appendChild(orn); }
   }
 }
 window.addEventListener("resize", () => requestAnimationFrame(fitVillage));
@@ -210,6 +222,14 @@ document.addEventListener("DOMContentLoaded", () => {
   santa.setAttribute("aria-hidden", "true");
   santa.innerHTML = '<img src="icons/santa-sleigh.svg" alt="">';
   document.body.appendChild(santa);
+  // A Christmas ornament with a photo inside, hanging from the top-left corner and
+  // slowly spinning (Christmas mode). Clicks pass through it.
+  const orn = document.createElement("div");
+  orn.id = "photo-ornament";
+  orn.setAttribute("aria-hidden", "true");
+  orn.innerHTML = '<span class="po-string"></span><span class="po-swing"><span class="po-cap"></span>' +
+    '<span class="po-ball"><img src="assets/ornament-photo.jpg" alt=""><span class="po-shine"></span></span></span>';
+  document.body.appendChild(orn);
   // Santa hat for Snoopy (only on pages that show him)
   const snoopy = document.querySelector(".mascot");
   if (snoopy) {

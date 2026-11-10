@@ -564,32 +564,19 @@ body.festive .mascot-wrap::after { opacity: 1; }
 /* ---------- Christmas mode on the Today page: a snowy village along the bottom of the
    banner. The banner's bottom edge is the ground line: the snow runs right down to it,
    the houses stand side by side on the snow, and Snoopy stands in the clearing. ---------- */
-body.festive .hero-band:has(.village) {
-  --village-h: 380px;    /* height of the village strip */
-  --snow-depth: 144px;   /* snow below the ground surface, down to the banner edge */
-  padding-bottom: 400px; /* room for the village under the headline and buttons */
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--drop, 22%)), 0 100%); /* same slant as light mode */
-}
 .village {
-  position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: var(--village-h, 380px);
+  position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; aspect-ratio: 1600 / 380;
   object-fit: cover; object-position: 50% 100%;
   z-index: 0; pointer-events: none; opacity: 0; transition: opacity .6s;
   /* tilt the ground to follow the banner's slanted bottom edge; skewY keeps the houses upright */
-  transform-origin: 0 100%; transform: skewY(var(--slope, 0deg));
+  transform-origin: 0 100%; transform: translateY(var(--shift, 0px)) skewY(var(--slope, 0deg));
+  box-shadow: 0 300px 0 0 #d9c2cf; /* snow continues below if the ground is lifted to Snoopy's feet */
 }
 body.festive .village { opacity: 1; }
-body.festive .hero:has(.village) { position: static; }   /* place the village and Snoopy on the banner */
-body.festive .hero:has(.village) .mascot-wrap {
-  position: absolute; z-index: 2;
-  right: max(24px, calc((100% - 1120px) / 2));
-  bottom: calc(var(--snow-depth) - var(--pad) - 8px + var(--rise, 0px));    /* feet in the snow, on the slope */
-}
-@media (max-width: 720px) {
-  body.festive .hero-band:has(.village) { --village-h: 260px; --snow-depth: 98px; padding-bottom: 270px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--drop, 12%)), 0 100%); }
-  body.festive .village { object-position: 78% 100%; }
-  body.festive .hero:has(.village) .mascot-wrap { right: 12px; }
-}
+/* the banner keeps its light-mode shape; Snoopy is moved onto the snow by fitVillage() */
+.hero:has(.village) { position: static; }  /* anchor the village to the banner, not the text block */
+.hero:has(.village) .hero-text { position: relative; z-index: 1; }
+@media (max-width: 720px) { .village { display: none; } }
 
 /* ---------- Santa and his reindeer fly slowly back and forth over the page (Christmas mode).
    Fixed on top of everything, but pointer-events: none, so nothing underneath is blocked. ---------- */
@@ -609,3 +596,39 @@ body.festive #santa { display: block; animation: santa-fly 56s linear infinite; 
 }
 @keyframes santa-bob { from { transform: translateY(-8px) rotate(-2deg); } to { transform: translateY(8px) rotate(2deg); } }
 @media (prefers-reduced-motion: reduce) { body.festive #santa { display: none; } }
+
+/* ---------- Photo ornament hanging from the top-left (Christmas mode) ---------- */
+#photo-ornament { position: fixed; top: 0; left: 48px; z-index: 55; pointer-events: none; display: none; }
+body.festive #photo-ornament { display: block; }
+.po-string { position: absolute; left: 0; top: 0; width: 2px; height: 120px; background: #d9a441; margin-left: -1px; }
+.po-swing {
+  position: absolute; left: 0; top: 120px; display: block; transform-origin: 0 -120px;
+  animation: po-sway 4s ease-in-out infinite alternate;
+}
+.po-cap {
+  position: absolute; left: -12px; top: -4px; width: 24px; height: 14px; border-radius: 4px 4px 2px 2px; z-index: 2;
+  background: linear-gradient(90deg, #a8781f, #f2d27a, #a8781f);
+}
+.po-ball {
+  position: absolute; left: -52px; top: 8px; width: 104px; height: 104px; border-radius: 50%; overflow: hidden;
+  border: 4px solid #e0263f; box-shadow: 0 0 18px rgba(255, 210, 120, .55), 0 8px 18px rgba(0, 0, 0, .35);
+  animation: po-spin 6s linear infinite;
+}
+.po-ball img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.po-shine { /* glass highlight so the photo looks stuck inside */
+  position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, .7) 0 9%, rgba(255, 255, 255, 0) 24%),
+              radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, .25) 72%, rgba(120, 20, 40, .35) 100%);
+}
+@keyframes po-sway { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+@keyframes po-spin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+@media (max-width: 720px) {
+  #photo-ornament { left: 30px; }
+  .po-string { height: 84px; } .po-swing { top: 84px; transform-origin: 0 -84px; }
+  .po-ball { width: 76px; height: 76px; left: -38px; }
+}
+@media (prefers-reduced-motion: reduce) { .po-swing, .po-ball { animation: none; } }
+
+/* on the Today page the photo ornament hangs from the banner, between the houses and Snoopy */
+#photo-ornament.in-band { position: absolute; top: 0; left: var(--orn-x, 50%); z-index: 3; }
+.in-band .po-string { height: 150px; } .in-band .po-swing { top: 150px; transform-origin: 0 -150px; }
