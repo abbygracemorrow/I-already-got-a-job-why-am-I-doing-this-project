@@ -63,7 +63,7 @@ a:hover { color: var(--berry); }
 }
 .nav-links a:hover { background: var(--pink-bg); }
 .nav-links a[aria-current="page"] { background: var(--green); color: var(--cream); }
-.garland { display: block; width: 100%; height: 26px; background: url("../icons/garland.svg") repeat-x center / auto 26px; }
+.garland { display: block; width: 100%; height: 50px; background: url("../icons/garland.svg") repeat-x center / auto 50px; }
 
 /* ---------- layout ---------- */
 main { max-width: 1180px; margin: 0 auto; padding: 22px 20px 60px; }
