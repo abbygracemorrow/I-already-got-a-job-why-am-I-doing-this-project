@@ -25,7 +25,7 @@ opens a GitHub Issue with the changes, and publishes the result to the site.
 customer service, representative, sales, collector, collections, recovery, fraud, engineer,
 engineering, developer, software, data scientist, call center, managing director, head of,
 chief, director, insurance, card services, trader, trading, quantitative, data owner,
-business intelligence*. Matching ignores case and uses whole words.
+business intelligence, reporting, operations*. Matching ignores case and uses whole words.
 
 **Dallas-area rule** (`in_dallas`, an extra column). The location names Dallas, Irving / Las
 Colinas, Plano, Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch, Garland, Grand
@@ -144,6 +144,7 @@ by `posting_id` (`<source>:<source's own id>`).
 
 | Path | What it does |
 |------|--------------|
+| `README.md` | This file: sources, title rule, commands and file list |
 | `watcher/sources.py` | The watch list: every employer, its ATS, board and search term |
 | `watcher/fetch.py` | Calls each board's JSON API (Workday, Oracle, Greenhouse, SmartRecruiters, JSearch, Adzuna) and returns the raw pages |
 | `watcher/normalize.py` | Converts each source's raw file to the common columns |
@@ -152,6 +153,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `watcher/status.py` | Writes `data/status.json` |
 | `watcher/issue.py` | Opens or updates the day's GitHub Issue and closes the previous one |
 | `watcher/__main__.py` | Command line: `run`, `fetch`, `build` |
+| `watcher/__init__.py` | Marks `watcher` as a Python package |
 | `tests/test_normalize.py` | Tests the conversion of each source type to the common columns |
 | `tests/test_rules.py` | Tests the title rule and the Dallas-area rule |
 | `tests/test_build.py` | Tests first-seen, last-seen, removed, reopened, failed-source and rebuild logic |
@@ -167,11 +169,15 @@ by `posting_id` (`<source>:<source's own id>`).
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme) |
 | `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
-| `assets/today.js`, `assets/browse.js`, `assets/market.js` | Code for each page |
-| `assets/snoopy.png` | Optional mascot image at the top of each page (add your own; an ornament shows until then) |
+| `assets/today.js` | Today page: counts, new and taken-down lists, countdown, 7-day goal, Dallas job picker, shortlist, Snoopy money rain, snow switch |
+| `assets/browse.js` | Browse page: filters, search, sort, shortlist |
+| `assets/market.js` | Market page: the six findings and their charts |
+| `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
 | `manifest.webmanifest` | Web app manifest, so the site installs as an app |
 | `sw.js` | Service worker: network first, cached copy when offline |
-| `icons/` | App icons and the theme's tree, garland and ornament art |
+| `icons/icon-192.png`, `icons/icon-512.png` | App icons used when the site is installed |
+| `icons/ornament.svg` | Striped ornament (favicon and the 7-day goal ornaments) |
+| `icons/garland.svg` | Garland under the navigation bar |
 | `requirements-dev.txt` | Test dependency (pytest) |
 | `.gitignore` | Keeps Python caches and half-written raw folders out of git |
 | `.nojekyll` | Tells GitHub Pages to serve the files as they are |
