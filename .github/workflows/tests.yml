@@ -3,6 +3,9 @@ name: Tests
 on:
   push:
   pull_request:
+  # The daily run starts this after it pushes its data commit, because pushes made
+  # with the workflow's own token do not start other workflows on their own.
+  workflow_dispatch:
 
 jobs:
   pytest:
