@@ -2,7 +2,7 @@
 
 import pytest
 
-from watcher.rules import in_dallas, in_role, is_remote
+from watcher.rules import dallas_area, in_dallas, in_role, is_remote
 
 
 @pytest.mark.parametrize("title", [
@@ -44,14 +44,14 @@ def test_not_in_role(title):
 
 @pytest.mark.parametrize("loc", [
     "Dallas, TX", "Plano-TX", "Irving, Texas", "TX - Frisco", "Las Colinas, TX",
-    "Fort Worth, TX (+2 more)", "Arlington, TX", "Westlake, Texas, United States",
+    "Fort Worth, TX", "Arlington, TX", "Westlake, Texas, United States", "Dallas",
 ])
 def test_in_dallas(loc):
     assert in_dallas(loc)
 
 
 @pytest.mark.parametrize("loc", [
-    "Houston, TX", "Dallas, GA", "Westlake, OH", "Arlington, VA", "New York, NY", "Remote", "",
+    "Houston, TX", "Dallas, GA", "Dallas, AZ", "Westlake, OH", "Arlington, VA", "New York, NY", "Remote", "",
 ])
 def test_not_in_dallas(loc):
     assert not in_dallas(loc)
@@ -79,3 +79,20 @@ def test_not_remote(title, loc):
 
 def test_remote_location_is_not_dallas():
     assert not in_dallas("Dallas, TX (Remote)")
+
+
+@pytest.mark.parametrize("loc,area", [
+    ("Dallas, TX - Uptown", "Dallas"),
+    ("Dallas, TX - Far North Dallas", "Dallas"),
+    ("Dallas TX 17 Seventeen Building Branch", "Dallas"),
+    ("Dallas Texas United States", "Dallas"),
+    ("Plano TX", "Plano"),
+    ("Las Colinas, TX", "Irving / Las Colinas"),
+    ("Irving Texas United States", "Irving / Las Colinas"),
+    ("Richardson, Dallas County", "Richardson"),
+    ("Fort Worth, TX - Downtown", "Fort Worth"),
+    ("Dallas, AZ", ""),
+    ("Charlotte, NC", ""),
+])
+def test_dallas_area(loc, area):
+    assert dallas_area(loc) == area

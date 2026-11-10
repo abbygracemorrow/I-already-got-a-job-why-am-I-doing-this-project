@@ -64,8 +64,8 @@ def workday_location(job: dict) -> str:
     if _N_LOCATIONS.match(text):
         parts = (job.get("externalPath") or "").split("/")
         primary = parts[2].replace("-", " ") if len(parts) > 2 else ""
-        n = int(text.split()[0])
-        return f"{_clean(primary)} (+{n - 1} more)" if primary else text
+        # Several locations: keep the first one, the job's primary location.
+        return _clean(primary) if primary else text
     return text
 
 
@@ -103,10 +103,7 @@ def from_oracle(raw: dict, day: str) -> list[dict]:
             for job in item.get("requisitionList") or []:
                 if not job.get("Id"):
                     continue
-                loc = _clean(job.get("PrimaryLocation"))
-                extra = len(job.get("secondaryLocations") or [])
-                if extra:
-                    loc = f"{loc} (+{extra} more)"
+                loc = _clean(job.get("PrimaryLocation"))  # the primary location
                 rows.append(_row(
                     raw, job["Id"], job.get("Title"), location=loc,
                     department=job.get("JobFamily") or "",

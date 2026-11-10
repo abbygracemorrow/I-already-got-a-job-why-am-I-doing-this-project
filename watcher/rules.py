@@ -19,7 +19,7 @@ The rule, in words:
       trader, trading, quantitative, data owner, business intelligence,
       reporting, operations.
 
-The location rule marks postings in the Dallas area: Dallas and the cities
+The location rule gives each posting its Dallas-area city ("area"), or none: Dallas and the cities
 that touch it or sit in its core business corridors (Irving/Las Colinas,
 Plano, Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch,
 Garland, Grand Prairie, Westlake, Southlake, Allen, McKinney, Lewisville,
@@ -61,21 +61,49 @@ def in_role(title: str) -> bool:
     return bool(_CREDIT_WORK.search(t) or _UNDERWRITING.search(t) or _LOAN_REVIEW.search(t))
 
 
-_DFW_CITIES = (
-    "dallas", "irving", "las colinas", "plano", "richardson", "addison", "frisco",
-    "coppell", "carrollton", "farmers branch", "garland", "grand prairie", "westlake",
-    "southlake", "allen", "mckinney", "lewisville", "fort worth", "ft worth",
-    "ft. worth", "dfw",
-)
-_DFW = re.compile(r"\b(" + "|".join(re.escape(c) for c in _DFW_CITIES) + r")\b", re.I)
+# Dallas-area cities, each with the area name the site shows. Neighborhoods
+# ("Dallas, TX - Uptown", "Far North Dallas", ...) fall under Dallas.
+AREAS = [
+    ("Dallas", ("dallas", "dfw", "park cities", "highland park", "university park")),
+    ("Irving / Las Colinas", ("irving", "las colinas")),
+    ("Plano", ("plano",)),
+    ("Richardson", ("richardson",)),
+    ("Addison", ("addison",)),
+    ("Frisco", ("frisco",)),
+    ("Coppell", ("coppell",)),
+    ("Carrollton", ("carrollton",)),
+    ("Farmers Branch", ("farmers branch",)),
+    ("Garland", ("garland",)),
+    ("Grand Prairie", ("grand prairie",)),
+    ("Westlake", ("westlake",)),
+    ("Southlake", ("southlake",)),
+    ("Allen", ("allen",)),
+    ("McKinney", ("mckinney",)),
+    ("Lewisville", ("lewisville",)),
+    ("Fort Worth", ("fort worth", "ft worth", "ft. worth")),
+]
+_AREA_PATTERNS = [(name, re.compile(r"\b(" + "|".join(re.escape(w) for w in words) + r")\b", re.I))
+                  for name, words in AREAS]
 _ARLINGTON_TX = re.compile(r"\barlington\b[\s,\-]*(tx|texas)\b|\b(tx|texas)\b[\s,\-]*arlington\b", re.I)
-_TEXAS = re.compile(r"\b(tx|texas)\b", re.I)
-# States that share a city name with the list above (Dallas GA, Westlake OH/CA/LA, ...).
-_NOT_TEXAS = re.compile(
-    r"\b(ga|georgia|pa|pennsylvania|or|oregon|nc|north carolina|oh|ohio|la|louisiana|"
-    r"ca|california|ky|kentucky|ia|iowa|mo|missouri|wi|wisconsin)\b",
-    re.I,
-)
+_TEXAS = re.compile(r"\b(TX|Texas)\b", re.I)
+_STATE_CODES = set("""AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT
+NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN UT VT VA WA WV WI WY""".split())
+_STATE_NAMES = re.compile(
+    r"\b(alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|"
+    r"hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|"
+    r"michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|new hampshire|new jersey|"
+    r"new mexico|new york|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|"
+    r"rhode island|south carolina|south dakota|tennessee|utah|vermont|virginia|washington|"
+    r"west virginia|wisconsin|wyoming)\b", re.I)
+
+
+def _other_state_only(loc: str) -> bool:
+    """True when the location names a US state other than Texas and does not name Texas
+    ("Dallas, AZ", "Dallas, Georgia", "Westlake, OH")."""
+    if _TEXAS.search(loc):
+        return False
+    codes = set(re.findall(r"\b[A-Z]{2}\b", loc))  # state codes are written in capitals
+    return bool(codes & _STATE_CODES) or bool(_STATE_NAMES.search(loc))
 
 
 _REMOTE_LOCATION = re.compile(r"\b(remote|work from home|wfh|telecommut\w*|teletravail|virtual)\b", re.I)
@@ -89,17 +117,23 @@ def is_remote(title: str, location: str) -> bool:
     return bool(_REMOTE_LOCATION.search(location or "") or _REMOTE_TITLE.search(title or ""))
 
 
+def dallas_area(location: str) -> str:
+    """The Dallas-area city a location is in ("Dallas", "Plano", "Irving / Las Colinas", ...),
+    or "" when it is not in the Dallas area (or is remote). When a location names several
+    cities, the one written first wins."""
+    loc = (location or "").replace("-", " ")
+    if _REMOTE_LOCATION.search(loc) or _other_state_only(loc):
+        return ""
+    if _ARLINGTON_TX.search(loc):
+        return "Arlington"
+    best, at = "", len(loc) + 1
+    for name, pat in _AREA_PATTERNS:
+        m = pat.search(loc)
+        if m and m.start() < at:
+            best, at = name, m.start()
+    return best
+
+
 def in_dallas(location: str) -> bool:
     """True when the location is in the Dallas area (and not remote)."""
-    if _REMOTE_LOCATION.search(location or ""):
-        return False
-    loc = (location or "").replace("-", " ")
-    if _ARLINGTON_TX.search(loc):
-        return True
-    m = _DFW.search(loc)
-    if not m:
-        return False
-    # "Dallas, GA", "Allen, ..." etc.: when a non-Texas state is named and Texas is not, reject.
-    if _NOT_TEXAS.search(loc) and not _TEXAS.search(loc):
-        return False
-    return True
+    return dallas_area(location) != ""

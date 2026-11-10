@@ -29,7 +29,7 @@ def test_workday():
     assert a["department"] == ""
     assert a["url"] == ("https://wd5.myworkdaysite.com/recruiting/frostbank/External"
                         "/job/Dallas-TX/Credit-Analyst-II_R-1001")
-    assert b["location"] == "Plano TX (+2 more)"
+    assert b["location"] == "Plano TX"
     assert b["posted_date"] == ""
 
 
@@ -53,7 +53,7 @@ def test_oracle():
     (r,) = normalize(raw, DAY)
     assert r["posting_id"] == "jpmorgan:210001"
     assert r["title"] == "Credit Risk Analyst"
-    assert r["location"] == "Plano, TX, United States (+1 more)"
+    assert r["location"] == "Plano, TX, United States"
     assert r["department"] == "Credit"
     assert r["posted_date"] == "2026-11-08"
     assert r["url"] == ("https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/"
