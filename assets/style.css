@@ -340,3 +340,11 @@ details.remote-more { margin-top: 10px; font-size: .9rem; }
 details.remote-more summary { cursor: pointer; color: var(--ink-3); font-weight: 600; padding: 6px 0; }
 details.remote-more summary:hover { color: var(--rose-deep); }
 .src-note { font-size: .78rem; color: #9c5a24; margin-top: 4px; max-width: 280px; }
+
+/* days of history: missed days and the upcoming check */
+.orn.missed img { filter: grayscale(1) opacity(.3); }
+.orn.next img { filter: grayscale(.4) opacity(.45); outline: 2px dashed #e7c3d1; outline-offset: 3px; border-radius: 50% 50% 40% 40%; }
+.orn.next small { color: var(--ink-3); }
+.ornaments .orn:last-child .orn-tip { left: auto; right: 0; transform: translate(0, 6px); }
+.ornaments .orn:last-child:hover .orn-tip, .ornaments .orn:last-child.open .orn-tip, .ornaments .orn:last-child:focus-visible .orn-tip { transform: translate(0, 0); }
+.ornaments .orn:last-child .orn-tip::after { left: auto; right: 14px; }

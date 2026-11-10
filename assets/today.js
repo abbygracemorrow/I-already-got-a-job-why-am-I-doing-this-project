@@ -1,5 +1,5 @@
 // Today page: last run, source status, the four counts, new and removed lists,
-// plus the interactive extras: countdown to the next check, 7-day goal, a filterable
+// plus the interactive extras: countdown to the next check, days of history, a filterable
 // list of Dallas credit jobs with a "surprise me" pick, the shortlist, Snoopy's money
 // rain and a snow switch.
 (async function () {
@@ -37,24 +37,31 @@
   const saveStars = () => localStorage.setItem(KEY, JSON.stringify([...stars]));
   const byId = new Map(rows.map(r => [r.posting_id, r]));
 
-  const GOAL = 7;
-  const done = Math.min(status.days_with_success, GOAL);
-  // Dates for the 7-day goal. A day counts by its UTC date (course rule); the popup
-  // shows it in Dallas time. Past days come from the history; future days follow the
-  // daily schedule (12:00 UTC = 6:00 am in Dallas).
-  const runDays = [...new Set(rows.flatMap(r => [r.first_seen, r.last_seen, r.removed_date]).filter(Boolean))].sort();
-  const lastDay = runDays[runDays.length - 1] || day;
+  // Days of history: one ornament per calendar day since watching began. A day counts
+  // by its UTC date (course rule) and is lit when it has data; the popup shows it in
+  // Dallas time. A faded ornament at the end is the next scheduled check (6:00 am Dallas).
+  const runDays = (status.run_days && status.run_days.length ? status.run_days
+    : [...new Set(rows.flatMap(r => [r.first_seen, r.last_seen, r.removed_date]).filter(Boolean))]).slice().sort();
+  const haveData = new Set(runDays);
+  const firstRunDay = runDays[0] || day;
+  const lastDay = runDays.length ? [runDays[runDays.length - 1], day].sort().pop() : day;
   const dallasStamp = iso => new Date(iso).toLocaleString("en-US", { timeZone: "America/Chicago",
     weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-  const goalDays = Array.from({ length: GOAL }, (_, i) => {
-    if (i < done) {
-      const d = runDays[i];
-      const when = i === 0 && status.watching_since ? dallasStamp(status.watching_since)
-        : d === day ? dallasStamp(status.run_time) : dallasStamp(d + "T12:00:00Z");
-      return { n: i + 1, done: true, when };
-    }
-    return { n: i + 1, done: false, when: dallasStamp(dayStr(dayNum(lastDay) + (i - done + 1)) + "T12:00:00Z") };
+  const shortDate = iso => new Date(iso).toLocaleDateString("en-US", { timeZone: "America/Chicago", month: "short", day: "numeric" });
+  // Each ornament is labelled with its day; the popup gives the time of that day's check.
+  const calendar = dayRange(firstRunDay, lastDay).map((d, i) => {
+    const when = d === day ? status.run_time : d + "T12:00:00Z";
+    const began = i === 0 && status.watching_since ? status.watching_since : "";
+    return { d, n: i + 1, done: haveData.has(d), when, began };
   });
+  const dayLabel = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
+  const nextCheck = (() => { // next 12:00 UTC (6:00 am Dallas)
+    const now = new Date(), t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 0, 0));
+    if (t <= now) t.setUTCDate(t.getUTCDate() + 1);
+    return t.toISOString();
+  })();
+  const daysWithData = calendar.filter(c => c.done).length;
+  const missed = calendar.length - daysWithData;
 
   app.innerHTML = `
     <div class="card run-card">
@@ -71,25 +78,29 @@
     </div>
 
     <div class="tiles">
-      <a class="tile tile-link" href="#goal"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></a>
+      <a class="tile tile-link" href="#history"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></a>
       <a class="tile tile-link tile-feature" href="#dallas"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">credit analyst roles, not remote</div></a>
       <a class="tile tile-link" href="browse.html"><div class="label">All open jobs</div><div class="value">${fmt(status.open)}</div><div class="sub">every role, every location, at the ${status.sources.length} companies I track</div></a>
       <a class="tile tile-link" href="#new-card"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></a>
       <a class="tile tile-link" href="#gone-card"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></a>
     </div>
 
-    <div class="card" id="goal">
+    <div class="card" id="history">
       <div class="goal-head">
-        <h2>Road to ${GOAL} days</h2>
+        <h2>Days of history: ${fmt(daysWithData)}</h2>
         <label class="switch"><input type="checkbox" id="snow-toggle"><span></span> Let it snow</label>
       </div>
-      <p class="lede">${done >= GOAL ? "Seven days of successful runs: goal reached!" :
-        `${done} of ${GOAL} days done. ${GOAL - done} more daily check${GOAL - done === 1 ? "" : "s"} to go. Hover over or tap an ornament to see its date.`}</p>
-      <div class="ornaments" id="orns">${goalDays.map(g =>
-        `<button type="button" class="orn ${g.done ? "lit" : ""}" aria-label="Day ${g.n}: ${esc(g.when)}, ${g.done ? "done" : "coming up"}">
-          <img src="icons/ornament.svg" alt=""><small>Day ${g.n}</small>
-          <span class="orn-tip" role="tooltip"><b>Day ${g.n}</b>${esc(g.when)} Dallas time<em class="${g.done ? "ok" : ""}">${g.done ? "✓ Done" : "Coming up"}</em></span>
-        </button>`).join("")}</div>
+      <p class="lede">The tool has ${fmt(daysWithData)} day${daysWithData === 1 ? "" : "s"} of job data, starting ${esc(status.watching_since ? shortDate(status.watching_since) : dayLabel(firstRunDay))}${missed ? `, with ${missed} day${missed === 1 ? "" : "s"} missed` : ""}.
+        Each ornament is one day: lit means that day's check worked${missed ? ", grey means it was missed" : ""}, and the faded one is the next check. Hover over or tap one to see its date. Times are Dallas time.</p>
+      <div class="ornaments" id="orns">${calendar.map(c =>
+        `<button type="button" class="orn ${c.done ? "lit" : "missed"}" aria-label="Day ${c.n}: ${esc(dallasStamp(c.when))}, ${c.done ? "data collected" : "missed"}">
+          <img src="icons/ornament.svg" alt=""><small>${esc(shortDate(c.when))}</small>
+          <span class="orn-tip" role="tooltip"><b>Day ${c.n}</b>${c.done ? "Checked" : "Check missed"} ${esc(dallasStamp(c.when))}${c.began && c.began !== c.when ? `<span>Watching began ${esc(dallasStamp(c.began))}</span>` : ""}<em class="${c.done ? "ok" : ""}">${c.done ? "✓ Data collected" : "✗ No data this day"}</em></span>
+        </button>`).join("")}
+        <button type="button" class="orn next" aria-label="Next check: ${esc(dallasStamp(nextCheck))}">
+          <img src="icons/ornament.svg" alt=""><small>Next</small>
+          <span class="orn-tip" role="tooltip"><b>Next check</b>${esc(dallasStamp(nextCheck))}<em>Coming up</em></span>
+        </button></div>
     </div>
 
     <div class="card" id="dallas">

@@ -176,7 +176,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme) |
 | `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
-| `assets/today.js` | Today page: counts, new and taken-down lists, countdown, 7-day goal, Dallas job picker, shortlist, Snoopy money rain, snow switch |
+| `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain, snow switch |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
 | `assets/market.js` | Market page: the six findings and their charts |
 | `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
@@ -184,7 +184,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `sw.js` | Service worker: network first, cached copy when offline |
 | `icons/icon-192.png`, `icons/icon-512.png` | App icons used when the site is installed |
 | `icons/favicon.svg`, `icons/favicon-32.png` | Dollar-bill tab icon (SVG, with a PNG fallback) |
-| `icons/ornament.svg` | Striped ornament (the 7-day goal ornaments) |
+| `icons/ornament.svg` | Striped ornament (one per day in the days-of-history tracker) |
 | `icons/garland.svg` | Garland under the navigation bar |
 | `requirements-dev.txt` | Test dependency (pytest) |
 | `.gitignore` | Keeps Python caches and half-written raw folders out of git |
@@ -200,4 +200,4 @@ date of the raw file, and "30+ Days Ago" is left empty. When a posting lists sev
 (Workday's "3 Locations", Oracle's secondary locations), `location` is its primary location.
 
 `data/status.json`: `run_time, run_date, first_run_date, watching_since (UTC time of the first run), days_with_success, open, new_today,
-removed_today, open_in_role, open_in_role_dallas, sources[] (name, employer, ats, ok, count, error, and a note when a Workday board is over its limit)`.
+removed_today, open_in_role, open_in_role_dallas, run_days (every date with a raw file), sources[] (name, employer, ats, ok, count, error, and a note when a Workday board is over its limit)`.
