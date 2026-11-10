@@ -30,7 +30,7 @@ def make_status(rows: list[dict], raw_dir: Path, run: dict) -> dict:
         "open_in_role": sum(1 for r in rows if r["status"] == "open" and r["in_role"]),
         "open_in_role_dallas": sum(1 for r in rows if r["status"] == "open"
                                    and r["in_role"] and r["in_dallas"] and not r["remote"]),
-        "sources": [{k: s.get(k) for k in ("name", "employer", "ats", "ok", "count", "error")}
+        "sources": [{k: s.get(k) for k in ("name", "employer", "ats", "ok", "count", "error", "note") if k in s}
                     for s in run["sources"]],
     }
 

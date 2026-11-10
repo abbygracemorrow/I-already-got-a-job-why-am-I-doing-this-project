@@ -21,7 +21,7 @@ from pathlib import Path
 
 from . import issue
 from .build import write_history
-from .fetch import fetch
+from .fetch import WORKDAY_MAX, fetch
 from .normalize import normalize
 from .sources import SOURCES
 from .status import make_status, write_status
@@ -80,6 +80,9 @@ def _fetch_one(src, tmp: Path, day: str) -> dict:
         with gzip.open(tmp / f"{src.name}.json.gz", "wt", encoding="utf-8") as f:
             json.dump(raw, f, separators=(",", ":"), sort_keys=True)
         entry.update(ok=True, count=count)
+        if src.ats == "workday" and (raw.get("total") or 0) > WORKDAY_MAX:
+            entry["note"] = (f"board lists {raw['total']} postings; Workday returns at most "
+                             f"{WORKDAY_MAX}, so add a search term for this source")
     except Exception as exc:  # noqa: BLE001 - record and keep going
         entry["error"] = f"{type(exc).__name__}: {exc}"[:300]
     entry["seconds"] = round(time.time() - t0, 1)

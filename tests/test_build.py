@@ -96,3 +96,19 @@ def test_second_run_same_day_keeps_first_run_time(tmp_path, monkeypatch):
     run = cli.do_fetch(data, datetime(2026, 11, 10, 12, 23, tzinfo=timezone.utc))
     assert run["run_time"] == "2026-11-10T12:23:00Z"
     assert run["first_run_time"] == "2026-11-10T00:39:00Z"
+
+
+def test_workday_board_over_limit_gets_a_note(tmp_path, monkeypatch):
+    from datetime import datetime, timezone
+    import watcher.__main__ as cli
+    from watcher.sources import Source
+
+    big = Source("bigbank", "Big Bank", "workday", {"host": "wd1.myworkdaysite.com", "tenant": "b", "site": "s"})
+    monkeypatch.setattr(cli, "SOURCES", [big])
+    monkeypatch.setattr(cli, "fetch", lambda src: {
+        "source": "bigbank", "employer": "Big Bank", "ats": "workday", "total": 2400,
+        "url": "https://wd1.myworkdaysite.com/wday/cxs/b/s/jobs",
+        "pages": [{"jobPostings": [{"title": "Credit Analyst", "externalPath": "/job/Dallas-TX/Credit-Analyst_R1"}]}]})
+    run = cli.do_fetch(tmp_path / "data", datetime(2026, 11, 10, 12, 0, tzinfo=timezone.utc))
+    (entry,) = run["sources"]
+    assert entry["ok"] and "2400" in entry["note"]
