@@ -90,14 +90,14 @@
         <h2>Days of history: ${fmt(daysWithData)}</h2>
       </div>
       <p class="lede">The tool has ${fmt(daysWithData)} day${daysWithData === 1 ? "" : "s"} of job data, starting ${esc(status.watching_since ? shortDate(status.watching_since) : dayLabel(firstRunDay))}${missed ? `, with ${missed} day${missed === 1 ? "" : "s"} missed` : ""}.
-        Each ornament is one day: lit means that day's check worked${missed ? ", grey means it was missed" : ""}, and the faded one is the next check. Hover over or tap one to see its date. Times are Dallas time.</p>
+        Each one is a day: in color means that day's check worked${missed ? ", grey means it was missed" : ""}, and the faded one is the next check. Hover over or tap one to see its date. Times are Dallas time.</p>
       <div class="ornaments" id="orns">${calendar.map(c =>
         `<button type="button" class="orn ${c.done ? "lit" : "missed"}" aria-label="Day ${c.n}: ${esc(dallasStamp(c.when))}, ${c.done ? "data collected" : "missed"}">
-          <img src="icons/ornament.svg" alt=""><small>${esc(shortDate(c.when))}</small>
+          <img class="money plain-only" src="icons/favicon.svg" alt=""><img class="xmas-only" src="icons/ornament.svg" alt=""><small>${esc(shortDate(c.when))}</small>
           <span class="orn-tip" role="tooltip"><b>Day ${c.n}</b>${c.done ? "Checked" : "Check missed"} ${esc(dallasStamp(c.when))}${c.began && c.began !== c.when ? `<span>Watching began ${esc(dallasStamp(c.began))}</span>` : ""}<em class="${c.done ? "ok" : ""}">${c.done ? "✓ Data collected" : "✗ No data this day"}</em></span>
         </button>`).join("")}
         <button type="button" class="orn next" aria-label="Next check: ${esc(dallasStamp(nextCheck))}">
-          <img src="icons/ornament.svg" alt=""><small>Next</small>
+          <img class="money plain-only" src="icons/favicon.svg" alt=""><img class="xmas-only" src="icons/ornament.svg" alt=""><small>Next</small>
           <span class="orn-tip" role="tooltip"><b>Next check</b>${esc(dallasStamp(nextCheck))}<em>Coming up</em></span>
         </button></div>
     </div>
@@ -111,7 +111,7 @@
       </div>
       <div class="controls">
         <label>Search titles<input id="dq" type="search" placeholder="e.g. underwriter"></label>
-        <button class="btn" id="surprise" type="button">🎁 Surprise me</button>
+        <button class="btn" id="surprise" type="button"><span class="plain-only">💸</span><span class="xmas-only">🎁</span> Surprise me</button>
       </div>
       <p class="count" id="dcount"></p>
       <ul class="jobs" id="dlist"></ul>

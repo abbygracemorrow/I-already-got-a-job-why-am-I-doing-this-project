@@ -61,7 +61,8 @@ a:hover { color: var(--berry); }
 .nav-links a[aria-current="page"] { color: var(--snow); background: var(--ink); }
 /* garland hangs at the top of the hero band and scrolls away with the page */
 .garland { position: absolute; top: 0; left: 0; right: 0; height: 50px; z-index: 2; pointer-events: none;
-  background: url("../icons/garland.svg") repeat-x center / auto 50px; }
+  background: url("../icons/flower-garland.svg") repeat-x center / auto 50px; }
+body.festive .garland { background-image: url("../icons/garland.svg"); } /* mistletoe in Christmas mode */
 
 /* ---------- hero: angled gradient band ---------- */
 .hero-band {
@@ -77,8 +78,8 @@ a:hover { color: var(--berry); }
   animation: drift 18s ease-in-out infinite alternate;
   clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
 }
-.hero-band::after { /* soft falling-snow speckle */
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .7;
+.hero-band::after { /* soft falling-snow speckle (Christmas mode only) */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
   background-image:
     radial-gradient(circle, #fff 0 1.6px, transparent 2.4px),
     radial-gradient(circle, #fff 0 1.1px, transparent 1.8px);
@@ -458,6 +459,7 @@ body.festive .hero-band {
   background-size: 140% 140%;
 }
 body.festive .hero-band::after { opacity: .45; }
+
 body.festive .eyebrow { background: rgba(255, 255, 255, .1); color: #a9e2c0; }
 body.festive .hero p { color: #e2cbd6; }
 body.festive .btn-primary { background: #f7e9f0; color: #21161d; }
@@ -504,3 +506,13 @@ body.festive .countdown { color: #fff; }
 #light-frame .lf-left::before, #light-frame .lf-right::before { top: 0; bottom: 0; left: 3px; width: 2px; }
 #light-frame .lf-left i, #light-frame .lf-right i { margin: 0 0 0 6px; width: 12px; height: 8px; border-radius: 45% 50% 50% 45%; }
 #light-frame .lf-left i::before, #light-frame .lf-right i::before { top: 2px; left: -3px; width: 4px; height: 4px; }
+
+/* ---------- Plain until the candy cane is clicked: every Christmas touch has a plain
+   version (money, flowers) that swaps for the Christmas one in Christmas mode. ---------- */
+.xmas-only { display: none; }
+body.festive .xmas-only { display: inline; }
+body.festive .plain-only { display: none; }
+.orn img.money { width: 46px; height: 46px; margin: 5px 0 5px; }
+.orn img.xmas-only { display: none; }
+body.festive .orn img.xmas-only { display: block; }
+.orn.next img.money { outline-offset: 2px; border-radius: 10px; }

@@ -174,7 +174,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme, plus its dark mode) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for dark mode with Christmas lights around the whole window and under the nav bar, snow, and a Santa hat on Snoopy; the site always opens in light mode) |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for Christmas mode: dark colors, Christmas lights around the whole window and under the nav bar, snow, mistletoe, ornaments and a Santa hat on Snoopy; the site always opens in plain light mode with flowers and money) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
@@ -182,10 +182,11 @@ by `posting_id` (`<source>:<source's own id>`).
 | `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
 | `manifest.webmanifest` | Web app manifest, so the site installs as an app |
 | `sw.js` | Service worker: network first, cached copy when offline |
-| `icons/icon-192.png`, `icons/icon-512.png` | App icons used when the site is installed |
-| `icons/favicon.svg`, `icons/favicon-32.png` | Dollar-bill tab icon (SVG, with a PNG fallback) |
-| `icons/ornament.svg` | Striped ornament (one per day in the days-of-history tracker) |
-| `icons/garland.svg` | Garland at the top of the page banner |
+| `icons/icon-192.png`, `icons/icon-512.png` | Dollar-bill app icons used when the site is installed |
+| `icons/favicon.svg`, `icons/favicon-32.png` | Dollar-bill tab icon (SVG, with a PNG fallback); also the days-of-history markers in light mode |
+| `icons/ornament.svg` | Striped ornament: one per day in the days-of-history tracker in Christmas mode (dollar bills in light mode) |
+| `icons/flower-garland.svg` | Flower garland at the top of the page banner (light mode) |
+| `icons/garland.svg` | Mistletoe garland that replaces the flowers in Christmas mode |
 | `icons/santa-hat.svg` | Santa hat Snoopy wears when the lights are on |
 | `icons/candy-cane.svg` | The candy cane that turns dark mode and the lights on and off |
 | `requirements-dev.txt` | Test dependency (pytest) |

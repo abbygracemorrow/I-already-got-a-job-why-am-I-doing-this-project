@@ -77,7 +77,7 @@ function dallasDate(d) {
 function jobItem(r, opts = {}) {
   const badges = [
     r.in_role ? '<span class="pill role">credit role</span>' : "",
-    r.in_dallas ? '<span class="pill dfw">🎄 Dallas area</span>' : "",
+    r.in_dallas ? '<span class="pill dfw"><span class="plain-only">📍</span><span class="xmas-only">🎄</span> Dallas area</span>' : "",
   ].join(" ");
   const star = opts.star
     ? `<button class="star" data-id="${esc(r.posting_id)}" aria-pressed="${opts.starred ? "true" : "false"}" title="Save to shortlist" aria-label="Save to shortlist">${opts.starred ? "★" : "☆"}</button>`
