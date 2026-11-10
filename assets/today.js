@@ -15,10 +15,10 @@
 
   app.innerHTML = `
     <div class="card"><h2>Last run <span class="bow">🎀</span></h2>
-      <p class="lede" style="margin:0">${esc(runTime.toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" }))}
+      <p class="lede" style="margin:0">${esc(dallasTime(runTime))} <b>Dallas time</b>
       <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p></div>
     <div class="tiles">
-      <div class="tile"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(prettyDate(status.first_run_date))}</div></div>
+      <div class="tile"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(prettyDate(status.first_run_date))} (UTC)</div></div>
       <div class="tile"><div class="label">Open postings</div><div class="value">${fmt(status.open)}</div><div class="sub">${fmt(status.open_in_role_dallas)} credit roles in the Dallas area</div></div>
       <div class="tile"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></div>
       <div class="tile"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></div>
@@ -30,10 +30,10 @@
           <button data-f="role" aria-pressed="false">Credit roles</button>
           <button data-f="focus" aria-pressed="false">Credit roles in Dallas</button>
         </div></div>
-      <h2>New in the latest run</h2><p class="lede">Postings first seen on ${esc(prettyDate(day))}. Postings that were already open when a board was first watched are not counted as new. Dallas credit roles are listed first.</p>
+      <h2>New in the latest run</h2><p class="lede">Postings first seen on run day ${esc(prettyDate(day))} (UTC date; this run was ${esc(dallasTime(runTime))} in Dallas). Postings that were already open when a board was first watched are not counted as new. Dallas credit roles are listed first.</p>
       <div class="scroll"><ul class="jobs" id="new"></ul></div>
     </div>
-    <div class="card"><h2>Removed in the latest run</h2><p class="lede">Postings that were open before and are no longer listed on ${esc(prettyDate(day))}.</p>
+    <div class="card"><h2>Removed in the latest run</h2><p class="lede">Postings that were open before and are no longer listed on run day ${esc(prettyDate(day))} (UTC date).</p>
       <div class="scroll"><ul class="jobs" id="gone"></ul></div></div>
     <div class="card"><h2>Sources</h2><p class="lede">Each employer's board, read through its applicant tracking system. A source that fails is skipped for the day; the others still run.</p>
       <div class="scroll"><table><thead><tr><th>Employer</th><th>System</th><th>Status</th><th class="num">Postings</th></tr></thead><tbody>

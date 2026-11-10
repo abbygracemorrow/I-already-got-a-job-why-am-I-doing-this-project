@@ -62,6 +62,12 @@ function prettyDate(s) {
   return new Date(s + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 }
 
+// The pipeline records dates in UTC (course rule); show run times in Dallas time for reading.
+function dallasTime(d) {
+  return new Date(d).toLocaleString("en-US", { timeZone: "America/Chicago", weekday: "long", month: "short",
+    day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
+}
+
 function jobItem(r, opts = {}) {
   const badges = [
     r.in_role ? '<span class="pill role">🎀 credit role</span>' : "",
