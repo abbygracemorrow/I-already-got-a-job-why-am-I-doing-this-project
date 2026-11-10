@@ -367,15 +367,29 @@ details.remote-more summary:hover { color: var(--rose-deep); }
   border-radius: 50%; display: grid; place-items: center; transition: background .2s;
 }
 .festive-toggle { position: relative; }
-.festive-toggle::before { /* glowing halo behind the candy cane */
-  content: ""; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle, rgba(255, 236, 210, .95) 0%, rgba(255, 196, 214, .7) 35%, rgba(255, 196, 214, 0) 70%);
-  animation: cane-glow 2.2s ease-in-out infinite alternate;
+.festive-toggle::before { /* glowing halo that cycles through Christmas colours */
+  content: ""; position: absolute; inset: 4px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: #ff5d7d; filter: blur(7px); opacity: .85;
+  animation: cane-colors 3s linear infinite, cane-pulse 1.5s ease-in-out infinite alternate;
+}
+.festive-toggle::after { /* a ring that bursts outward, changing colour each time */
+  content: ""; position: absolute; inset: 6px; border-radius: 50%; pointer-events: none; z-index: 0;
+  border: 3px solid #ff5d7d; opacity: 0;
+  animation: cane-burst 1.5s ease-out infinite, cane-ring-colors 3s steps(1) infinite;
 }
 .cane { position: relative; z-index: 1; }
-@keyframes cane-glow { from { opacity: .65; transform: scale(.9); } to { opacity: 1; transform: scale(1.12); } }
-body.festive .festive-toggle::before {
-  background: radial-gradient(circle, rgba(255, 236, 170, .9) 0%, rgba(255, 200, 90, .55) 38%, rgba(255, 200, 90, 0) 72%);
+@keyframes cane-colors {
+  0%   { background: #ff5d7d; }   20% { background: #ffd166; }   40% { background: #5fd38d; }
+  60%  { background: #ff9fc0; }   80% { background: #fff4d6; }   100% { background: #ff5d7d; }
+}
+@keyframes cane-ring-colors {
+  0% { border-color: #ff5d7d; } 25% { border-color: #ffd166; } 50% { border-color: #5fd38d; } 75% { border-color: #ff9fc0; }
+}
+@keyframes cane-pulse { from { transform: scale(.85); } to { transform: scale(1.2); } }
+@keyframes cane-burst {
+  0%   { transform: scale(.5); opacity: .95; border-width: 4px; }
+  70%  { opacity: .35; }
+  100% { transform: scale(1.9); opacity: 0; border-width: 1px; }
 }
 .festive-toggle:hover { background: rgba(227, 98, 143, .1); }
 .festive-toggle:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
@@ -446,7 +460,7 @@ body.festive .santa-hat { opacity: 1; transform: rotate(-6deg) translateY(0) sca
 }
 @media (prefers-reduced-motion: reduce) {
   .lights i, #light-frame i, body.festive .garland::after { animation: none; }
-  .cane, .festive-toggle.boing .cane, .festive-toggle::before { animation: none; }
+  .cane, .festive-toggle.boing .cane, .festive-toggle::before, .festive-toggle::after { animation: none; }
 }
 
 /* ---------- Dark mode: when the lights-and-snow toggle is on, the site goes dark so the
@@ -536,3 +550,42 @@ body.festive .plain-only { display: none; }
 .orn img.xmas-only { display: none; }
 body.festive .orn img.xmas-only { display: block; }
 .orn.next img.money { outline-offset: 2px; border-radius: 10px; }
+
+/* gingerbread village behind Snoopy (Today page, Christmas mode only). The houses
+   stand to the left of Snoopy; he stands in the snowy clearing at the end of the path. */
+.hero-text { position: relative; z-index: 1; }
+.mascot-wrap { z-index: 1; }
+.village {
+  position: absolute; right: -30px; bottom: -40px; width: 560px; height: auto; z-index: 0; pointer-events: none;
+  opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s;
+  /* soften the left edge and the bottom edge so the snow fades into the page */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%), linear-gradient(to bottom, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0, #000 8%), linear-gradient(to bottom, #000 88%, transparent 100%);
+  mask-composite: intersect;
+}
+body.festive .village { opacity: 1; transform: none; }
+/* keep the headline and paragraph to the left of the village */
+body.festive .hero-text { max-width: min(640px, calc(100% - 520px)); }
+@media (max-width: 720px) {
+  /* mirrored so the clearing is on the left, where Snoopy sits on phones */
+  .village { right: auto; left: -16px; bottom: auto; top: -30px; width: 360px;
+    transform: scaleX(-1) translateY(24px); -webkit-mask-image: none; mask-image: none; }
+  body.festive .hero-text { max-width: none; }
+  body.festive .village { transform: scaleX(-1); }
+  body.festive .mascot-wrap { margin-bottom: 30px; }
+}
+/* in-between widths in Christmas mode: stack like phones, Snoopy in the village clearing above the text */
+@media (min-width: 721px) and (max-width: 1000px) {
+  body.festive .hero { flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
+  body.festive .hero-text { max-width: none; }
+  .village { right: auto; left: -16px; bottom: auto; top: -34px; width: 520px;
+    transform: scaleX(-1) translateY(24px);
+    /* (mirrored) fade the outer edge and the bottom of the snow */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to bottom, #000 86%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to bottom, #000 86%, transparent 100%);
+    mask-composite: intersect; }
+  body.festive .village { transform: scaleX(-1); }
+  body.festive .mascot-wrap { margin-bottom: 52px; }
+}
