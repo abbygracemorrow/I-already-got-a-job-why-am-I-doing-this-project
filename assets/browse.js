@@ -6,8 +6,7 @@
   try { rows = await loadHistory(); } catch (e) { return showError(list.closest(".card"), e); }
 
   const last = lastRunDate(rows);
-  // Remote postings are never offered as options.
-  const open = rows.filter(r => r.status === "open" && !r.remote).map(r => ({ ...r, days: daysBetween(r.first_seen, last) }));
+  const open = rows.filter(r => r.status === "open").map(r => ({ ...r, days: daysBetween(r.first_seen, last) }));
   const KEY = "jobwatch.shortlist";
   const stars = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
   const save = () => localStorage.setItem(KEY, JSON.stringify([...stars]));
@@ -21,9 +20,11 @@
     const q = $("f-q").value.trim().toLowerCase(), emp = $("f-emp").value, loc = $("f-loc").value.trim().toLowerCase();
     const [lo, hi] = ($("f-days").value || "0-99999").split("-").map(Number);
     const dallas = $("f-dallas").checked;
+    const remote = $("f-remote").checked; // remote jobs stay hidden unless asked for
     let out = open.filter(r =>
       (mode === "all" || (mode === "role" && r.in_role) || (mode === "star" && stars.has(r.posting_id))) &&
       (!dallas || mode === "star" || r.in_dallas) &&
+      (remote || mode === "star" || !r.remote) &&
       (!q || r.title.toLowerCase().includes(q)) &&
       (!emp || r.employer === emp) &&
       (!loc || r.location.toLowerCase().includes(loc)) &&
@@ -61,11 +62,11 @@
     draw();
   }));
   ["f-q", "f-loc"].forEach(id => $(id).addEventListener("input", () => { shown = 100; draw(); }));
-  ["f-emp", "f-days", "f-sort", "f-dallas"].forEach(id => $(id).addEventListener("change", () => { shown = 100; draw(); }));
+  ["f-emp", "f-days", "f-sort", "f-dallas", "f-remote"].forEach(id => $(id).addEventListener("change", () => { shown = 100; draw(); }));
   $("more").addEventListener("click", () => { shown += 100; draw(); });
   $("f-reset").addEventListener("click", () => {
     $("f-q").value = $("f-loc").value = $("f-emp").value = $("f-days").value = "";
-    $("f-sort").value = "new"; $("f-dallas").checked = true; shown = 100;
+    $("f-sort").value = "new"; $("f-dallas").checked = true; $("f-remote").checked = false; shown = 100;
     $("mode-role").click();
   });
   draw();

@@ -36,8 +36,9 @@ Browse page shows Dallas-area credit roles by default.
 **Remote rule** (`is_remote`, the `remote` column). A posting is remote when its location says
 *remote, virtual, work from home, WFH, telecommute* or *teletravail*, or its title says *remote,
 work from home, WFH* or *telecommute*. Remote postings stay in `history.csv` (every posting the
-board returns is kept) and are counted on the Market page, but the Browse page, the Today lists
-and the daily issue's Dallas lists never show them, and a remote posting is never "Dallas area".
+board returns is kept) and in every count. The site keeps them out of the way: the Browse page
+hides them unless **Include remote jobs** is checked, the Today page folds them under
+**Show N remote postings** below the new and removed lists, and a remote posting is never "Dallas area".
 
 ## Sources
 
@@ -71,7 +72,9 @@ Every source returns JSON to a request made with no login.
 **Search terms.** JPMorgan Chase's board returns more than 5,000 postings (about 7,000), so it is
 requested with the search term **`credit`**. Workday's public API stops paging at 2,000 results,
 so the Workday boards at or above that limit (Capital One, Citi, PNC) are also requested with
-**`credit`**. Every other board is read in full.
+**`credit`**. Every other board is read in full. If a Workday board without a search term ever
+grows past 2,000 postings, the run still succeeds but records a note on that source (shown on the
+Today page and in `data/status.json`) saying a search term is needed.
 
 **Job aggregators (LinkedIn, Glassdoor and more).** LinkedIn and Glassdoor have no public job API,
 and the project does not read web pages, so their postings come through two aggregators with an
@@ -111,7 +114,8 @@ Run the whole daily pipeline (fetch every source, build, write status, open the 
 python -m watcher run
 ```
 
-Run the tests:
+Run the tests (GitHub Actions also runs them on every push, including each daily data commit,
+which the daily workflow starts the Tests workflow for):
 
 ```bash
 python -m pytest
@@ -158,12 +162,12 @@ by `posting_id` (`<source>:<source's own id>`).
 | `tests/test_rules.py` | Tests the title rule and the Dallas-area rule |
 | `tests/test_build.py` | Tests first-seen, last-seen, removed, reopened, failed-source and rebuild logic |
 | `.github/workflows/daily.yml` | Runs the pipeline every day at 12:23 UTC and commits the data |
-| `.github/workflows/tests.yml` | Runs the tests on every push |
+| `.github/workflows/tests.yml` | Runs the tests on every push (and on each daily data commit, started by the daily run) |
 | `data/raw/<date>/<source>.json.gz` | What each source returned that day, compressed |
 | `data/runs/<date>.json` | The result of every source on that day's run |
 | `data/history.csv` | One row per posting ever seen |
 | `data/status.json` | Summary of the latest run |
-| `index.html` | Today page: last run, source status, the four counts, new and removed postings |
+| `index.html` | Today page: last run, source status, the counts (days with a successful run, open, new today, removed today, plus open credit jobs in Dallas), new and removed postings |
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme) |
@@ -191,4 +195,4 @@ empty. Workday shows relative posting dates ("Posted 3 Days Ago"); they are conv
 date of the raw file, and "30+ Days Ago" is left empty.
 
 `data/status.json`: `run_time, run_date, first_run_date, watching_since (UTC time of the first run), days_with_success, open, new_today,
-removed_today, open_in_role, open_in_role_dallas, sources[] (name, employer, ats, ok, count, error)`.
+removed_today, open_in_role, open_in_role_dallas, sources[] (name, employer, ats, ok, count, error, and a note when a Workday board is over its limit)`.

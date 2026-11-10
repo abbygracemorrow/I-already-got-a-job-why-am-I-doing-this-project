@@ -332,3 +332,11 @@ a.tile-link:hover, a.tile-link:focus-visible { transform: translateY(-3px); box-
   .hero-band { animation: none; }
   .orn:hover img, .mascot.hop, .jobs li.picked { animation: none; }
 }
+
+/* rubric fixes: featured tile, remote fold, source notes */
+.tile-feature { background: linear-gradient(160deg, #fff 0%, #fff5f9 100%); border-color: #f4c7d7; }
+.tile-feature .value { color: var(--rose-deep); }
+details.remote-more { margin-top: 10px; font-size: .9rem; }
+details.remote-more summary { cursor: pointer; color: var(--ink-3); font-weight: 600; padding: 6px 0; }
+details.remote-more summary:hover { color: var(--rose-deep); }
+.src-note { font-size: .78rem; color: #9c5a24; margin-top: 4px; max-width: 280px; }

@@ -16,8 +16,9 @@
   // Remote postings are counted in the tiles but never listed as options.
   const added = addedAll.filter(r => !r.remote).sort(order);
   const removed = removedAll.filter(r => !r.remote).sort(order);
-  const hiddenNote = (all, shown) => all.length > shown.length
-    ? ` (${all.length - shown.length} remote job${all.length - shown.length === 1 ? "" : "s"} not shown.)` : "";
+  const addedRemote = addedAll.filter(r => r.remote).sort(order);
+  const removedRemote = removedAll.filter(r => r.remote).sort(order);
+  const hiddenNote = () => "";
   const okCount = status.sources.filter(s => s.ok).length;
   const runTime = new Date(status.run_time);
   const firstDay = status.days_with_success <= 1;
@@ -71,7 +72,8 @@
 
     <div class="tiles">
       <a class="tile tile-link" href="#goal"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></a>
-      <a class="tile tile-link" href="#dallas"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">out of ${fmt(status.open)} open postings across ${status.sources.length} job boards</div></a>
+      <a class="tile tile-link tile-feature" href="#dallas"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">credit analyst roles, not remote</div></a>
+      <a class="tile tile-link" href="browse.html"><div class="label">Open postings</div><div class="value">${fmt(status.open)}</div><div class="sub">all jobs at all ${status.sources.length} job boards</div></a>
       <a class="tile tile-link" href="#new-card"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></a>
       <a class="tile tile-link" href="#gone-card"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></a>
     </div>
@@ -123,15 +125,17 @@
         ? "This was the first check, so every job it found was already posted. Starting with the next check, jobs that are new since the day before will show up here."
         : "Jobs that showed up since the last check. Credit roles in Dallas are at the top."}${hiddenNote(addedAll, added)}</p>
       <div class="scroll"><ul class="jobs" id="new"></ul></div>
+      <div id="new-remote"></div>
     </div>
     <div class="card" id="gone-card"><h2>Jobs taken down</h2><p class="lede">${firstDay
         ? "Nothing can be taken down yet. Starting with the next check, jobs that were posted before and are now gone will show up here."
         : "Jobs that were posted at the last check and are now gone."}${hiddenNote(removedAll, removed)}</p>
-      <div class="scroll"><ul class="jobs" id="gone"></ul></div></div>
+      <div class="scroll"><ul class="jobs" id="gone"></ul></div>
+      <div id="gone-remote"></div></div>
     <div class="card"><h2>Sources</h2><p class="lede">Each employer's board, read through its applicant tracking system. A source that fails is skipped for the day; the others still run.</p>
       <div class="scroll"><table><thead><tr><th>Employer</th><th>System</th><th>Status</th><th class="num">Postings</th></tr></thead><tbody>
       ${status.sources.map(s => `<tr><td>${esc(s.employer || s.name)}</td><td>${esc(s.ats || "")}</td>
-        <td>${s.ok ? '<span class="pill ok">✓ OK</span>' : `<span class="pill fail" title="${esc(s.error || "")}">✗ Failed</span>`}</td>
+        <td>${s.ok ? '<span class="pill ok">✓ OK</span>' : `<span class="pill fail" title="${esc(s.error || "")}">✗ Failed</span>`}${s.note ? `<div class="src-note">${esc(s.note)}</div>` : ""}</td>
         <td class="num">${s.ok ? fmt(s.count) : "—"}</td></tr>`).join("")}
       </tbody></table></div></div>`;
 
@@ -153,6 +157,11 @@
     const a = added.filter(keep), g = removed.filter(keep);
     $("new").innerHTML = a.length ? a.map(r => jobItem(r, { side: esc(prettyDate(r.posted_date)) })).join("") : '<li class="empty">No new jobs.</li>';
     $("gone").innerHTML = g.length ? g.map(r => jobItem(r, { side: "open since " + esc(prettyDate(r.first_seen)) })).join("") : '<li class="empty">No jobs taken down.</li>';
+    // Remote postings are kept out of the main lists but can be opened here.
+    const fold = (rs, side) => rs.length ? `<details class="remote-more"><summary>Show ${rs.length} remote posting${rs.length === 1 ? "" : "s"}</summary>
+      <ul class="jobs">${rs.map(r => jobItem(r, { side: side(r) })).join("")}</ul></details>` : "";
+    $("new-remote").innerHTML = fold(addedRemote.filter(keep), r => esc(prettyDate(r.posted_date)));
+    $("gone-remote").innerHTML = fold(removedRemote.filter(keep), r => "open since " + esc(prettyDate(r.first_seen)));
   }
   $("new-card").querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
     $("new-card").querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
