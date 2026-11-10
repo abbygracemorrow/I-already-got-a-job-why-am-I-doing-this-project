@@ -183,7 +183,8 @@ by `posting_id` (`<source>:<source's own id>`).
 | `manifest.webmanifest` | Web app manifest, so the site installs as an app |
 | `sw.js` | Service worker: network first, cached copy when offline |
 | `icons/icon-192.png`, `icons/icon-512.png` | App icons used when the site is installed |
-| `icons/ornament.svg` | Striped ornament (favicon and the 7-day goal ornaments) |
+| `icons/favicon.svg`, `icons/favicon-32.png` | Dollar-bill tab icon (SVG, with a PNG fallback) |
+| `icons/ornament.svg` | Striped ornament (the 7-day goal ornaments) |
 | `icons/garland.svg` | Garland under the navigation bar |
 | `requirements-dev.txt` | Test dependency (pytest) |
 | `.gitignore` | Keeps Python caches and half-written raw folders out of git |
