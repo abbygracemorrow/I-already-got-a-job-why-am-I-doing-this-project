@@ -1,0 +1,14 @@
+{
+  "name": "Dallas Credit Job Watcher",
+  "short_name": "Job Watcher",
+  "description": "A daily watch of credit analyst openings at Dallas-area lenders.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8d7e2",
+  "theme_color": "#e3628f",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

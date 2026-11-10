@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today · Dallas Credit Job Watcher</title>
+<meta name="description" content="A daily watch of credit analyst openings at Dallas-area lenders.">
+<meta name="theme-color" content="#e3628f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/ornament.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="./"><img src="icons/ornament.svg" alt=""><span><b>Credit Job Watcher</b><small>Dallas area · updated daily</small></span></a>
+    <div class="nav-links">
+      <a href="./" aria-current="page">Today</a>
+      <a href="browse.html">Browse</a>
+      <a href="market.html">Market</a>
+    </div>
+  </div>
+  <span class="garland" aria-hidden="true"></span>
+</nav>
+<main>
+<div class="offline-note">You're offline: showing the last data this device loaded.</div>
+<div class="hero">
+  <img class="mascot" src="assets/snoopy.png" alt="" onerror="this.src='icons/ornament.svg';this.onerror=null;this.style.width='70px'">
+  <div><h1>Today's job watch</h1><p>What changed at the boards I watch since the last run.</p></div>
+</div>
+<div id="app"><p class="empty">Loading…</p></div>
+</main>
+<footer>Made with 🎀 · Data from each employer's public job board, collected daily by GitHub Actions.</footer>
+<script src="assets/common.js"></script>
+<script src="assets/charts.js"></script>
+<script src="assets/today.js"></script>
+</body>
+</html>
