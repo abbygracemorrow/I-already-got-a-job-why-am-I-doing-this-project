@@ -1,4 +1,7 @@
-// Today page: last run, source status, the four counts, new and removed lists.
+// Today page: last run, source status, the four counts, new and removed lists,
+// plus the interactive extras: countdown to the next check, 7-day goal, a filterable
+// list of Dallas credit jobs with a "surprise me" pick, the shortlist, Snoopy's money
+// rain and a snow switch.
 (async function () {
   const app = document.getElementById("app");
   let status, rows;
@@ -18,18 +21,80 @@
   const okCount = status.sources.filter(s => s.ok).length;
   const runTime = new Date(status.run_time);
   const firstDay = status.days_with_success <= 1;
+  const last = lastRunDate(rows);
+
+  // Open credit jobs in the Dallas area (never remote), newest first.
+  const dallas = rows.filter(r => r.status === "open" && r.in_role && r.in_dallas && !r.remote)
+    .map(r => ({ ...r, days: daysBetween(r.first_seen, last) }))
+    .sort((a, b) => b.first_seen.localeCompare(a.first_seen) || a.employer.localeCompare(b.employer) || a.title.localeCompare(b.title));
+  const byEmp = {};
+  dallas.forEach(r => { byEmp[r.employer] = (byEmp[r.employer] || 0) + 1; });
+  const empChips = Object.entries(byEmp).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+  const KEY = "jobwatch.shortlist";
+  const stars = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+  const saveStars = () => localStorage.setItem(KEY, JSON.stringify([...stars]));
+  const byId = new Map(rows.map(r => [r.posting_id, r]));
+
+  const GOAL = 7;
+  const done = Math.min(status.days_with_success, GOAL);
 
   app.innerHTML = `
-    <div class="card"><h2>Last run</h2>
-      <p class="lede" style="margin:0">${esc(dallasTime(runTime))} <b>Dallas time</b>
-      <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p></div>
-    <div class="tiles">
-      <div class="tile"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></div>
-      <div class="tile"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">out of ${fmt(status.open)} open postings across ${status.sources.length} job boards</div></div>
-      <div class="tile"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></div>
-      <div class="tile"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></div>
+    <div class="card run-card">
+      <div>
+        <h2>Last run</h2>
+        <p class="lede" style="margin:0">${esc(dallasTime(runTime))} <b>Dallas time</b>
+        <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p>
+      </div>
+      <div class="countdown">
+        <div class="cd-label">Next check in</div>
+        <div class="cd-time" id="cd">--:--:--</div>
+        <div class="cd-sub">every day at 6:23 am Dallas time</div>
+      </div>
     </div>
-    <div class="card">
+
+    <div class="tiles">
+      <a class="tile tile-link" href="#goal"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></a>
+      <a class="tile tile-link" href="#dallas"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">out of ${fmt(status.open)} open postings across ${status.sources.length} job boards</div></a>
+      <a class="tile tile-link" href="#new-card"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></a>
+      <a class="tile tile-link" href="#gone-card"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></a>
+    </div>
+
+    <div class="card" id="goal">
+      <div class="goal-head">
+        <h2>Road to ${GOAL} days</h2>
+        <label class="switch"><input type="checkbox" id="snow-toggle"><span></span> Let it snow</label>
+      </div>
+      <p class="lede">${done >= GOAL ? "Seven days of successful runs: goal reached!" :
+        `${done} of ${GOAL} days done. ${GOAL - done} more daily check${GOAL - done === 1 ? "" : "s"} to go. Hover an ornament to see its day.`}</p>
+      <div class="ornaments">${Array.from({ length: GOAL }, (_, i) =>
+        `<span class="orn ${i < done ? "lit" : ""}" title="Day ${i + 1}${i < done ? ": done" : ": coming up"}" tabindex="0">
+          <img src="icons/ornament.svg" alt=""><small>Day ${i + 1}</small></span>`).join("")}</div>
+    </div>
+
+    <div class="card" id="dallas">
+      <h2>Credit jobs in Dallas right now</h2>
+      <p class="lede">Tap an employer to narrow the list, ★ a job to save it, or let Snoopy pick one for you.</p>
+      <div class="chips" id="chips">
+        <button class="chip" aria-pressed="true" data-emp="">All <b>${fmt(dallas.length)}</b></button>
+        ${empChips.map(([e, n]) => `<button class="chip" aria-pressed="false" data-emp="${esc(e)}">${esc(e)} <b>${n}</b></button>`).join("")}
+      </div>
+      <div class="controls">
+        <label>Search titles<input id="dq" type="search" placeholder="e.g. underwriter"></label>
+        <button class="btn" id="surprise" type="button">🎁 Surprise me</button>
+      </div>
+      <p class="count" id="dcount"></p>
+      <ul class="jobs" id="dlist"></ul>
+      <p style="text-align:center"><button class="btn ghost" id="dmore" type="button" hidden>Show all</button></p>
+    </div>
+
+    <div class="card" id="shortlist-card">
+      <h2>★ Your shortlist</h2>
+      <p class="lede">Jobs you've starred here or on the Browse page. Saved in this browser.</p>
+      <ul class="jobs" id="slist"></ul>
+    </div>
+
+    <div class="card" id="new-card">
       <div class="controls" style="margin-bottom:6px">
         <div class="seg" role="group" aria-label="Which postings">
           <button data-f="all" aria-pressed="true">All postings</button>
@@ -41,7 +106,7 @@
         : "Jobs that showed up since the last check. Credit roles in Dallas are at the top."}${hiddenNote(addedAll, added)}</p>
       <div class="scroll"><ul class="jobs" id="new"></ul></div>
     </div>
-    <div class="card"><h2>Jobs taken down</h2><p class="lede">${firstDay
+    <div class="card" id="gone-card"><h2>Jobs taken down</h2><p class="lede">${firstDay
         ? "Nothing can be taken down yet. Starting with the next check, jobs that were posted before and are now gone will show up here."
         : "Jobs that were posted at the last check and are now gone."}${hiddenNote(removedAll, removed)}</p>
       <div class="scroll"><ul class="jobs" id="gone"></ul></div></div>
@@ -52,16 +117,154 @@
         <td class="num">${s.ok ? fmt(s.count) : "—"}</td></tr>`).join("")}
       </tbody></table></div></div>`;
 
+  const $ = id => document.getElementById(id);
+
+  // ---------- new / removed lists
   const filters = { all: () => true, role: r => r.in_role, focus: r => r.in_role && r.in_dallas };
-  function draw(f) {
+  function drawChanges(f) {
     const keep = filters[f];
     const a = added.filter(keep), g = removed.filter(keep);
-    document.getElementById("new").innerHTML = a.length ? a.map(r => jobItem(r, { side: esc(prettyDate(r.posted_date)) })).join("") : '<li class="empty">No new jobs.</li>';
-    document.getElementById("gone").innerHTML = g.length ? g.map(r => jobItem(r, { side: "open since " + esc(prettyDate(r.first_seen)) })).join("") : '<li class="empty">No jobs taken down.</li>';
+    $("new").innerHTML = a.length ? a.map(r => jobItem(r, { side: esc(prettyDate(r.posted_date)) })).join("") : '<li class="empty">No new jobs.</li>';
+    $("gone").innerHTML = g.length ? g.map(r => jobItem(r, { side: "open since " + esc(prettyDate(r.first_seen)) })).join("") : '<li class="empty">No jobs taken down.</li>';
   }
-  app.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
-    app.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    draw(b.dataset.f);
+  $("new-card").querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+    $("new-card").querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    drawChanges(b.dataset.f);
   }));
-  draw("all");
+  drawChanges("all");
+
+  // ---------- Dallas credit jobs: chips, search, stars, surprise
+  let emp = "", showAll = false;
+  const PAGE = 8;
+  const dallasFiltered = () => {
+    const q = $("dq").value.trim().toLowerCase();
+    return dallas.filter(r => (!emp || r.employer === emp) && (!q || r.title.toLowerCase().includes(q)));
+  };
+  const sideFor = r => r.first_run ? "open when watching began" : `open ${r.days} day${r.days === 1 ? "" : "s"}`;
+  function drawDallas() {
+    const list = dallasFiltered();
+    const shown = showAll ? list : list.slice(0, PAGE);
+    $("dcount").textContent = `${fmt(list.length)} job${list.length === 1 ? "" : "s"}${emp ? " at " + emp : ""}`;
+    $("dlist").innerHTML = shown.length
+      ? shown.map(r => jobItem(r, { star: true, starred: stars.has(r.posting_id), side: sideFor(r) })
+          .replace("<li>", `<li data-pid="${esc(r.posting_id)}">`)).join("")
+      : '<li class="empty">No jobs match.</li>';
+    $("dmore").hidden = list.length <= PAGE;
+    $("dmore").textContent = showAll ? "Show fewer" : `Show all ${list.length}`;
+  }
+  $("chips").addEventListener("click", e => {
+    const c = e.target.closest(".chip"); if (!c) return;
+    emp = c.dataset.emp; showAll = false;
+    $("chips").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+    drawDallas();
+  });
+  $("dq").addEventListener("input", () => { showAll = false; drawDallas(); });
+  $("dmore").addEventListener("click", () => { showAll = !showAll; drawDallas(); });
+  $("surprise").addEventListener("click", () => {
+    const list = dallasFiltered();
+    if (!list.length) return;
+    const pick = list[Math.floor(Math.random() * list.length)];
+    showAll = true; drawDallas();
+    const li = $("dlist").querySelector(`li[data-pid="${CSS.escape(pick.posting_id)}"]`);
+    if (li) {
+      li.classList.add("picked");
+      li.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => li.classList.remove("picked"), 4000);
+    }
+    moneyRain(10);
+  });
+
+  // ---------- shortlist preview (shared with the Browse page)
+  function drawShortlist() {
+    const saved = [...stars].map(id => byId.get(id)).filter(Boolean);
+    $("slist").innerHTML = saved.length
+      ? saved.map(r => jobItem(r, { star: true, starred: true,
+          side: r.status === "open" ? "still open" : `<span class="pill fail">taken down ${esc(prettyDate(r.removed_date))}</span>` })).join("")
+      : '<li class="empty">Nothing saved yet. Tap ☆ on a job above to save it here.</li>';
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".star"); if (!b) return;
+    const id = b.dataset.id;
+    stars.has(id) ? stars.delete(id) : stars.add(id);
+    saveStars();
+    document.querySelectorAll(`.star[data-id="${CSS.escape(id)}"]`).forEach(s => {
+      s.setAttribute("aria-pressed", String(stars.has(id))); s.textContent = stars.has(id) ? "★" : "☆";
+    });
+    drawShortlist();
+  });
+  drawDallas();
+  drawShortlist();
+
+  // ---------- countdown to the next scheduled check (12:23 UTC daily)
+  function nextRun(now) {
+    const t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 12, 23, 0));
+    if (t <= now) t.setUTCDate(t.getUTCDate() + 1);
+    return t;
+  }
+  const pad = n => String(n).padStart(2, "0");
+  function tick() {
+    const now = new Date(), s = Math.floor((nextRun(now) - now) / 1000);
+    $("cd").textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // ---------- snow switch (remembered in this browser)
+  const snowKey = "jobwatch.snow";
+  $("snow-toggle").checked = localStorage.getItem(snowKey) === "on";
+  setSnow($("snow-toggle").checked);
+  $("snow-toggle").addEventListener("change", e => {
+    localStorage.setItem(snowKey, e.target.checked ? "on" : "off");
+    setSnow(e.target.checked);
+  });
+
+  // ---------- Snoopy: click for a money rain
+  const snoopy = document.querySelector(".mascot");
+  if (snoopy) {
+    snoopy.classList.add("clickable");
+    snoopy.title = "Click me!";
+    snoopy.setAttribute("role", "button");
+    snoopy.setAttribute("aria-label", "Make it rain");
+    snoopy.tabIndex = 0;
+    const go = () => { snoopy.classList.remove("hop"); void snoopy.offsetWidth; snoopy.classList.add("hop"); moneyRain(24); };
+    snoopy.addEventListener("click", go);
+    snoopy.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  }
 })();
+
+const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function moneyRain(n) {
+  if (calm()) return;
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement("span");
+    b.className = "bill";
+    b.textContent = "💵";
+    b.style.left = Math.random() * 100 + "vw";
+    b.style.animationDelay = Math.random() * 0.8 + "s";
+    b.style.animationDuration = 2.2 + Math.random() * 1.6 + "s";
+    b.style.setProperty("--spin", (Math.random() * 720 - 360) + "deg");
+    b.style.fontSize = 22 + Math.random() * 18 + "px";
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 5000);
+  }
+}
+
+function setSnow(on) {
+  let layer = document.getElementById("snow");
+  if (!on || calm()) { if (layer) layer.remove(); return; }
+  if (layer) return;
+  layer = document.createElement("div");
+  layer.id = "snow";
+  layer.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 60; i++) {
+    const f = document.createElement("i");
+    const size = 3 + Math.random() * 6;
+    f.style.left = Math.random() * 100 + "vw";
+    f.style.width = f.style.height = size + "px";
+    f.style.animationDuration = 6 + Math.random() * 8 + "s";
+    f.style.animationDelay = -Math.random() * 14 + "s";
+    f.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
+    layer.appendChild(f);
+  }
+  document.body.appendChild(layer);
+}

@@ -198,3 +198,67 @@ footer { text-align: center; color: var(--ink-2); font-size: .85rem; padding: 0 
 /* fixes after the first visual check */
 .controls .check input { min-width: 0; width: 18px; height: 18px; padding: 0; accent-color: var(--green); }
 .tile .label { padding-right: 26px; }
+
+/* ---------- Today page: interactive extras ---------- */
+.run-card { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.countdown {
+  text-align: center; background: var(--green); color: var(--cream);
+  border-radius: 16px; padding: 10px 20px; min-width: 220px;
+}
+.cd-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; opacity: .85; font-weight: 700; }
+.cd-time { font: 700 2rem/1.1 var(--font-head); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.cd-sub { font-size: .8rem; opacity: .85; }
+
+a.tile-link { display: block; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; }
+a.tile-link:hover, a.tile-link:focus-visible { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(184, 64, 107, .22); }
+
+.goal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ornaments { display: flex; gap: 10px; flex-wrap: wrap; }
+.orn { display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none; }
+.orn img { width: 44px; height: 62px; filter: grayscale(1) opacity(.35); transition: transform .2s, filter .3s; transform-origin: top center; }
+.orn.lit img { filter: none; }
+.orn:hover img, .orn:focus-visible img { animation: swing .9s ease-in-out; }
+.orn small { font-size: .75rem; color: var(--ink-2); font-weight: 700; }
+.orn.lit small { color: var(--rose-deep); }
+@keyframes swing { 0%,100% { transform: rotate(0); } 25% { transform: rotate(12deg); } 75% { transform: rotate(-10deg); } }
+
+.switch { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--green-deep); cursor: pointer; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch span { width: 44px; height: 24px; border-radius: 999px; background: #e7cdd7; position: relative; transition: background .2s; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--snow); box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: left .2s; }
+.switch input:checked + span { background: var(--green); }
+.switch input:checked + span::after { left: 23px; }
+.switch input:focus-visible + span { outline: 3px solid var(--mint); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip {
+  font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer;
+  border: 1.5px solid var(--pink); background: var(--snow); color: var(--ink);
+  border-radius: 999px; padding: 5px 12px; transition: background .15s, transform .1s;
+}
+.chip b { color: var(--rose-deep); margin-left: 4px; }
+.chip:hover { background: var(--pink-bg); }
+.chip:active { transform: scale(.96); }
+.chip[aria-pressed="true"] { background: var(--rose); border-color: var(--rose); color: var(--snow); }
+.chip[aria-pressed="true"] b { color: var(--snow); }
+.btn.ghost { background: var(--snow); color: var(--rose-deep); border: 1.5px solid var(--rose); }
+.btn.ghost:hover { background: var(--pink-bg); }
+
+.jobs li.picked { background: #fde6ee; border-radius: 12px; animation: pulse 1s ease-in-out 3; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(227, 98, 143, .0); } 50% { box-shadow: 0 0 0 6px rgba(227, 98, 143, .35); } }
+
+.mascot.clickable { cursor: pointer; transition: transform .2s; }
+.mascot.clickable:hover { transform: rotate(-4deg) scale(1.04); }
+.mascot.hop { animation: hop .6s ease-out; }
+@keyframes hop { 0% { transform: translateY(0); } 30% { transform: translateY(-22px) rotate(-6deg); } 60% { transform: translateY(0) rotate(4deg); } 80% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+
+.bill { position: fixed; top: -60px; z-index: 50; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(var(--spin)); } }
+
+#snow { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
+#snow i { position: absolute; top: -10px; background: #fff; border-radius: 50%; opacity: .9; animation: snowfall linear infinite; box-shadow: 0 0 4px rgba(255,255,255,.8); }
+@keyframes snowfall { to { transform: translate(var(--drift), 105vh); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .orn:hover img, .mascot.hop, .jobs li.picked { animation: none; }
+}
