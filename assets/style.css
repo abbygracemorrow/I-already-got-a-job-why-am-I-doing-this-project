@@ -59,7 +59,8 @@ a:hover { color: var(--berry); }
 }
 .nav-links a:hover { color: var(--ink); background: rgba(227, 98, 143, .08); }
 .nav-links a[aria-current="page"] { color: var(--snow); background: var(--ink); }
-.garland { display: block; width: 100%; height: 50px; margin-bottom: -50px; position: relative; pointer-events: none;
+/* garland hangs at the top of the hero band and scrolls away with the page */
+.garland { position: absolute; top: 0; left: 0; right: 0; height: 50px; z-index: 2; pointer-events: none;
   background: url("../icons/garland.svg") repeat-x center / auto 50px; }
 
 /* ---------- hero: angled gradient band ---------- */
