@@ -174,7 +174,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme, plus its dark mode) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for Christmas mode: dark colors, Christmas lights around the whole window and under the nav bar, snow, mistletoe, ornaments and a Santa hat on Snoopy; the site always opens in plain light mode with flowers and money) |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for Christmas mode: dark colors, Christmas lights around the whole window, snow, mistletoe with white fairy lights, ornaments and a Santa hat on Snoopy; the site always opens in plain light mode with flowers and money) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
@@ -187,6 +187,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `icons/ornament.svg` | Striped ornament: one per day in the days-of-history tracker in Christmas mode (dollar bills in light mode) |
 | `icons/flower-garland.svg` | Flower garland at the top of the page banner (light mode) |
 | `icons/garland.svg` | Mistletoe garland that replaces the flowers in Christmas mode |
+| `icons/garland-lights.svg` | White fairy lights that twinkle on the mistletoe garland in Christmas mode |
 | `icons/santa-hat.svg` | Santa hat Snoopy wears when the lights are on |
 | `icons/candy-cane.svg` | The candy cane that turns dark mode and the lights on and off |
 | `requirements-dev.txt` | Test dependency (pytest) |

@@ -103,7 +103,7 @@ if ("serviceWorker" in navigator) {
 }
 
 // ---------- Festive mode: a bouncing candy cane in the top-right of the nav bar.
-// Click it for dark mode: Christmas lights along the nav bar light up, snow falls, and
+// Click it for Christmas mode: lights frame the window, the garland lights up, snow falls, and
 // Snoopy gets a Santa hat. The site always opens in light mode; the choice only carries
 // between pages during the same visit.
 const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -161,7 +161,7 @@ function setFestive(on) {
   const btn = document.getElementById("festive-toggle");
   if (btn) {
     btn.setAttribute("aria-pressed", String(on));
-    btn.title = on ? "Back to light mode" : "Dark mode with Christmas lights and snow";
+    btn.title = on ? "Back to light mode" : "Christmas mode";
   }
   setSnow(on);
 }
@@ -174,19 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.id = "festive-toggle";
   btn.type = "button";
   btn.className = "festive-toggle";
-  btn.setAttribute("aria-label", "Christmas lights and snow");
+  btn.setAttribute("aria-label", "Christmas mode");
   btn.innerHTML = '<img class="cane" src="icons/candy-cane.svg" alt="">';
   inner.appendChild(btn);
-  // the string of lights along the bottom of the nav bar
-  const lights = document.createElement("div");
-  lights.className = "lights";
-  lights.setAttribute("aria-hidden", "true");
-  for (let i = 0; i < 48; i++) {
-    const b = document.createElement("i");
-    b.style.animationDelay = (i % 7) * 0.23 + "s";
-    lights.appendChild(b);
-  }
-  nav.appendChild(lights);
   // Santa hat for Snoopy (only on pages that show him)
   const snoopy = document.querySelector(".mascot");
   if (snoopy) {

@@ -63,6 +63,15 @@ a:hover { color: var(--berry); }
 .garland { position: absolute; top: 0; left: 0; right: 0; height: 50px; z-index: 2; pointer-events: none;
   background: url("../icons/flower-garland.svg") repeat-x center / auto 50px; }
 body.festive .garland { background-image: url("../icons/garland.svg"); } /* mistletoe in Christmas mode */
+.garland::after { /* white fairy lights on the garland, Christmas mode only */
+  content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .35s;
+  background: url("../icons/garland-lights.svg") repeat-x center / auto 50px;
+}
+body.festive .garland::after {
+  opacity: 1; animation: garland-twinkle 1.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px rgba(255, 255, 255, .9)) drop-shadow(0 0 10px rgba(255, 244, 214, .7));
+}
+@keyframes garland-twinkle { from { opacity: 1; } to { opacity: .55; } }
 
 /* ---------- hero: angled gradient band ---------- */
 .hero-band {
@@ -400,7 +409,7 @@ body.festive .cane { filter: drop-shadow(0 0 6px rgba(255, 210, 120, .9)) drop-s
 .lights i:nth-child(5n+4), #light-frame i:nth-child(5n+4) { --bulb: #ff9fc0; --bulb-glow: rgba(255, 159, 192, .55); }
 .lights i:nth-child(5n+5), #light-frame i:nth-child(5n+5) { --bulb: #fff4d6; --bulb-glow: rgba(255, 244, 214, .6); }
 @keyframes twinkle { from { opacity: 1; filter: brightness(1.15); } to { opacity: .45; filter: brightness(.8); } }
-body.festive .lights { display: flex; }
+
 
 /* Snoopy's Santa hat */
 .mascot-wrap { position: relative; display: inline-block; flex-shrink: 0; line-height: 0; }
@@ -425,7 +434,7 @@ body.festive .santa-hat { opacity: 1; transform: rotate(-6deg) translateY(0) sca
   .lights i:nth-child(n+25) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .lights i, #light-frame i { animation: none; }
+  .lights i, #light-frame i, body.festive .garland::after { animation: none; }
   .cane, .festive-toggle.boing .cane { animation: none; }
 }
 
