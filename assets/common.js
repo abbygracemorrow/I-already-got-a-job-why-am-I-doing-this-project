@@ -103,8 +103,7 @@ if ("serviceWorker" in navigator) {
 }
 
 // ---------- Festive mode: a bouncing candy cane in the top-right of the nav bar.
-// Click it for Christmas mode: lights frame the window, the garland lights up, snow falls,
-// Santa flies across the page, and
+// Click it for Christmas mode: lights frame the window, the garland lights up, snow falls, and
 // Snoopy gets a Santa hat. The site always opens in light mode; the choice only carries
 // between pages during the same visit.
 const calm = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -225,32 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.setAttribute("aria-label", "Christmas mode");
   btn.innerHTML = '<img class="cane" src="icons/candy-cane.svg" alt="">';
   inner.appendChild(btn);
-  // Santa on/off button, shown only in Christmas mode
-  const sb = document.createElement("button");
-  sb.id = "santa-toggle"; sb.type = "button"; sb.className = "santa-toggle";
-  sb.innerHTML = "🎅";
-  const setSanta = on => {
-    document.body.classList.toggle("no-santa", !on);
-    sb.setAttribute("aria-pressed", String(on));
-    sb.title = sb.ariaLabel = on ? "Hide Santa" : "Show Santa";
-  };
-  setSanta(sessionStorage.getItem("jobwatch.santa") !== "off");
-  sb.addEventListener("click", () => {
-    const on = document.body.classList.contains("no-santa");
-    sessionStorage.setItem("jobwatch.santa", on ? "on" : "off");
-    setSanta(on);
-  });
-  // float the Santa button just right of the candy cane without moving anything else
-  const holder = document.createElement("span");
-  holder.className = "festive-holder";
-  btn.replaceWith(holder); holder.append(btn, sb);
-  // Santa and his reindeer, flying back and forth over the page in Christmas mode.
-  // He floats above everything but can't be clicked and never moves anything.
-  const santa = document.createElement("div");
-  santa.id = "santa";
-  santa.setAttribute("aria-hidden", "true");
-  santa.innerHTML = '<img src="icons/santa-sleigh.svg" alt="">';
-  document.body.appendChild(santa);
   // A Christmas ornament with a photo inside, hanging from the top-left corner and
   // slowly spinning (Christmas mode). Clicks pass through it.
   const orn = document.createElement("div");

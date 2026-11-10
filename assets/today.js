@@ -71,9 +71,9 @@
         <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p>
       </div>
       <div class="countdown">
-        <div class="cd-label">Next check in</div>
+        <div class="cd-label" id="cd-label">Next check in</div>
         <div class="cd-time" id="cd">--:--:--</div>
-        <div class="cd-sub">every day at 6:00 am Dallas time</div>
+        <div class="cd-sub" id="cd-sub">every day at 6:00 am Dallas time</div>
       </div>
     </div>
 
@@ -248,9 +248,26 @@
     return t;
   }
   const pad = n => String(n).padStart(2, "0");
+  // Christmas mode: count down to midnight on Dec 25 in Dallas (6:00 UTC, standard time).
+  function christmas(now) {
+    let t = new Date(Date.UTC(now.getUTCFullYear(), 11, 25, 6, 0, 0));
+    if (t <= now) t = new Date(Date.UTC(now.getUTCFullYear() + 1, 11, 25, 6, 0, 0));
+    return t;
+  }
   function tick() {
-    const now = new Date(), s = Math.floor((nextRun(now) - now) / 1000);
-    $("cd").textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+    const now = new Date(), xmas = document.body.classList.contains("festive");
+    const s = Math.floor(((xmas ? christmas(now) : nextRun(now)) - now) / 1000);
+    const clock = `${pad(Math.floor(s / 3600) % 24)}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+    if (xmas) {
+      const d = Math.floor(s / 86400);
+      $("cd-label").textContent = "Days till Christmas";
+      $("cd").textContent = `${d} day${d === 1 ? "" : "s"}`;
+      $("cd-sub").textContent = `and ${clock}`;
+    } else {
+      $("cd-label").textContent = "Next check in";
+      $("cd").textContent = `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+      $("cd-sub").textContent = "every day at 6:00 am Dallas time";
+    }
   }
   tick(); setInterval(tick, 1000);
 
