@@ -73,7 +73,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 22px 20px 60px; }
 }
 .hero h1 { font: 700 2.2rem/1.15 var(--font-head); margin: 0; color: var(--green-deep); }
 .hero p { margin: 6px 0 0; color: var(--ink-2); }
-.mascot { width: 130px; height: auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.12)); }
+.mascot { width: 160px; height: auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.12)); }
 .offline-note {
   display: none; background: var(--cream); border: 2px dashed var(--rose);
   border-radius: 12px; padding: 8px 14px; margin-bottom: 14px; color: var(--rose-deep);
