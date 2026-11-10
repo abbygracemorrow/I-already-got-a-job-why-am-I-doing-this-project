@@ -646,10 +646,16 @@ body.festive .countdown::before { /* soft centre so the numbers read clearly */
 /* Christmas mode: the "Today's job watch" letters look like candy canes */
 body.festive .hero h1 {
   /* same red / white / pink / white stripes as the Christmas countdown, scaled to the letters */
-  background: repeating-linear-gradient(135deg, #cc0011 0 11px, #fff 11px 20px, #f2a6ba 20px 31px, #fff 31px 40px);
+  background: repeating-linear-gradient(135deg, #cc0011 0 14px, #fff 14px 24px, #f2a6ba 24px 38px, #fff 38px 48px);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  -webkit-text-stroke: 1px rgba(120, 10, 30, .55);
+  -webkit-text-stroke: 1.5px #fff;   /* crisp white outline around every letter */
   text-shadow: none;
   /* soft white-and-pink glow so the striped letters stand out on the night sky */
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, .9)) drop-shadow(0 0 8px rgba(255, 190, 215, .85)) drop-shadow(0 0 18px rgba(255, 120, 170, .6));
+  filter: drop-shadow(0 2px 1px rgba(20, 0, 8, 1)) drop-shadow(0 0 4px rgba(20, 0, 8, 1)) drop-shadow(0 0 14px rgba(20, 0, 8, .95)) drop-shadow(0 0 2px rgba(255, 255, 255, .6));
 }
+
+/* the green "Next run" box and the Christmas countdown are exactly the same size */
+.countdown { box-sizing: border-box; width: 240px; height: 100px; min-width: 0; padding: 10px 16px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; }
+body.festive .countdown { border-width: 2px; }
+.countdown { border: 2px solid transparent; }
