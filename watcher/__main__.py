@@ -1,0 +1,108 @@
+"""Command line.
+
+    python -m watcher run       # fetch every source, build, write status, open the issue
+    python -m watcher build     # rebuild data/history.csv from data/raw only
+    python -m watcher fetch     # fetch only (writes data/raw/<today>/ and data/runs/<today>.json)
+
+Options: --data DIR (default: data), --only NAME[,NAME] (fetch a subset; for testing).
+"""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import json
+import shutil
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+from . import issue
+from .build import write_history
+from .fetch import fetch
+from .normalize import normalize
+from .sources import SOURCES
+from .status import make_status, write_status
+
+
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def do_fetch(data: Path, now: datetime, only: set[str] | None = None) -> dict:
+    """Fetch every source into data/raw/<date>/. One failing source does not stop the run.
+    A second run on the same day replaces that day's raw files."""
+    day = now.strftime("%Y-%m-%d")
+    tmp = data / "raw" / f".{day}.tmp"
+    shutil.rmtree(tmp, ignore_errors=True)
+    tmp.mkdir(parents=True)
+    results = []
+    for src in SOURCES:
+        if only and src.name not in only:
+            continue
+        t0 = time.time()
+        entry = {"name": src.name, "employer": src.employer, "ats": src.ats,
+                 "search": src.search, "ok": False, "count": 0, "error": ""}
+        try:
+            raw = fetch(src)
+            raw["fetched_at"] = utc_now().isoformat(timespec="seconds")
+            count = len(normalize(raw, day))
+            if count == 0:
+                raise RuntimeError("board returned no postings")
+            with gzip.open(tmp / f"{src.name}.json.gz", "wt", encoding="utf-8") as f:
+                json.dump(raw, f, separators=(",", ":"), sort_keys=True)
+            entry.update(ok=True, count=count)
+        except Exception as exc:  # noqa: BLE001 - record and keep going
+            entry["error"] = f"{type(exc).__name__}: {exc}"[:300]
+        entry["seconds"] = round(time.time() - t0, 1)
+        print(f"  {src.name:<14} {'ok' if entry['ok'] else 'FAILED':<6} "
+              f"{entry['count']:>5}  {entry['error']}", flush=True)
+        results.append(entry)
+
+    final = data / "raw" / day
+    shutil.rmtree(final, ignore_errors=True)
+    if any(tmp.iterdir()):
+        tmp.rename(final)
+    else:
+        shutil.rmtree(tmp)
+    run = {"date": day, "run_time": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sources": results}
+    (data / "runs").mkdir(parents=True, exist_ok=True)
+    (data / "runs" / f"{day}.json").write_text(json.dumps(run, indent=2) + "\n")
+    return run
+
+
+def main(argv=None) -> int:
+    p = argparse.ArgumentParser(prog="watcher")
+    p.add_argument("command", choices=["run", "fetch", "build"])
+    p.add_argument("--data", default="data")
+    p.add_argument("--only", default="")
+    a = p.parse_args(argv)
+    data = Path(a.data)
+    only = set(filter(None, a.only.split(","))) or None
+
+    if a.command == "build":
+        rows = write_history(data / "raw", data / "history.csv")
+        print(f"history.csv: {len(rows)} postings")
+        return 0
+
+    now = utc_now()
+    print(f"Fetching {len(SOURCES)} sources ({now:%Y-%m-%d %H:%M} UTC)")
+    run = do_fetch(data, now, only)
+    if a.command == "fetch":
+        return 0
+
+    rows = write_history(data / "raw", data / "history.csv")
+    status = make_status(rows, data / "raw", run)
+    write_status(status, data / "status.json")
+    print(f"history.csv: {len(rows)} postings; open {status['open']}, "
+          f"new {status['new_today']}, removed {status['removed_today']}")
+    try:
+        print("Issue:", issue.publish(rows, status))
+    except Exception as exc:  # noqa: BLE001 - the commit should still happen
+        print(f"Issue: FAILED {type(exc).__name__}: {exc}", file=sys.stderr)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
