@@ -153,7 +153,46 @@ def from_smartrecruiters(raw: dict, day: str) -> list[dict]:
     return rows
 
 
+# ---------------------------------------------------------------- Aggregators
+# For aggregator rows, employer is the hiring company and department shows the site
+# the posting came from (e.g. "via LinkedIn").
+def from_jsearch(raw: dict, day: str) -> list[dict]:
+    rows = []
+    for page in raw.get("pages", []):
+        for job in page.get("data") or []:
+            if not job.get("job_id"):
+                continue
+            place = ", ".join(x for x in [job.get("job_city"), job.get("job_state")] if x)
+            if job.get("job_is_remote"):
+                place = f"{place} (Remote)" if place else "Remote"
+            r = _row(raw, job["job_id"], job.get("job_title"), location=place,
+                     department=f"via {job['job_publisher']}" if job.get("job_publisher") else "",
+                     posted_date=(job.get("job_posted_at_datetime_utc") or "")[:10],
+                     url=job.get("job_apply_link") or job.get("job_google_link") or "")
+            r["employer"] = _clean(job.get("employer_name")) or raw["employer"]
+            rows.append(r)
+    return rows
+
+
+def from_adzuna(raw: dict, day: str) -> list[dict]:
+    rows = []
+    for page in raw.get("pages", []):
+        for job in page.get("results") or []:
+            if not job.get("id"):
+                continue
+            r = _row(raw, job["id"], job.get("title"),
+                     location=(job.get("location") or {}).get("display_name", ""),
+                     department=(job.get("category") or {}).get("label", ""),
+                     posted_date=(job.get("created") or "")[:10],
+                     url=job.get("redirect_url", ""))
+            r["employer"] = _clean((job.get("company") or {}).get("display_name")) or raw["employer"]
+            rows.append(r)
+    return rows
+
+
 CONVERTERS = {
+    "jsearch": from_jsearch,
+    "adzuna": from_adzuna,
     "workday": from_workday,
     "oracle": from_oracle,
     "greenhouse": from_greenhouse,

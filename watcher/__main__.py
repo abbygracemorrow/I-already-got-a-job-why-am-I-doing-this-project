@@ -41,7 +41,8 @@ def do_fetch(data: Path, now: datetime, only: set[str] | None = None) -> dict:
     tmp = data / "raw" / f".{day}.tmp"
     shutil.rmtree(tmp, ignore_errors=True)
     tmp.mkdir(parents=True)
-    chosen = [s for s in SOURCES if not only or s.name in only]
+    # Aggregators without an API key are left out (not counted as failures).
+    chosen = [s for s in SOURCES if (not only or s.name in only) and s.enabled()]
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         results = list(pool.map(lambda s: _fetch_one(s, tmp, day), chosen))
     for entry in results:
@@ -100,7 +101,7 @@ def main(argv=None) -> int:
         return 0
 
     now = utc_now()
-    print(f"Fetching {len(SOURCES)} sources ({now:%Y-%m-%d %H:%M} UTC)")
+    print(f"Fetching {sum(s.enabled() for s in SOURCES)} sources ({now:%Y-%m-%d %H:%M} UTC)")
     run = do_fetch(data, now, only)
     if a.command == "fetch":
         return 0

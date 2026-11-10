@@ -95,3 +95,71 @@ def test_smartrecruiters():
     assert r["department"] == "Risk"
     assert r["posted_date"] == "2026-11-10"
     assert r["url"] == "https://jobs.smartrecruiters.com/Experian/744000160747449"
+
+
+def test_jsearch():
+    raw = {
+        "source": "jsearch", "employer": "JSearch", "ats": "jsearch",
+        "url": "https://jsearch.p.rapidapi.com/search?query=credit+analyst",
+        "pages": [{"status": "OK", "data": [
+            {"job_id": "abc==", "job_title": "Credit Analyst", "employer_name": "Comerica Bank",
+             "job_city": "Dallas", "job_state": "TX", "job_is_remote": False, "job_publisher": "LinkedIn",
+             "job_apply_link": "https://www.linkedin.com/jobs/view/1", "job_posted_at_datetime_utc": "2026-11-08T14:00:00.000Z"},
+            {"job_id": "def==", "job_title": "Credit Analyst", "employer_name": "Acme",
+             "job_city": None, "job_state": None, "job_is_remote": True, "job_publisher": "Glassdoor",
+             "job_apply_link": "https://www.glassdoor.com/job/2"},
+        ]}],
+    }
+    a, b = normalize(raw, DAY)
+    assert a["posting_id"] == "jsearch:abc=="
+    assert a["employer"] == "Comerica Bank"
+    assert a["location"] == "Dallas, TX"
+    assert a["department"] == "via LinkedIn"
+    assert a["posted_date"] == "2026-11-08"
+    assert a["url"] == "https://www.linkedin.com/jobs/view/1"
+    assert b["location"] == "Remote"
+    assert b["department"] == "via Glassdoor"
+    assert b["posted_date"] == ""
+
+
+def test_adzuna():
+    raw = {
+        "source": "adzuna", "employer": "Adzuna", "ats": "adzuna",
+        "url": "https://api.adzuna.com/v1/api/jobs/us/search/1?what=credit+analyst",
+        "pages": [{"count": 1, "results": [
+            {"id": "4412", "title": "Commercial Credit Analyst", "company": {"display_name": "Veritex Bank"},
+             "location": {"display_name": "Dallas, Dallas County"}, "category": {"label": "Accounting & Finance Jobs"},
+             "created": "2026-11-07T09:00:00Z", "redirect_url": "https://www.adzuna.com/details/4412"},
+        ]}],
+    }
+    (r,) = normalize(raw, DAY)
+    assert r["posting_id"] == "adzuna:4412"
+    assert r["employer"] == "Veritex Bank"
+    assert r["location"] == "Dallas, Dallas County"
+    assert r["department"] == "Accounting & Finance Jobs"
+    assert r["posted_date"] == "2026-11-07"
+    assert r["url"] == "https://www.adzuna.com/details/4412"
+
+
+def test_aggregators_need_keys():
+    from watcher.sources import SOURCES_BY_NAME
+    js, az = SOURCES_BY_NAME["jsearch"], SOURCES_BY_NAME["adzuna"]
+    assert not js.enabled({}) and js.enabled({"JSEARCH_API_KEY": "x"})
+    assert not az.enabled({"ADZUNA_APP_ID": "x"})
+    assert az.enabled({"ADZUNA_APP_ID": "x", "ADZUNA_APP_KEY": "y"})
+    assert SOURCES_BY_NAME["frost"].enabled({})
+
+
+def test_saved_urls_hold_no_keys(monkeypatch):
+    import watcher.fetch as f
+    from watcher.sources import SOURCES_BY_NAME
+    monkeypatch.setenv("ADZUNA_APP_ID", "SECRET_ID")
+    monkeypatch.setenv("ADZUNA_APP_KEY", "SECRET_KEY")
+    monkeypatch.setenv("JSEARCH_API_KEY", "SECRET_JS")
+    seen = []
+    monkeypatch.setattr(f, "_request", lambda url, body=None, extra_headers=None: seen.append(url) or
+                        {"count": 0, "results": [], "status": "OK", "data": []})
+    out = [f.fetch(SOURCES_BY_NAME["adzuna"]), f.fetch(SOURCES_BY_NAME["jsearch"])]
+    text = str(out)
+    assert "SECRET" not in text
+    assert "SECRET_ID" in seen[0]  # the key is sent, just never saved

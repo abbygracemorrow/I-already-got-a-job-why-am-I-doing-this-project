@@ -19,9 +19,15 @@ from dataclasses import dataclass, field
 class Source:
     name: str  # short id, used in file names and posting_id
     employer: str
-    ats: str  # workday | oracle | greenhouse | smartrecruiters
+    ats: str  # workday | oracle | greenhouse | smartrecruiters | jsearch | adzuna
     config: dict = field(default_factory=dict)
     search: str = ""  # search term sent to the board ("" = whole board)
+    needs: tuple = ()  # environment variables (API keys) the source needs to run
+
+    def enabled(self, env=None) -> bool:
+        import os
+        env = os.environ if env is None else env
+        return all(env.get(k) for k in self.needs)
 
 
 def _wd(name, employer, dc, tenant, site, search=""):
@@ -57,6 +63,18 @@ SOURCES: list[Source] = [
     Source("carvana", "Carvana", "greenhouse", {"token": "carvana"}),
     # --- SmartRecruiters (public postings API) ---
     Source("experian", "Experian", "smartrecruiters", {"company": "Experian"}),
+    # --- Job aggregators with an API key (off until the key is saved as a GitHub secret) ---
+    # JSearch reads Google for Jobs, which lists postings from LinkedIn, Glassdoor, Indeed,
+    # ZipRecruiter and company sites. One search a day keeps it inside the free plan.
+    Source("jsearch", "JSearch (LinkedIn, Glassdoor, Indeed …)", "jsearch",
+           {"query": "credit analyst in Dallas, TX", "num_pages": 3},
+           search="credit analyst in Dallas, TX", needs=("JSEARCH_API_KEY",)),
+    # Adzuna aggregates thousands of US job sites and recruiters.
+    Source("adzuna", "Adzuna (job sites and recruiters)", "adzuna",
+           {"what": "credit analyst", "where": "Dallas, TX", "distance_km": 40, "max_pages": 5},
+           search="credit analyst / Dallas, TX", needs=("ADZUNA_APP_ID", "ADZUNA_APP_KEY")),
 ]
+
+AGGREGATORS = {"jsearch", "adzuna"}
 
 SOURCES_BY_NAME = {s.name: s for s in SOURCES}

@@ -25,9 +25,9 @@ SMARTRECRUITERS_PAGE = 100
 MAX_PAGES = 400  # safety stop for any one source
 
 
-def _request(url: str, body: dict | None = None) -> dict:
+def _request(url: str, body: dict | None = None, extra_headers: dict | None = None) -> dict:
     data = None
-    headers = {"Accept": "application/json", "User-Agent": USER_AGENT}
+    headers = {"Accept": "application/json", "User-Agent": USER_AGENT, **(extra_headers or {})}
     if body is not None:
         data = json.dumps(body).encode()
         headers["Content-Type"] = "application/json"
@@ -106,7 +106,43 @@ def fetch_smartrecruiters(src: Source) -> dict:
     return {"url": base, "total": total, "pages": pages}
 
 
+def fetch_jsearch(src: Source) -> dict:
+    """JSearch (RapidAPI). The key is sent in a header and never saved in the raw file."""
+    import os
+    host = "jsearch.p.rapidapi.com"
+    params = {"query": src.config["query"], "page": 1, "num_pages": src.config["num_pages"],
+              "country": "us", "date_posted": "all"}
+    url = f"https://{host}/search?" + urllib.parse.urlencode(params)
+    page = _request(url, extra_headers={"X-RapidAPI-Key": os.environ["JSEARCH_API_KEY"],
+                                        "X-RapidAPI-Host": host})
+    if page.get("status") not in (None, "OK"):
+        raise RuntimeError(f"JSearch status {page.get('status')}: {page.get('error') or page.get('message')}")
+    return {"url": url, "total": len(page.get("data") or []), "pages": [page]}
+
+
+def fetch_adzuna(src: Source) -> dict:
+    """Adzuna. The app id and key go in the query string, so the saved url leaves them out."""
+    import os
+    c = src.config
+    base = "https://api.adzuna.com/v1/api/jobs/us/search"
+    params = {"what": c["what"], "where": c["where"], "distance": c["distance_km"],
+              "results_per_page": 50, "content-type": "application/json"}
+    secret = {"app_id": os.environ["ADZUNA_APP_ID"], "app_key": os.environ["ADZUNA_APP_KEY"]}
+    pages, total = [], None
+    for n in range(1, c["max_pages"] + 1):
+        page = _request(f"{base}/{n}?" + urllib.parse.urlencode({**secret, **params}))
+        if total is None:
+            total = int(page.get("count") or 0)
+        pages.append(page)
+        if not page.get("results") or n * 50 >= total:
+            break
+        time.sleep(0.5)
+    return {"url": f"{base}/1?" + urllib.parse.urlencode(params), "total": total, "pages": pages}
+
+
 FETCHERS = {
+    "jsearch": fetch_jsearch,
+    "adzuna": fetch_adzuna,
     "workday": fetch_workday,
     "oracle": fetch_oracle,
     "greenhouse": fetch_greenhouse,

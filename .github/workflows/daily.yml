@@ -27,6 +27,10 @@ jobs:
       - name: Fetch sources, build history, write status, open issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Job aggregator keys (optional). A source whose key is not set is left out of the run.
+          JSEARCH_API_KEY: ${{ secrets.JSEARCH_API_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
         run: python -m watcher run
 
       - name: Commit raw files, history and status

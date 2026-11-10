@@ -7,7 +7,7 @@
 
 A tool that watches the job market for **credit analyst** roles in the **Dallas area**. Every
 day, on its own, GitHub Actions pulls the open positions at 20 lenders from their applicant
-tracking systems, compares them with the day before, records what is new and what is gone,
+tracking systems (plus LinkedIn, Glassdoor and other job sites through two job aggregators), compares them with the day before, records what is new and what is gone,
 opens a GitHub Issue with the changes, and publishes the result to the site.
 
 ## Role and title rule
@@ -65,11 +65,31 @@ Every source returns JSON to a request made with no login.
 | 18 | SoFi | Greenhouse | `sofi` | — |
 | 19 | Carvana | Greenhouse | `carvana` | — |
 | 20 | Experian | SmartRecruiters | `Experian` | — |
+| 21 | JSearch: postings from **LinkedIn, Glassdoor, Indeed, ZipRecruiter** and company sites (via Google for Jobs) | Job aggregator API (key) | `jsearch.p.rapidapi.com` | `credit analyst in Dallas, TX` |
+| 22 | Adzuna: thousands of US job sites and recruiters | Job aggregator API (key) | `api.adzuna.com` | `credit analyst` near `Dallas, TX` (40 km) |
 
 **Search terms.** JPMorgan Chase's board returns more than 5,000 postings (about 7,000), so it is
 requested with the search term **`credit`**. Workday's public API stops paging at 2,000 results,
 so the Workday boards at or above that limit (Capital One, Citi, PNC) are also requested with
 **`credit`**. Every other board is read in full.
+
+**Job aggregators (LinkedIn, Glassdoor and more).** LinkedIn and Glassdoor have no public job API,
+and the project does not read web pages, so their postings come through two aggregators with an
+API key. Each holds millions of jobs, so each is asked **one search a day** (terms in the table
+above). For their rows, `employer` is the hiring company and `department` names the site the
+posting came from (e.g. "via LinkedIn"). A search returns the top matches, so an aggregator posting
+that drops out of the results is marked removed even if the job is still open somewhere.
+
+The aggregators run only when their keys are set. Without a key they are left out of the run (not
+counted as failed). To turn them on, save the keys as repository secrets
+(**Settings → Secrets and variables → Actions → New repository secret**):
+
+| Secret | Where to get it |
+|--------|-----------------|
+| `JSEARCH_API_KEY` | rapidapi.com → subscribe to the free plan of the JSearch API → copy the `X-RapidAPI-Key` |
+| `ADZUNA_APP_ID`, `ADZUNA_APP_KEY` | developer.adzuna.com → register → copy the Application ID and Key |
+
+Keys are sent with each request but never written to the raw files, the data or the site.
 
 ## Commands
 
@@ -125,7 +145,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | Path | What it does |
 |------|--------------|
 | `watcher/sources.py` | The watch list: every employer, its ATS, board and search term |
-| `watcher/fetch.py` | Calls each board's JSON API (Workday, Oracle, Greenhouse, SmartRecruiters) and returns the raw pages |
+| `watcher/fetch.py` | Calls each board's JSON API (Workday, Oracle, Greenhouse, SmartRecruiters, JSearch, Adzuna) and returns the raw pages |
 | `watcher/normalize.py` | Converts each source's raw file to the common columns |
 | `watcher/rules.py` | The title rule (`in_role`) and the Dallas-area rule (`in_dallas`) |
 | `watcher/build.py` | Builds `data/history.csv` from the raw files (first-seen / last-seen / removed logic) |
