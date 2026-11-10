@@ -635,3 +635,18 @@ body.festive #photo-ornament { display: block; }
 /* on the Today page the photo ornament hangs from the banner, between the houses and Snoopy */
 #photo-ornament.in-band { position: absolute; top: 0; left: var(--orn-x, 50px); z-index: 3; }
 
+
+/* Santa on/off button (Christmas mode only) */
+.santa-toggle {
+  display: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #5a3445; cursor: pointer;
+  background: #2b1e26; font-size: 20px; line-height: 1; margin-left: 4px; transition: opacity .2s, filter .2s;
+}
+body.festive .santa-toggle { display: grid; place-items: center; }
+.santa-toggle[aria-pressed="false"] { filter: grayscale(1); opacity: .5; }
+.santa-toggle:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+body.festive.no-santa #santa { display: none; }
+
+/* keep the banner text readable over the village in Christmas mode */
+body.festive .hero-text h1, body.festive .hero-text p, body.festive .hero-cta .btn-link {
+  text-shadow: 0 0 6px rgba(22, 10, 18, .95), 0 0 16px rgba(22, 10, 18, .9), 0 2px 3px rgba(0, 0, 0, .8);
+}

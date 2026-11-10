@@ -225,6 +225,22 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.setAttribute("aria-label", "Christmas mode");
   btn.innerHTML = '<img class="cane" src="icons/candy-cane.svg" alt="">';
   inner.appendChild(btn);
+  // Santa on/off button, shown only in Christmas mode
+  const sb = document.createElement("button");
+  sb.id = "santa-toggle"; sb.type = "button"; sb.className = "santa-toggle";
+  sb.innerHTML = "🎅";
+  const setSanta = on => {
+    document.body.classList.toggle("no-santa", !on);
+    sb.setAttribute("aria-pressed", String(on));
+    sb.title = sb.ariaLabel = on ? "Hide Santa" : "Show Santa";
+  };
+  setSanta(sessionStorage.getItem("jobwatch.santa") !== "off");
+  sb.addEventListener("click", () => {
+    const on = document.body.classList.contains("no-santa");
+    sessionStorage.setItem("jobwatch.santa", on ? "on" : "off");
+    setSanta(on);
+  });
+  inner.insertBefore(sb, btn);
   // Santa and his reindeer, flying back and forth over the page in Christmas mode.
   // He floats above everything but can't be clicked and never moves anything.
   const santa = document.createElement("div");
