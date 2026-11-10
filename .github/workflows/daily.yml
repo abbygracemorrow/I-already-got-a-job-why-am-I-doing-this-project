@@ -2,7 +2,13 @@ name: Daily run
 
 on:
   schedule:
-    - cron: "0 12 * * *"   # every day at 12:00 UTC (6:00 am Dallas time)
+    # Main run at 12:00 UTC (6:00 am Dallas). GitHub sometimes delays or skips scheduled
+    # runs, especially on the hour, so three backups follow. A second run on the same day
+    # just replaces that day's data, so the day still counts once.
+    - cron: "0 12 * * *"
+    - cron: "17 13 * * *"
+    - cron: "41 15 * * *"
+    - cron: "23 19 * * *"
   workflow_dispatch:
 
 permissions:

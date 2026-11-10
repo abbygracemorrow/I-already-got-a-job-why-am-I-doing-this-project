@@ -164,7 +164,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `tests/test_normalize.py` | Tests the conversion of each source type to the common columns |
 | `tests/test_rules.py` | Tests the title rule and the Dallas-area rule |
 | `tests/test_build.py` | Tests first-seen, last-seen, removed, reopened, failed-source and rebuild logic |
-| `.github/workflows/daily.yml` | Runs the pipeline every day at 12:00 UTC (6:00 am Dallas time) and commits the data |
+| `.github/workflows/daily.yml` | Runs the pipeline every day at 12:00 UTC (6:00 am Dallas time), with backup runs at 13:17, 15:41 and 19:23 UTC in case GitHub skips one, and commits the data |
 | `.github/workflows/tests.yml` | Runs the tests on every push (and on each daily data commit, started by the daily run) |
 | `data/raw/<date>/<source>.json.gz` | What each source returned that day, compressed |
 | `data/runs/<date>.json` | The result of every source on that day's run |
