@@ -113,8 +113,9 @@ a:hover { color: var(--berry); }
 .btn-link { color: var(--ink); font-weight: 600; text-decoration: none; }
 .btn-link:hover { color: var(--rose-deep); }
 
+.hero { --pad: 18px; }
 .mascot {
-  width: 230px; height: auto; flex-shrink: 0; padding: 18px;
+  width: 230px; height: auto; flex-shrink: 0; padding: var(--pad);
   background: radial-gradient(closest-side, rgba(255, 255, 255, .75) 70%, rgba(255, 255, 255, 0) 100%);
   filter: drop-shadow(0 14px 22px rgba(42, 26, 35, .18));
 }
@@ -321,7 +322,8 @@ a.tile-link:hover, a.tile-link:focus-visible { transform: translateY(-3px); box-
 @media (max-width: 720px) {
   .hero-band { padding: 76px 20px 120px; clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
   .hero { flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
-  .mascot { width: 150px; padding: 10px; }
+  .hero { --pad: 10px; }
+  .mascot { width: 150px; }
   main { margin-top: -70px; padding: 0 16px 56px; }
   .card { padding: 20px; }
   .jobs li { grid-template-columns: auto 1fr; }
@@ -365,13 +367,13 @@ details.remote-more summary:hover { color: var(--rose-deep); }
   transition: left .25s, background .25s, box-shadow .25s;
 }
 .ft-icon { font-size: 13px; line-height: 1; }
-.ft-off { filter: grayscale(1); opacity: .7; }
+.ft-off { filter: grayscale(1) brightness(1.1); opacity: .6; } /* unlit tree */
 .ft-on { display: none; }
 .festive-toggle:hover .ft-track { border-color: var(--rose); }
-body.festive .ft-track { background: var(--ink); border-color: var(--ink); box-shadow: 0 0 14px rgba(255, 196, 92, .45); }
+body.festive .ft-track { background: #0c0709; border-color: #5a3445; box-shadow: 0 0 14px rgba(255, 196, 92, .45); }
 body.festive .ft-knob { left: 35px; background: #fff7e0; box-shadow: 0 0 10px rgba(255, 210, 120, .9); }
 body.festive .ft-off { display: none; }
-body.festive .ft-on { display: block; }
+body.festive .ft-on { display: block; filter: drop-shadow(0 0 3px rgba(255, 210, 120, .9)); } /* lit tree */
 
 /* string of Christmas lights hanging under the nav bar */
 .lights {
@@ -402,13 +404,21 @@ body.festive .lights { display: flex; }
 /* Snoopy's Santa hat */
 .mascot-wrap { position: relative; display: inline-block; flex-shrink: 0; line-height: 0; }
 .mascot-wrap.hop { animation: hop .6s ease-out; }
+/* Measured on snoopy.png (420x397): top of head y=12, eyes y=72-86, head x=100-280.
+   The hat's fur band (72% of the hat's width, bottom at 90% of its height) rests on the
+   crown with its bottom edge at y=52, above the eyes. Sizes are fractions of the picture
+   (the img box minus its padding) so it lines up at every screen size. */
 .santa-hat {
-  position: absolute; width: 46%; left: 31%; top: -11%; pointer-events: none;
-  transform: rotate(-8deg) translateY(-14px) scale(.85); transform-origin: 30% 90%;
+  --img-w: calc(100% - 2 * var(--pad));
+  position: absolute; pointer-events: none;
+  width: calc(var(--img-w) * 0.60);
+  left: calc(var(--pad) + var(--img-w) * 0.212);
+  bottom: calc(100% - var(--pad) - (100% - 2 * var(--pad)) * 0.184); /* band edge at y=52; the svg has 10% empty below the band */
+  transform: rotate(-6deg) translateY(-14px) scale(.85); transform-origin: 42% 90%;
   opacity: 0; transition: opacity .3s, transform .35s cubic-bezier(.3, 1.6, .5, 1);
   filter: drop-shadow(0 3px 4px rgba(42, 26, 35, .25));
 }
-body.festive .santa-hat { opacity: 1; transform: rotate(-8deg) translateY(0) scale(1); }
+body.festive .santa-hat { opacity: 1; transform: rotate(-6deg) translateY(0) scale(1); }
 
 @media (max-width: 720px) {
   .lights i:nth-child(n+25) { display: none; }
@@ -416,3 +426,63 @@ body.festive .santa-hat { opacity: 1; transform: rotate(-8deg) translateY(0) sca
 @media (prefers-reduced-motion: reduce) {
   .lights i { animation: none; }
 }
+
+/* ---------- Dark mode: when the lights-and-snow toggle is on, the site goes dark so the
+   Christmas lights, snow and Snoopy's hat glow against it. ---------- */
+body { transition: background-color .35s, color .35s; }
+body.festive {
+  --pink-bg: #160e13;
+  --cream: #21161d;          /* cards */
+  --snow: #2b1e26;           /* inputs, light chips */
+  --ink: #f7e9f0;
+  --ink-2: #d4bcc8;
+  --ink-3: #a38c98;
+  --line: #3a2832;
+  --rose: #f07aa3;
+  --rose-deep: #ff9cbf;
+  --green: #3f9c64;
+  --mint: #6fbf8f;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -8px rgba(0, 0, 0, .6);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, .45), 0 18px 40px -10px rgba(240, 122, 163, .25);
+  color-scheme: dark;
+}
+body.festive .nav { background: rgba(22, 14, 19, .82); border-bottom-color: #3a2832; }
+body.festive .hero-band {
+  background:
+    radial-gradient(40% 60% at 12% 30%, rgba(240, 122, 163, .18), transparent 70%),
+    radial-gradient(35% 55% at 85% 20%, rgba(63, 156, 100, .35) 0%, transparent 70%),
+    radial-gradient(45% 70% at 70% 90%, rgba(184, 64, 107, .55) 0%, transparent 70%),
+    radial-gradient(50% 80% at 25% 95%, rgba(90, 30, 60, .7) 0%, transparent 70%),
+    linear-gradient(120deg, #2a1420 0%, #3a1a2b 45%, #1c2a22 100%);
+  background-size: 140% 140%;
+}
+body.festive .hero-band::after { opacity: .45; }
+body.festive .eyebrow { background: rgba(255, 255, 255, .1); color: #a9e2c0; }
+body.festive .hero p { color: #e2cbd6; }
+body.festive .btn-primary { background: #f7e9f0; color: #21161d; }
+body.festive .btn-primary:hover { background: var(--rose); color: #21161d; }
+body.festive .mascot { background: radial-gradient(closest-side, rgba(255, 255, 255, .22) 70%, rgba(255, 255, 255, 0) 100%); }
+body.festive tbody tr:hover td, body.festive .jobs li:hover, body.festive .btn.ghost:hover { background: #2c1e27; }
+body.festive .pill.ok, body.festive .pill.dfw { background: rgba(63, 156, 100, .2); color: #a9e2c0; }
+body.festive .pill.fail { background: rgba(210, 60, 75, .2); color: #ffb3bd; }
+body.festive .pill.role { background: rgba(240, 122, 163, .18); color: #ffb3cf; }
+body.festive .controls input, body.festive .controls select, body.festive .chip, body.festive .btn.ghost { border-color: #4a3540; }
+body.festive .seg { background: #2f212a; }
+body.festive .seg button[aria-pressed="true"] { background: #463440; color: var(--ink); }
+body.festive .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #21161d; }
+body.festive .chip[aria-pressed="true"] b { color: var(--rose-deep); filter: brightness(.7); }
+body.festive .chart .grid line { stroke: #3a2832; }
+body.festive .tip { background: #f7e9f0; color: #21161d; }
+body.festive .tile-feature { background: linear-gradient(160deg, #2a1a23 0%, #331d29 100%); border-color: #5a3445; }
+body.festive .jobs li.picked { background: rgba(240, 122, 163, .18); }
+body.festive .orn-tip { background: #f7e9f0; color: #21161d; }
+body.festive .orn-tip::after { border-top-color: #f7e9f0; }
+body.festive .orn-tip em { color: #b8406b; }
+body.festive .orn-tip em.ok { color: #1f7a45; }
+body.festive .apply { background: #f7e9f0; color: #21161d; }
+body.festive .apply:hover { background: var(--rose); color: #21161d; }
+body.festive .nav-links a[aria-current="page"] { background: #f7e9f0; color: #21161d; }
+body.festive .offline-note { background: var(--cream); }
+body.festive footer b { color: var(--ink); }
+body.festive #snow i { box-shadow: 0 0 6px rgba(255, 255, 255, .9); }
+body.festive .countdown { color: #fff; }

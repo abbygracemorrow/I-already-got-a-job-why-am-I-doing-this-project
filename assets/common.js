@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btn.className = "festive-toggle";
   btn.setAttribute("aria-label", "Christmas lights and snow");
   btn.innerHTML = '<span class="ft-track"><span class="ft-knob" aria-hidden="true">' +
-    '<span class="ft-icon ft-off">💡</span><span class="ft-icon ft-on">🎄</span></span></span>';
+    '<span class="ft-icon ft-off">🎄</span><span class="ft-icon ft-on">🎄</span></span></span>';
   inner.appendChild(btn);
   // the string of lights along the bottom of the nav bar
   const lights = document.createElement("div");

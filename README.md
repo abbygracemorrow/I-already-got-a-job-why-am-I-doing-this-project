@@ -173,8 +173,8 @@ by `posting_id` (`<source>:<source's own id>`).
 | `index.html` | Today page: last run, source status, the counts (days with a successful run, open, new today, removed today, plus open credit jobs in Dallas), new and removed postings |
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
-| `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the top-right lights-and-snow toggle (Christmas lights, snow, Santa hat on Snoopy) |
+| `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme, plus its dark mode) |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the top-right Christmas-tree toggle (dark mode with Christmas lights, snow, and a Santa hat on Snoopy) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
