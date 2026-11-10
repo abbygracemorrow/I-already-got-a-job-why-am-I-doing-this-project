@@ -29,6 +29,7 @@ function parseCSV(text) {
     o.first_run = o.first_run === "true";
     o.in_dallas = o.in_dallas === "true";
     o.remote = o.remote === "true";
+    o.area = o.area || "";
     return o;
   });
 }

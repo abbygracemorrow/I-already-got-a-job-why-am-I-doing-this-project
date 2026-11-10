@@ -27,11 +27,14 @@ engineering, developer, software, data scientist, call center, managing director
 chief, director, insurance, card services, trader, trading, quantitative, data owner,
 business intelligence, reporting, operations*. Matching ignores case and uses whole words.
 
-**Dallas-area rule** (`in_dallas`, an extra column). The location names Dallas, Irving / Las
-Colinas, Plano, Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch, Garland, Grand
-Prairie, Westlake, Southlake, Allen, McKinney, Lewisville, Fort Worth or DFW, or "Arlington, TX".
-A location that names another state sharing a city name (e.g. Dallas, GA) is left out. The
-Browse page shows Dallas-area credit roles by default.
+**Dallas-area rule** (`dallas_area`, the `area` and `in_dallas` columns). Each posting gets the
+Dallas-area city its location names, or none: Dallas (including neighborhoods such as Uptown,
+Lakewood, Preston Hollow, Far North Dallas and the Park Cities), Irving / Las Colinas, Plano,
+Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch, Garland, Grand Prairie, Westlake,
+Southlake, Allen, McKinney, Lewisville, Fort Worth, or Arlington (only when Texas is named). A location
+that names another US state and not Texas (e.g. Dallas, AZ or Dallas, GA) is not in the Dallas area,
+and neither is a remote one. `in_dallas` is true when `area` is not empty. The Browse page shows
+Dallas-area credit roles by default, and its **Area** menu lists one entry per city with a count.
 
 **Remote rule** (`is_remote`, the `remote` column). A posting is remote when its location says
 *remote, virtual, work from home, WFH, telecommute* or *teletravail*, or its title says *remote,
@@ -174,7 +177,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, 7-day goal, Dallas job picker, shortlist, Snoopy money rain, snow switch |
-| `assets/browse.js` | Browse page: filters, search, sort, shortlist |
+| `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |
 | `assets/market.js` | Market page: the six findings and their charts |
 | `assets/snoopy.png` | Snoopy mascot at the top of each page (click him on the Today page) |
 | `manifest.webmanifest` | Web app manifest, so the site installs as an app |
@@ -189,10 +192,11 @@ by `posting_id` (`<source>:<source's own id>`).
 ## Data columns
 
 `data/history.csv`: `posting_id, source, source_id, employer, title, location, department,
-posted_date, url, in_role, first_run, first_seen, last_seen, status, removed_date, in_dallas, remote`.
+posted_date, url, in_role, first_run, first_seen, last_seen, status, removed_date, in_dallas, remote, area`.
 A column a source does not provide (for example `department` on Workday and Greenhouse) is left
 empty. Workday shows relative posting dates ("Posted 3 Days Ago"); they are converted using the
-date of the raw file, and "30+ Days Ago" is left empty.
+date of the raw file, and "30+ Days Ago" is left empty. When a posting lists several locations
+(Workday's "3 Locations", Oracle's secondary locations), `location` is its primary location.
 
 `data/status.json`: `run_time, run_date, first_run_date, watching_since (UTC time of the first run), days_with_success, open, new_today,
 removed_today, open_in_role, open_in_role_dallas, sources[] (name, employer, ats, ok, count, error, and a note when a Workday board is over its limit)`.
