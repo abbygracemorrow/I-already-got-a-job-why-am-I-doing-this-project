@@ -68,6 +68,10 @@ function dallasTime(d) {
     day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
 }
 
+function dallasDate(d) {
+  return new Date(d).toLocaleDateString("en-US", { timeZone: "America/Chicago", month: "short", day: "numeric", year: "numeric" });
+}
+
 function jobItem(r, opts = {}) {
   const badges = [
     r.in_role ? '<span class="pill role">credit role</span>' : "",

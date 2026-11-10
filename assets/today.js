@@ -18,7 +18,7 @@
       <p class="lede" style="margin:0">${esc(dallasTime(runTime))} <b>Dallas time</b>
       <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p></div>
     <div class="tiles">
-      <div class="tile"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(prettyDate(status.first_run_date))} (UTC)</div></div>
+      <div class="tile"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></div>
       <div class="tile"><div class="label">Open postings</div><div class="value">${fmt(status.open)}</div><div class="sub">${fmt(status.open_in_role_dallas)} credit roles in the Dallas area</div></div>
       <div class="tile"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></div>
       <div class="tile"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></div>

@@ -12,10 +12,17 @@ def make_status(rows: list[dict], raw_dir: Path, run: dict) -> dict:
     """``run`` is the run log: {"date", "run_time", "sources": [{name, ok, count, error}]}."""
     day = run["date"]
     days = raw_days(raw_dir)
+    starts = []
+    for d in days:
+        log = raw_dir.parent / "runs" / f"{d}.json"
+        if log.exists():
+            r = json.loads(log.read_text())
+            starts.append(r.get("first_run_time") or r["run_time"])
     return {
         "run_time": run["run_time"],
         "run_date": day,
         "first_run_date": days[0] if days else None,
+        "watching_since": min(starts) if starts else None,  # UTC time of the first run
         "days_with_success": len(days),
         "open": sum(1 for r in rows if r["status"] == "open"),
         "new_today": sum(1 for r in rows if r["first_seen"] == day and not r["first_run"]),

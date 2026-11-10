@@ -158,5 +158,5 @@ A column a source does not provide (for example `department` on Workday and Gree
 empty. Workday shows relative posting dates ("Posted 3 Days Ago"); they are converted using the
 date of the raw file, and "30+ Days Ago" is left empty.
 
-`data/status.json`: `run_time, run_date, first_run_date, days_with_success, open, new_today,
+`data/status.json`: `run_time, run_date, first_run_date, watching_since (UTC time of the first run), days_with_success, open, new_today,
 removed_today, open_in_role, open_in_role_dallas, sources[] (name, employer, ats, ok, count, error)`.

@@ -54,9 +54,14 @@ def do_fetch(data: Path, now: datetime, only: set[str] | None = None) -> dict:
         tmp.rename(final)
     else:
         shutil.rmtree(tmp)
-    run = {"date": day, "run_time": now.strftime("%Y-%m-%dT%H:%M:%SZ"), "sources": results}
-    (data / "runs").mkdir(parents=True, exist_ok=True)
-    (data / "runs" / f"{day}.json").write_text(json.dumps(run, indent=2) + "\n")
+    run_time = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+    run = {"date": day, "run_time": run_time, "first_run_time": run_time, "sources": results}
+    log = data / "runs" / f"{day}.json"
+    if log.exists():  # a second run the same day keeps the time of that day's first run
+        earlier = json.loads(log.read_text())
+        run["first_run_time"] = min(run_time, earlier.get("first_run_time") or earlier["run_time"])
+    log.parent.mkdir(parents=True, exist_ok=True)
+    log.write_text(json.dumps(run, indent=2) + "\n")
     return run
 
 

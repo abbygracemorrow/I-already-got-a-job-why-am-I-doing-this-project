@@ -83,3 +83,16 @@ def test_rebuild_is_identical_and_sorted(tmp_path):
     ids = [line.split(",")[0] for line in lines[1:]]
     assert ids == sorted(ids)
     assert to_csv([]) == ",".join(COLUMNS) + "\n"
+
+
+def test_second_run_same_day_keeps_first_run_time(tmp_path, monkeypatch):
+    from datetime import datetime, timezone
+    import watcher.__main__ as cli
+
+    monkeypatch.setattr(cli, "SOURCES", [])
+    data = tmp_path / "data"
+    put(data / "raw", "2026-11-10", gh_raw("a", [(1, "X")]))
+    cli.do_fetch(data, datetime(2026, 11, 10, 0, 39, tzinfo=timezone.utc))
+    run = cli.do_fetch(data, datetime(2026, 11, 10, 12, 23, tzinfo=timezone.utc))
+    assert run["run_time"] == "2026-11-10T12:23:00Z"
+    assert run["first_run_time"] == "2026-11-10T00:39:00Z"
