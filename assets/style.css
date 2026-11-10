@@ -645,7 +645,8 @@ body.festive .countdown::before { /* soft centre so the numbers read clearly */
 
 /* Christmas mode: the "Today's job watch" letters look like candy canes */
 body.festive .hero h1 {
-  background: repeating-linear-gradient(135deg, #e0263f 0 9px, #fff 9px 18px);
+  /* same red / white / pink / white stripes as the Christmas countdown, scaled to the letters */
+  background: repeating-linear-gradient(135deg, #cc0011 0 11px, #fff 11px 20px, #f2a6ba 20px 31px, #fff 31px 40px);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-stroke: 1px rgba(120, 10, 30, .55);
   text-shadow: none; filter: drop-shadow(0 0 6px rgba(22, 10, 18, .9)) drop-shadow(0 2px 2px rgba(0, 0, 0, .6));
