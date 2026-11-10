@@ -558,11 +558,7 @@ body.festive .orn img.xmas-only { display: block; }
 .village {
   position: absolute; right: -30px; bottom: -14px; width: 560px; height: auto; z-index: 0; pointer-events: none;
   opacity: 0; transform: translateY(24px); transition: opacity .6s, transform .6s;
-  /* soften the left edge and the bottom edge so the snow fades into the page */
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%), linear-gradient(to bottom, #000 88%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0, #000 8%), linear-gradient(to bottom, #000 88%, transparent 100%);
-  mask-composite: intersect;
+  /* the drawing fades its own edges into the page */
 }
 body.festive .village { opacity: 1; transform: none; }
 /* keep the headline and paragraph to the left of the village */
@@ -570,7 +566,7 @@ body.festive .hero-text { max-width: min(640px, calc(100% - 520px)); }
 @media (max-width: 720px) {
   /* mirrored so the clearing is on the left, where Snoopy sits on phones */
   .village { right: auto; left: -16px; bottom: auto; top: -30px; width: 360px;
-    transform: scaleX(-1) translateY(24px); -webkit-mask-image: none; mask-image: none; }
+    transform: scaleX(-1) translateY(24px); }
   body.festive .hero-text { max-width: none; }
   body.festive .village { transform: scaleX(-1); }
   body.festive .mascot-wrap { margin-bottom: 30px; }
@@ -580,12 +576,16 @@ body.festive .hero-text { max-width: min(640px, calc(100% - 520px)); }
   body.festive .hero { flex-direction: column-reverse; align-items: flex-start; gap: 8px; }
   body.festive .hero-text { max-width: none; }
   .village { right: auto; left: -16px; bottom: auto; top: -34px; width: 520px;
-    transform: scaleX(-1) translateY(24px);
-    /* (mirrored) fade the outer edge and the bottom of the snow */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to bottom, #000 86%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to bottom, #000 86%, transparent 100%);
-    mask-composite: intersect; }
+    transform: scaleX(-1) translateY(24px); }
   body.festive .village { transform: scaleX(-1); }
   body.festive .mascot-wrap { margin-bottom: 52px; }
 }
+/* in the village, Snoopy stands in the scene: no glow disc behind him, a soft shadow on the snow under his feet */
+body.festive .mascot { background: none; }
+.mascot-wrap::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .6s;
+  left: calc(var(--pad) + (100% - 2 * var(--pad)) * .2); width: calc((100% - 2 * var(--pad)) * .62);
+  bottom: calc(var(--pad) - 7px); height: 16px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(90, 50, 75, .45), rgba(90, 50, 75, 0));
+}
+body.festive .mascot-wrap::after { opacity: 1; }
