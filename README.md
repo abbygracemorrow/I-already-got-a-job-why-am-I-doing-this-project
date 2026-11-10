@@ -174,7 +174,7 @@ by `posting_id` (`<source>:<source's own id>`).
 | `browse.html` | Browse page: open postings with role switch, filters, search, sort, apply links, shortlist |
 | `market.html` | Market page: six findings computed in the browser from the history file |
 | `assets/style.css` | Shared fonts, colors and layout (pink Christmas theme, plus its dark mode) |
-| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for Christmas mode: dark colors, Christmas lights down the sides and along the bottom of the window, snow, mistletoe with white fairy lights, a gingerbread village behind Snoopy, ornaments and a Santa hat on Snoopy; the site always opens in plain light mode with flowers and money) |
+| `assets/common.js` | Shared data loading, CSV parsing, date helpers, service-worker registration, and the bouncing candy cane in the top right (click it for Christmas mode: dark colors, Christmas lights down the sides and along the bottom of the window, snow, mistletoe with white fairy lights, a gingerbread village behind a dancing Snoopy, ornaments and a Santa hat on Snoopy; the site always opens in plain light mode with flowers and money) |
 | `assets/charts.js` | Small SVG chart helpers with tooltips and table views |
 | `assets/today.js` | Today page: counts, new and taken-down lists, countdown, days-of-history tracker, Dallas job picker, shortlist, Snoopy money rain |
 | `assets/browse.js` | Browse page: role switch, filters (employer, area, days open), search, sort, shortlist |

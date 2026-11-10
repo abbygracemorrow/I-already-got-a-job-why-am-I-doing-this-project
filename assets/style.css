@@ -589,3 +589,28 @@ body.festive .mascot { background: none; }
   background: radial-gradient(closest-side, rgba(90, 50, 75, .45), rgba(90, 50, 75, 0));
 }
 body.festive .mascot-wrap::after { opacity: 1; }
+
+/* Snoopy dances in Christmas mode (his hat moves with him; his shadow stays on the snow) */
+body.festive .mascot-wrap { transform-origin: 50% 92%; animation: snoopy-dance 1.3s ease-in-out infinite; }
+body.festive .mascot-wrap.hop { animation: hop .6s ease-out, snoopy-dance 1.3s ease-in-out .6s infinite; }
+body.festive .mascot-wrap::after { animation: shadow-dance 1.3s ease-in-out infinite; }
+@keyframes snoopy-dance {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  15%  { transform: translate(-7px, -12px) rotate(-8deg); }
+  30%  { transform: translate(-9px, 0) rotate(-4deg) scale(1.03, .96); }
+  45%  { transform: translate(0, -5px) rotate(0deg); }
+  60%  { transform: translate(7px, -12px) rotate(8deg); }
+  75%  { transform: translate(9px, 0) rotate(4deg) scale(1.03, .96); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes shadow-dance { /* undo the hop so the shadow stays on the ground, and shrink it in the air */
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  15%  { transform: translate(7px, 12px) scale(.75); }
+  30%  { transform: translate(9px, 0) scale(1.05); }
+  45%  { transform: translate(0, 5px) scale(.9); }
+  60%  { transform: translate(-7px, 12px) scale(.75); }
+  75%  { transform: translate(-9px, 0) scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.festive .mascot-wrap, body.festive .mascot-wrap.hop, body.festive .mascot-wrap::after { animation: none; }
+}
