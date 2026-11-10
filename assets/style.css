@@ -87,8 +87,8 @@ body.festive .garland::after {
   animation: drift 18s ease-in-out infinite alternate;
   clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
 }
-.hero-band::after { /* soft falling-snow speckle (Christmas mode only) */
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+.hero-band::after { /* soft white speckle on the banner (both modes) */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .7; transition: opacity .35s;
   background-image:
     radial-gradient(circle, #fff 0 1.6px, transparent 2.4px),
     radial-gradient(circle, #fff 0 1.1px, transparent 1.8px);
