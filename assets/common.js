@@ -28,6 +28,7 @@ function parseCSV(text) {
     o.in_role = o.in_role === "true";
     o.first_run = o.first_run === "true";
     o.in_dallas = o.in_dallas === "true";
+    o.remote = o.remote === "true";
     return o;
   });
 }

@@ -6,7 +6,8 @@
   try { rows = await loadHistory(); } catch (e) { return showError(list.closest(".card"), e); }
 
   const last = lastRunDate(rows);
-  const open = rows.filter(r => r.status === "open").map(r => ({ ...r, days: daysBetween(r.first_seen, last) }));
+  // Remote postings are never offered as options.
+  const open = rows.filter(r => r.status === "open" && !r.remote).map(r => ({ ...r, days: daysBetween(r.first_seen, last) }));
   const KEY = "jobwatch.shortlist";
   const stars = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
   const save = () => localStorage.setItem(KEY, JSON.stringify([...stars]));

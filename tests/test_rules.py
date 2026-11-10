@@ -2,7 +2,7 @@
 
 import pytest
 
-from watcher.rules import in_dallas, in_role
+from watcher.rules import in_dallas, in_role, is_remote
 
 
 @pytest.mark.parametrize("title", [
@@ -53,3 +53,27 @@ def test_in_dallas(loc):
 ])
 def test_not_in_dallas(loc):
     assert not in_dallas(loc)
+
+
+@pytest.mark.parametrize("title,loc", [
+    ("Credit Analyst", "Remote, United States"),
+    ("Credit Analyst", "Dallas, TX (Remote)"),
+    ("Credit Analyst", "Virtual"),
+    ("Credit Analyst - Remote", "Dallas, TX"),
+    ("Credit Analyst", "REMOTE/TELETRAVAIL, ON, CAN"),
+])
+def test_remote(title, loc):
+    assert is_remote(title, loc)
+
+
+@pytest.mark.parametrize("title,loc", [
+    ("Credit Analyst", "Dallas, TX"),
+    ("Credit Analyst", "Plano TX (+2 more)"),
+    ("Virtual Banking Credit Analyst", "Irving, TX"),
+])
+def test_not_remote(title, loc):
+    assert not is_remote(title, loc)
+
+
+def test_remote_location_is_not_dallas():
+    assert not in_dallas("Dallas, TX (Remote)")

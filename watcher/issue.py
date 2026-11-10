@@ -37,7 +37,7 @@ def compose(rows: list[dict], status: dict, site_url: str) -> tuple[str, list[st
     key = lambda r: (r["employer"], r["title"])  # noqa: E731
     new.sort(key=key)
     gone.sort(key=key)
-    focus = lambda rs: [r for r in rs if r["in_role"] and r["in_dallas"]]  # noqa: E731
+    focus = lambda rs: [r for r in rs if r["in_role"] and r["in_dallas"] and not r["remote"]]  # noqa: E731
 
     failed = [s["name"] for s in status["sources"] if not s["ok"]]
     head = [

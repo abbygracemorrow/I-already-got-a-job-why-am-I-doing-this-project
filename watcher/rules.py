@@ -22,7 +22,12 @@ The location rule marks postings in the Dallas area: Dallas and the cities
 that touch it or sit in its core business corridors (Irving/Las Colinas,
 Plano, Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch,
 Garland, Grand Prairie, Westlake, Southlake, Allen, McKinney, Lewisville,
-Fort Worth, Arlington TX).
+Fort Worth, Arlington TX). A remote location is never in the Dallas area.
+
+The remote rule marks a posting remote when its location says remote, virtual,
+work from home, WFH, telecommute or teletravail, or its title says remote, work
+from home, WFH or telecommute. Remote postings stay in the history (the board
+returned them) but the site never lists them.
 """
 
 from __future__ import annotations
@@ -72,8 +77,21 @@ _NOT_TEXAS = re.compile(
 )
 
 
+_REMOTE_LOCATION = re.compile(r"\b(remote|work from home|wfh|telecommut\w*|teletravail|virtual)\b", re.I)
+_REMOTE_TITLE = re.compile(r"\b(remote|work from home|wfh|telecommut\w*)\b", re.I)
+
+
+def is_remote(title: str, location: str) -> bool:
+    """True when the posting is remote: the location (or title) says remote, virtual,
+    work from home or telecommute. Remote postings are kept in the history but never
+    shown as options on the site."""
+    return bool(_REMOTE_LOCATION.search(location or "") or _REMOTE_TITLE.search(title or ""))
+
+
 def in_dallas(location: str) -> bool:
-    """True when the location is in the Dallas area."""
+    """True when the location is in the Dallas area (and not remote)."""
+    if _REMOTE_LOCATION.search(location or ""):
+        return False
     loc = (location or "").replace("-", " ")
     if _ARLINGTON_TX.search(loc):
         return True

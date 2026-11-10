@@ -25,11 +25,11 @@ import re
 from pathlib import Path
 
 from .normalize import normalize
-from .rules import in_dallas, in_role
+from .rules import in_dallas, in_role, is_remote
 
 COLUMNS = ["posting_id", "source", "source_id", "employer", "title", "location",
            "department", "posted_date", "url", "in_role", "first_run", "first_seen",
-           "last_seen", "status", "removed_date", "in_dallas"]
+           "last_seen", "status", "removed_date", "in_dallas", "remote"]
 
 _DATE_DIR = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -84,7 +84,8 @@ def build_history(raw_dir: Path) -> list[dict]:
     out = []
     for pid in sorted(history):
         h = history[pid]
-        out.append({**h, "in_role": in_role(h["title"]), "in_dallas": in_dallas(h["location"])})
+        out.append({**h, "in_role": in_role(h["title"]), "in_dallas": in_dallas(h["location"]),
+                    "remote": is_remote(h["title"], h["location"])})
     return out
 
 

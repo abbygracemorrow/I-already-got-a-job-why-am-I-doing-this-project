@@ -29,7 +29,7 @@ def make_status(rows: list[dict], raw_dir: Path, run: dict) -> dict:
         "removed_today": sum(1 for r in rows if r["removed_date"] == day),
         "open_in_role": sum(1 for r in rows if r["status"] == "open" and r["in_role"]),
         "open_in_role_dallas": sum(1 for r in rows if r["status"] == "open"
-                                   and r["in_role"] and r["in_dallas"]),
+                                   and r["in_role"] and r["in_dallas"] and not r["remote"]),
         "sources": [{k: s.get(k) for k in ("name", "employer", "ats", "ok", "count", "error")}
                     for s in run["sources"]],
     }

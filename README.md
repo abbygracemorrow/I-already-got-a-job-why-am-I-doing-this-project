@@ -33,6 +33,12 @@ Prairie, Westlake, Southlake, Allen, McKinney, Lewisville, Fort Worth or DFW, or
 A location that names another state sharing a city name (e.g. Dallas, GA) is left out. The
 Browse page shows Dallas-area credit roles by default.
 
+**Remote rule** (`is_remote`, the `remote` column). A posting is remote when its location says
+*remote, virtual, work from home, WFH, telecommute* or *teletravail*, or its title says *remote,
+work from home, WFH* or *telecommute*. Remote postings stay in `history.csv` (every posting the
+board returns is kept) and are counted on the Market page, but the Browse page, the Today lists
+and the daily issue's Dallas lists never show them, and a remote posting is never "Dallas area".
+
 ## Sources
 
 Every source returns JSON to a request made with no login.
@@ -153,7 +159,7 @@ by `posting_id` (`<source>:<source's own id>`).
 ## Data columns
 
 `data/history.csv`: `posting_id, source, source_id, employer, title, location, department,
-posted_date, url, in_role, first_run, first_seen, last_seen, status, removed_date, in_dallas`.
+posted_date, url, in_role, first_run, first_seen, last_seen, status, removed_date, in_dallas, remote`.
 A column a source does not provide (for example `department` on Workday and Greenhouse) is left
 empty. Workday shows relative posting dates ("Posted 3 Days Ago"); they are converted using the
 date of the raw file, and "30+ Days Ago" is left empty.
