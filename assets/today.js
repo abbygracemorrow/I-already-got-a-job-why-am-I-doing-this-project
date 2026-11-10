@@ -14,7 +14,7 @@
   const runTime = new Date(status.run_time);
 
   app.innerHTML = `
-    <div class="card"><h2>Last run <span class="bow">🎀</span></h2>
+    <div class="card"><h2>Last run</h2>
       <p class="lede" style="margin:0">${esc(dallasTime(runTime))} <b>Dallas time</b>
       <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p></div>
     <div class="tiles">

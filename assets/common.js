@@ -70,7 +70,7 @@ function dallasTime(d) {
 
 function jobItem(r, opts = {}) {
   const badges = [
-    r.in_role ? '<span class="pill role">🎀 credit role</span>' : "",
+    r.in_role ? '<span class="pill role">credit role</span>' : "",
     r.in_dallas ? '<span class="pill dfw">🎄 Dallas area</span>' : "",
   ].join(" ");
   const star = opts.star

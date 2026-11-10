@@ -1,4 +1,4 @@
-# 🎄 Dallas Credit Job Watcher 🎀
+# 🎄 Dallas Credit Job Watcher
 
 [![Tests](https://github.com/abbygracemorrow/I-already-got-a-job-why-am-I-doing-this-project/actions/workflows/tests.yml/badge.svg)](https://github.com/abbygracemorrow/I-already-got-a-job-why-am-I-doing-this-project/actions/workflows/tests.yml)
 [![Daily run](https://github.com/abbygracemorrow/I-already-got-a-job-why-am-I-doing-this-project/actions/workflows/daily.yml/badge.svg)](https://github.com/abbygracemorrow/I-already-got-a-job-why-am-I-doing-this-project/actions/workflows/daily.yml)
