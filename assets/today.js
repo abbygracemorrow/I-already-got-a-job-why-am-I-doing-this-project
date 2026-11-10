@@ -71,9 +71,9 @@
         <br><span style="color:var(--ink-3)">${esc(status.run_time)} (UTC) · ${okCount} of ${status.sources.length} sources OK</span></p>
       </div>
       <div class="countdown">
-        <div class="cd-label" id="cd-label">Latest check</div>
+        <div class="cd-label" id="cd-label">Next run</div>
         <div class="cd-time" id="cd">--:--:--</div>
-        <div class="cd-sub" id="cd-sub">sources answered</div>
+        <div class="cd-sub" id="cd-sub">in the morning, Dallas time</div>
       </div>
     </div>
 
@@ -266,9 +266,11 @@
     } else {
       // Light mode: GitHub can start the daily run a little late, so no countdown.
       // Show today's check instead: how many sources answered.
-      $("cd-label").textContent = "Latest check";
-      $("cd").textContent = `${okCount} / ${status.sources.length}`;
-      $("cd-sub").textContent = okCount === status.sources.length ? "✓ every source answered" : "sources answered";
+      // The date of the next run (no exact time: GitHub can start it a little late).
+      const nd = new Date(nextCheck);
+      $("cd-label").textContent = "Next run";
+      $("cd").textContent = nd.toLocaleDateString("en-US", { timeZone: "America/Chicago", weekday: "short", month: "short", day: "numeric" });
+      $("cd-sub").textContent = "in the morning, Dallas time";
     }
   }
   tick(); setInterval(tick, 1000);
