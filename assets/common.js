@@ -129,7 +129,7 @@ function setSnow(on) {
   document.body.appendChild(layer);
 }
 
-// Strings of lights framing the whole window (top, right, bottom, left) in dark mode.
+// Strings of lights down the sides and along the bottom of the window in Christmas mode.
 function buildLightFrame() {
   let frame = document.getElementById("light-frame");
   if (frame) frame.remove();
@@ -138,7 +138,10 @@ function buildLightFrame() {
   frame.id = "light-frame";
   frame.setAttribute("aria-hidden", "true");
   const gap = window.innerWidth < 720 ? 30 : 36; // space between bulbs, in pixels
-  const sides = { top: window.innerWidth, bottom: window.innerWidth, left: window.innerHeight, right: window.innerHeight };
+  // No string along the top: it would cover the nav bar, and the garland already lights up there.
+  const navH = (document.querySelector(".nav") || { offsetHeight: 0 }).offsetHeight;
+  frame.style.setProperty("--nav-h", navH + "px");
+  const sides = { bottom: window.innerWidth, left: window.innerHeight - navH, right: window.innerHeight - navH };
   for (const [side, length] of Object.entries(sides)) {
     const string = document.createElement("div");
     string.className = "lf lf-" + side;
