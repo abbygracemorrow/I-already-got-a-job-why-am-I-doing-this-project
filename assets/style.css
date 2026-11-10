@@ -189,3 +189,7 @@ footer { text-align: center; color: var(--ink-2); font-size: .85rem; padding: 0 
   .jobs li { grid-template-columns: auto 1fr; }
   .jobs .side { grid-column: 2; text-align: left; }
 }
+
+/* fixes after the first visual check */
+.controls .check input { min-width: 0; width: 18px; height: 18px; padding: 0; accent-color: var(--green); }
+.tile .label { padding-right: 26px; }
