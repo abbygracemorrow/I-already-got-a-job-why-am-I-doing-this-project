@@ -73,7 +73,7 @@
     <div class="tiles">
       <a class="tile tile-link" href="#goal"><div class="label">Days with a successful run</div><div class="value">${fmt(status.days_with_success)}</div><div class="sub">since ${esc(status.watching_since ? dallasDate(status.watching_since) : prettyDate(status.first_run_date))}</div></a>
       <a class="tile tile-link tile-feature" href="#dallas"><div class="label">Open credit jobs in Dallas</div><div class="value">${fmt(status.open_in_role_dallas)}</div><div class="sub">credit analyst roles, not remote</div></a>
-      <a class="tile tile-link" href="browse.html"><div class="label">Open postings</div><div class="value">${fmt(status.open)}</div><div class="sub">all jobs at all ${status.sources.length} job boards</div></a>
+      <a class="tile tile-link" href="browse.html"><div class="label">All open jobs</div><div class="value">${fmt(status.open)}</div><div class="sub">every role, every location, at the ${status.sources.length} companies I track</div></a>
       <a class="tile tile-link" href="#new-card"><div class="label">New today</div><div class="value">${fmt(status.new_today)}</div><div class="sub">first seen this run</div></a>
       <a class="tile tile-link" href="#gone-card"><div class="label">Removed today</div><div class="value">${fmt(status.removed_today)}</div><div class="sub">no longer listed</div></a>
     </div>
