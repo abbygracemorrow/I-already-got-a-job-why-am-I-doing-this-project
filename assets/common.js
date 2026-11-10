@@ -240,7 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("jobwatch.santa", on ? "on" : "off");
     setSanta(on);
   });
-  btn.after(sb);   // to the right of the candy cane
+  // float the Santa button just right of the candy cane without moving anything else
+  const holder = document.createElement("span");
+  holder.className = "festive-holder";
+  btn.replaceWith(holder); holder.append(btn, sb);
   // Santa and his reindeer, flying back and forth over the page in Christmas mode.
   // He floats above everything but can't be clicked and never moves anything.
   const santa = document.createElement("div");

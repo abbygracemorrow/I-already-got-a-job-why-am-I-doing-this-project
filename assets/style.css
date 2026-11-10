@@ -650,3 +650,8 @@ body.festive.no-santa #santa { display: none; }
 body.festive .hero-text h1, body.festive .hero-text p, body.festive .hero-cta .btn-link {
   text-shadow: 0 0 6px rgba(22, 10, 18, .95), 0 0 16px rgba(22, 10, 18, .9), 0 2px 3px rgba(0, 0, 0, .8);
 }
+
+.festive-holder { position: relative; display: inline-flex; margin-left: 6px; }
+.festive-holder .festive-toggle { margin-left: 0; }
+.santa-toggle { position: absolute; left: calc(100% + 4px); top: 2px; margin-left: 0; }
+@media (max-width: 1180px) { .santa-toggle { left: 2px; top: calc(100% + 6px); } }  /* no room on the right: just below */
