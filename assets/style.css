@@ -73,7 +73,12 @@ main { max-width: 1180px; margin: 0 auto; padding: 22px 20px 60px; }
 }
 .hero h1 { font: 700 2.2rem/1.15 var(--font-head); margin: 0; color: var(--green-deep); }
 .hero p { margin: 6px 0 0; color: var(--ink-2); }
-.mascot { width: 160px; height: auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.12)); }
+.mascot {
+  width: 190px; height: auto; padding: 15px; flex-shrink: 0;
+  /* plain pink patch so the background trees do not show behind Snoopy */
+  background: radial-gradient(closest-side, var(--pink-bg) 82%, rgba(248, 215, 226, 0) 100%);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
+}
 .offline-note {
   display: none; background: var(--cream); border: 2px dashed var(--rose);
   border-radius: 12px; padding: 8px 14px; margin-bottom: 14px; color: var(--rose-deep);
@@ -185,7 +190,7 @@ footer { text-align: center; color: var(--ink-2); font-size: .85rem; padding: 0 
 
 @media (max-width: 640px) {
   .hero h1 { font-size: 1.7rem; }
-  .mascot { width: 96px; }
+  .mascot { width: 120px; padding: 10px; }
   .jobs li { grid-template-columns: auto 1fr; }
   .jobs .side { grid-column: 2; text-align: left; }
 }
