@@ -10,7 +10,7 @@
 <link rel="icon" href="icons/ornament.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Nunito:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -25,12 +25,19 @@
   </div>
   <span class="garland" aria-hidden="true"></span>
 </nav>
+<header class="hero-band">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Dallas · Credit analyst jobs</span>
+      <h1>The market so far</h1>
+      <p>Every number below is computed in your browser from the history file, so this page grows with each daily run.</p>
+      
+    </div>
+    <img class="mascot" src="assets/snoopy.png" alt="Snoopy holding money" onerror="this.src='icons/ornament.svg';this.onerror=null">
+  </div>
+</header>
 <main>
 <div class="offline-note">You're offline: showing the last data this device loaded.</div>
-<div class="hero">
-  <img class="mascot" src="assets/snoopy.png" alt="" onerror="this.src='icons/ornament.svg';this.onerror=null;this.style.width='70px'">
-  <div><h1>The market so far</h1><p>Every number below is computed in your browser from the history file, so this page grows with each daily run.</p></div>
-</div>
 <div id="app"><p class="empty">Loading…</p></div>
 </main>
 <footer>Made by <b>Abby Morrow</b> · Data from each employer's public job board, collected daily by GitHub Actions.</footer>
