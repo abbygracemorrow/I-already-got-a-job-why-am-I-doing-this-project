@@ -568,22 +568,25 @@ body.festive .hero-band:has(.village) {
   --village-h: 380px;    /* height of the village strip */
   --snow-depth: 144px;   /* snow below the ground surface, down to the banner edge */
   padding-bottom: 400px; /* room for the village under the headline and buttons */
-  clip-path: none;       /* a straight ground line instead of the slanted edge */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--drop, 22%)), 0 100%); /* same slant as light mode */
 }
 .village {
   position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: var(--village-h, 380px);
   object-fit: cover; object-position: 50% 100%;
   z-index: 0; pointer-events: none; opacity: 0; transition: opacity .6s;
+  /* tilt the ground to follow the banner's slanted bottom edge; skewY keeps the houses upright */
+  transform-origin: 0 100%; transform: skewY(var(--slope, 0deg));
 }
 body.festive .village { opacity: 1; }
 body.festive .hero:has(.village) { position: static; }   /* place the village and Snoopy on the banner */
 body.festive .hero:has(.village) .mascot-wrap {
   position: absolute; z-index: 2;
   right: max(24px, calc((100% - 1120px) / 2));
-  bottom: calc(var(--snow-depth) - var(--pad) - 8px);    /* feet in the snow */
+  bottom: calc(var(--snow-depth) - var(--pad) - 8px + var(--rise, 0px));    /* feet in the snow, on the slope */
 }
 @media (max-width: 720px) {
-  body.festive .hero-band:has(.village) { --village-h: 260px; --snow-depth: 98px; padding-bottom: 270px; }
+  body.festive .hero-band:has(.village) { --village-h: 260px; --snow-depth: 98px; padding-bottom: 270px;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--drop, 12%)), 0 100%); }
   body.festive .village { object-position: 78% 100%; }
   body.festive .hero:has(.village) .mascot-wrap { right: 12px; }
 }

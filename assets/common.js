@@ -159,6 +159,27 @@ function buildLightFrame() {
 let frameTimer;
 window.addEventListener("resize", () => { clearTimeout(frameTimer); frameTimer = setTimeout(buildLightFrame, 150); });
 
+// Fit the village to the banner's slanted bottom edge (light mode's skyline): tilt the
+// ground by the edge's angle and lift Snoopy by the slope's height where he stands.
+function fitVillage() {
+  const band = document.querySelector(".hero-band"), village = band && band.querySelector(".village");
+  if (!village) return;
+  const w = band.offsetWidth, h = band.offsetHeight, phone = window.innerWidth <= 720;
+  // Same angle as the light-mode banner: its slant drops 22% (12% on phones) of the light
+  // banner's height, which is this banner minus the extra room made for the village.
+  const extra = phone ? 270 - 120 : 400 - 150;
+  const drop = (phone ? 0.12 : 0.22) * Math.max(h - extra, 0);
+  band.style.setProperty("--drop", drop + "px");
+  band.style.setProperty("--slope", (-Math.atan(drop / w) * 180 / Math.PI) + "deg");
+  const snoopy = band.querySelector(".mascot-wrap");
+  if (snoopy) {
+    const box = band.getBoundingClientRect(), s = snoopy.getBoundingClientRect();
+    const mid = (s.left + s.width / 2 - box.left) / w;
+    band.style.setProperty("--rise", (mid * drop) + "px");
+  }
+}
+window.addEventListener("resize", () => requestAnimationFrame(fitVillage));
+
 function setFestive(on) {
   document.body.classList.toggle("festive", on);
   buildLightFrame();
@@ -168,6 +189,7 @@ function setFestive(on) {
     btn.title = on ? "Back to light mode" : "Christmas mode";
   }
   setSnow(on);
+  requestAnimationFrame(fitVillage);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
