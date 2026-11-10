@@ -616,16 +616,15 @@ body.festive #photo-ornament { display: block; }
   animation: po-spin 7s linear infinite;
 }
 .po-ball img {   /* photo unchanged, faded into the centre of the glass */
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 38%, rgba(0, 0, 0, 0) 66%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 38%, rgba(0, 0, 0, 0) 66%);
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 52% 40%; opacity: 1;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 56%, rgba(0, 0, 0, 0) 72%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 56%, rgba(0, 0, 0, 0) 72%);
 }
 .po-shine {   /* glass reflections on top of the photo */
   position: absolute; inset: 0; border-radius: 50%;
   background:
-    radial-gradient(ellipse 22% 14% at 32% 22%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 100%),
-    radial-gradient(ellipse 8% 5% at 70% 30%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 100%),
-    linear-gradient(135deg, rgba(255, 255, 255, .25) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, .18) 100%),
+    radial-gradient(ellipse 14% 8% at 24% 14%, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 100%),
+    radial-gradient(ellipse 5% 3% at 80% 20%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 100%),
     radial-gradient(circle, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, .35) 92%, rgba(255, 255, 255, .6) 100%);
 }
 @keyframes po-sway { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
