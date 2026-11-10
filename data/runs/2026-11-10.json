@@ -1,0 +1,206 @@
+{
+  "date": "2026-11-10",
+  "run_time": "2026-11-10T00:39:12Z",
+  "sources": [
+    {
+      "name": "bankofamerica",
+      "employer": "Bank of America",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1988,
+      "error": "",
+      "seconds": 85.5
+    },
+    {
+      "name": "capitalone",
+      "employer": "Capital One",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 437,
+      "error": "",
+      "seconds": 9.5
+    },
+    {
+      "name": "citi",
+      "employer": "Citi",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 1178,
+      "error": "",
+      "seconds": 67.7
+    },
+    {
+      "name": "wellsfargo",
+      "employer": "Wells Fargo",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1605,
+      "error": "",
+      "seconds": 97.3
+    },
+    {
+      "name": "santander",
+      "employer": "Santander US",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1059,
+      "error": "",
+      "seconds": 83.0
+    },
+    {
+      "name": "texascapital",
+      "employer": "Texas Capital",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 109,
+      "error": "",
+      "seconds": 3.0
+    },
+    {
+      "name": "frost",
+      "employer": "Frost Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 188,
+      "error": "",
+      "seconds": 7.9
+    },
+    {
+      "name": "pnc",
+      "employer": "PNC",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 419,
+      "error": "",
+      "seconds": 23.8
+    },
+    {
+      "name": "truist",
+      "employer": "Truist",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1402,
+      "error": "",
+      "seconds": 84.1
+    },
+    {
+      "name": "usbank",
+      "employer": "U.S. Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1237,
+      "error": "",
+      "seconds": 78.8
+    },
+    {
+      "name": "fifththird",
+      "employer": "Fifth Third Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 986,
+      "error": "",
+      "seconds": 45.9
+    },
+    {
+      "name": "keybank",
+      "employer": "KeyBank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 576,
+      "error": "",
+      "seconds": 29.8
+    },
+    {
+      "name": "regions",
+      "employer": "Regions Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 487,
+      "error": "",
+      "seconds": 25.0
+    },
+    {
+      "name": "bmo",
+      "employer": "BMO",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1082,
+      "error": "",
+      "seconds": 76.3
+    },
+    {
+      "name": "mufg",
+      "employer": "MUFG",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 667,
+      "error": "",
+      "seconds": 49.1
+    },
+    {
+      "name": "jpmorgan",
+      "employer": "JPMorgan Chase",
+      "ats": "oracle",
+      "search": "credit",
+      "ok": true,
+      "count": 2879,
+      "error": "",
+      "seconds": 38.8
+    },
+    {
+      "name": "goldmansachs",
+      "employer": "Goldman Sachs",
+      "ats": "oracle",
+      "search": "",
+      "ok": true,
+      "count": 914,
+      "error": "",
+      "seconds": 11.2
+    },
+    {
+      "name": "sofi",
+      "employer": "SoFi",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 48,
+      "error": "",
+      "seconds": 0.2
+    },
+    {
+      "name": "carvana",
+      "employer": "Carvana",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 1666,
+      "error": "",
+      "seconds": 0.6
+    },
+    {
+      "name": "experian",
+      "employer": "Experian",
+      "ats": "smartrecruiters",
+      "search": "",
+      "ok": true,
+      "count": 396,
+      "error": "",
+      "seconds": 2.3
+    }
+  ]
+}
