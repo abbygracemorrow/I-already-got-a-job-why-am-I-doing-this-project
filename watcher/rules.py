@@ -15,7 +15,8 @@ The rule, in words:
       intern, internship, summer, co-op, teller, customer service,
       representative, sales, collector, collections, recovery, fraud,
       engineer, developer, software, data scientist, call center,
-      managing director, head of, chief, director, insurance, card services.
+      managing director, head of, chief, director, insurance, card services,
+      trader, trading, quantitative, data owner, business intelligence.
 
 The location rule marks postings in the Dallas area: Dallas and the cities
 that touch it or sit in its core business corridors (Irving/Las Colinas,
@@ -41,7 +42,7 @@ _EXCLUDE = re.compile(
     r"\b(intern|internship|summer|co-?op|teller|customer service|representative|sales|"
     r"collector|collections|recovery|fraud|engineer|engineering|developer|software|"
     r"data scientist|call center|managing director|head of|chief|director|insurance|"
-    r"card services)\b",
+    r"card services|trader|trading|quantitative|data owner|business intelligence)\b",
     re.I,
 )
 

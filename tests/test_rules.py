@@ -32,6 +32,8 @@ def test_in_role(title):
     "Teller",
     "Financial Analyst",
     "Insurance Underwriter",
+    "Global Credit Trading - Credit Exotics Trader - Analyst",
+    "Quantitative Research - Wholesale Credit Risk - Associate",
     "",
 ])
 def test_not_in_role(title):

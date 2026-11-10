@@ -24,7 +24,8 @@ opens a GitHub Issue with the changes, and publishes the result to the site.
 **and** the title does **not** contain any of *intern, internship, summer, co-op, teller,
 customer service, representative, sales, collector, collections, recovery, fraud, engineer,
 engineering, developer, software, data scientist, call center, managing director, head of,
-chief, director, insurance, card services*. Matching ignores case and uses whole words.
+chief, director, insurance, card services, trader, trading, quantitative, data owner,
+business intelligence*. Matching ignores case and uses whole words.
 
 **Dallas-area rule** (`in_dallas`, an extra column). The location names Dallas, Irving / Las
 Colinas, Plano, Richardson, Addison, Frisco, Coppell, Carrollton, Farmers Branch, Garland, Grand
