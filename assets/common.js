@@ -183,7 +183,7 @@ function fitVillage() {
     if (orn) {
       if (orn.parentNode !== band) band.appendChild(orn);
       orn.classList.add("in-band");
-      band.style.setProperty("--orn-x", Math.round((w * 988 / 1600 + (s.left - box.left + s.width * 0.12)) / 2) + "px");
+      band.style.setProperty("--orn-x", Math.round((w * 988 / 1600 + (s.left - box.left + s.width * 0.12)) / 2 - 34) + "px");
     }
   } else {
     const orn = document.getElementById("photo-ornament");
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const orn = document.createElement("div");
   orn.id = "photo-ornament";
   orn.setAttribute("aria-hidden", "true");
-  orn.innerHTML = '<span class="po-string"></span><span class="po-swing"><span class="po-cap"></span>' +
+  orn.innerHTML = '<span class="po-swing"><span class="po-string"></span><span class="po-cap"></span>' +
     '<span class="po-ball"><img src="assets/ornament-photo.jpg" alt=""><span class="po-shine"></span></span></span>';
   document.body.appendChild(orn);
   // Santa hat for Snoopy (only on pages that show him)
