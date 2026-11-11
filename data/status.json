@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-11T19:17:16Z",
+  "run_time": "2026-11-11T20:12:10Z",
   "run_date": "2026-11-11",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -8,9 +8,9 @@
     "2026-11-10",
     "2026-11-11"
   ],
-  "open": 19356,
-  "new_today": 523,
-  "removed_today": 450,
+  "open": 19355,
+  "new_today": 545,
+  "removed_today": 473,
   "open_in_role": 447,
   "open_in_role_dallas": 42,
   "sources": [
@@ -19,9 +19,9 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1998,
+      "count": 1997,
       "error": "",
-      "note": "board lists 2016 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2017 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
@@ -44,7 +44,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1588,
+      "count": 1587,
       "error": ""
     },
     {
@@ -52,7 +52,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1091,
+      "count": 1095,
       "error": ""
     },
     {
@@ -100,7 +100,7 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 977,
+      "count": 978,
       "error": ""
     },
     {
@@ -108,7 +108,7 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 580,
+      "count": 581,
       "error": ""
     },
     {
@@ -116,7 +116,7 @@
       "employer": "Regions Bank",
       "ats": "workday",
       "ok": true,
-      "count": 490,
+      "count": 489,
       "error": ""
     },
     {
@@ -132,7 +132,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 673,
+      "count": 672,
       "error": ""
     },
     {
@@ -148,7 +148,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 940,
+      "count": 939,
       "error": ""
     },
     {
@@ -164,7 +164,7 @@
       "employer": "Carvana",
       "ats": "greenhouse",
       "ok": true,
-      "count": 1675,
+      "count": 1673,
       "error": ""
     },
     {

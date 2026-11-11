@@ -1,6 +1,6 @@
 {
   "date": "2026-11-11",
-  "run_time": "2026-11-11T19:17:16Z",
+  "run_time": "2026-11-11T20:12:10Z",
   "first_run_time": "2026-11-11T00:06:47Z",
   "sources": [
     {
@@ -9,10 +9,10 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1998,
+      "count": 1997,
       "error": "",
-      "note": "board lists 2016 postings; Workday returns at most 2000, so add a search term for this source",
-      "seconds": 90.3
+      "note": "board lists 2017 postings; Workday returns at most 2000, so add a search term for this source",
+      "seconds": 88.7
     },
     {
       "name": "capitalone",
@@ -22,7 +22,7 @@
       "ok": true,
       "count": 434,
       "error": "",
-      "seconds": 11.4
+      "seconds": 9.4
     },
     {
       "name": "citi",
@@ -32,7 +32,7 @@
       "ok": true,
       "count": 1181,
       "error": "",
-      "seconds": 76.8
+      "seconds": 66.0
     },
     {
       "name": "wellsfargo",
@@ -40,9 +40,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1588,
+      "count": 1587,
       "error": "",
-      "seconds": 103.4
+      "seconds": 99.3
     },
     {
       "name": "santander",
@@ -50,9 +50,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1091,
+      "count": 1095,
       "error": "",
-      "seconds": 93.7
+      "seconds": 94.1
     },
     {
       "name": "texascapital",
@@ -62,7 +62,7 @@
       "ok": true,
       "count": 107,
       "error": "",
-      "seconds": 3.5
+      "seconds": 3.1
     },
     {
       "name": "frost",
@@ -72,7 +72,7 @@
       "ok": true,
       "count": 182,
       "error": "",
-      "seconds": 8.3
+      "seconds": 7.8
     },
     {
       "name": "pnc",
@@ -82,7 +82,7 @@
       "ok": true,
       "count": 414,
       "error": "",
-      "seconds": 26.8
+      "seconds": 24.8
     },
     {
       "name": "truist",
@@ -92,7 +92,7 @@
       "ok": true,
       "count": 1394,
       "error": "",
-      "seconds": 91.2
+      "seconds": 79.2
     },
     {
       "name": "usbank",
@@ -102,7 +102,7 @@
       "ok": true,
       "count": 1240,
       "error": "",
-      "seconds": 79.5
+      "seconds": 80.4
     },
     {
       "name": "fifththird",
@@ -110,9 +110,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 977,
+      "count": 978,
       "error": "",
-      "seconds": 46.0
+      "seconds": 49.2
     },
     {
       "name": "keybank",
@@ -120,9 +120,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 580,
+      "count": 581,
       "error": "",
-      "seconds": 39.2
+      "seconds": 33.6
     },
     {
       "name": "regions",
@@ -130,9 +130,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 490,
+      "count": 489,
       "error": "",
-      "seconds": 29.4
+      "seconds": 24.1
     },
     {
       "name": "bmo",
@@ -142,7 +142,7 @@
       "ok": true,
       "count": 1062,
       "error": "",
-      "seconds": 84.7
+      "seconds": 79.2
     },
     {
       "name": "mufg",
@@ -150,9 +150,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 673,
+      "count": 672,
       "error": "",
-      "seconds": 54.2
+      "seconds": 52.8
     },
     {
       "name": "jpmorgan",
@@ -162,7 +162,7 @@
       "ok": true,
       "count": 2884,
       "error": "",
-      "seconds": 34.0
+      "seconds": 38.2
     },
     {
       "name": "goldmansachs",
@@ -170,9 +170,9 @@
       "ats": "oracle",
       "search": "",
       "ok": true,
-      "count": 940,
+      "count": 939,
       "error": "",
-      "seconds": 12.2
+      "seconds": 12.0
     },
     {
       "name": "sofi",
@@ -190,7 +190,7 @@
       "ats": "greenhouse",
       "search": "",
       "ok": true,
-      "count": 1675,
+      "count": 1673,
       "error": "",
       "seconds": 0.3
     },
@@ -202,7 +202,7 @@
       "ok": true,
       "count": 398,
       "error": "",
-      "seconds": 2.3
+      "seconds": 2.1
     }
   ]
 }
