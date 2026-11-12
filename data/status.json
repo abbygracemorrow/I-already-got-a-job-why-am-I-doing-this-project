@@ -1,17 +1,18 @@
 {
-  "run_time": "2026-11-11T22:16:11Z",
-  "run_date": "2026-11-11",
+  "run_time": "2026-11-12T01:35:19Z",
+  "run_date": "2026-11-12",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
-  "days_with_success": 2,
+  "days_with_success": 3,
   "run_days": [
     "2026-11-10",
-    "2026-11-11"
+    "2026-11-11",
+    "2026-11-12"
   ],
-  "open": 19364,
-  "new_today": 586,
-  "removed_today": 505,
-  "open_in_role": 447,
+  "open": 19358,
+  "new_today": 24,
+  "removed_today": 34,
+  "open_in_role": 446,
   "open_in_role_dallas": 42,
   "sources": [
     {
@@ -21,7 +22,7 @@
       "ok": true,
       "count": 2000,
       "error": "",
-      "note": "board lists 2017 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2016 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
@@ -36,7 +37,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1181,
+      "count": 1179,
       "error": ""
     },
     {
@@ -44,7 +45,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1599,
+      "count": 1602,
       "error": ""
     },
     {
@@ -52,7 +53,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1110,
+      "count": 1103,
       "error": ""
     },
     {
@@ -68,7 +69,7 @@
       "employer": "Frost Bank",
       "ats": "workday",
       "ok": true,
-      "count": 182,
+      "count": 179,
       "error": ""
     },
     {
@@ -108,7 +109,7 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 584,
+      "count": 586,
       "error": ""
     },
     {
@@ -140,7 +141,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2882,
+      "count": 2883,
       "error": ""
     },
     {
