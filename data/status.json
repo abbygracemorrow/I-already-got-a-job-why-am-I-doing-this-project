@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-12T19:35:48Z",
+  "run_time": "2026-11-12T20:48:52Z",
   "run_date": "2026-11-12",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -9,10 +9,10 @@
     "2026-11-11",
     "2026-11-12"
   ],
-  "open": 19251,
-  "new_today": 607,
-  "removed_today": 752,
-  "open_in_role": 456,
+  "open": 19264,
+  "new_today": 670,
+  "removed_today": 807,
+  "open_in_role": 457,
   "open_in_role_dallas": 42,
   "sources": [
     {
@@ -22,14 +22,14 @@
       "ok": true,
       "count": 1998,
       "error": "",
-      "note": "board lists 2008 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2003 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
       "employer": "Capital One",
       "ats": "workday",
       "ok": true,
-      "count": 437,
+      "count": 435,
       "error": ""
     },
     {
@@ -37,7 +37,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1175,
+      "count": 1178,
       "error": ""
     },
     {
@@ -45,7 +45,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1515,
+      "count": 1539,
       "error": ""
     },
     {
@@ -53,7 +53,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1096,
+      "count": 1098,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "employer": "Texas Capital",
       "ats": "workday",
       "ok": true,
-      "count": 104,
+      "count": 103,
       "error": ""
     },
     {
@@ -69,7 +69,7 @@
       "employer": "Frost Bank",
       "ats": "workday",
       "ok": true,
-      "count": 177,
+      "count": 180,
       "error": ""
     },
     {
@@ -77,7 +77,7 @@
       "employer": "PNC",
       "ats": "workday",
       "ok": true,
-      "count": 409,
+      "count": 411,
       "error": ""
     },
     {
@@ -93,7 +93,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1237,
+      "count": 1242,
       "error": ""
     },
     {
@@ -101,7 +101,7 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 989,
+      "count": 987,
       "error": ""
     },
     {
@@ -117,7 +117,7 @@
       "employer": "Regions Bank",
       "ats": "workday",
       "ok": true,
-      "count": 483,
+      "count": 481,
       "error": ""
     },
     {
@@ -125,7 +125,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1070,
+      "count": 1075,
       "error": ""
     },
     {
@@ -141,7 +141,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2862,
+      "count": 2861,
       "error": ""
     },
     {
@@ -149,7 +149,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 946,
+      "count": 947,
       "error": ""
     },
     {
@@ -157,7 +157,7 @@
       "employer": "SoFi",
       "ats": "greenhouse",
       "ok": true,
-      "count": 45,
+      "count": 47,
       "error": ""
     },
     {
@@ -165,7 +165,7 @@
       "employer": "Carvana",
       "ats": "greenhouse",
       "ok": true,
-      "count": 1661,
+      "count": 1636,
       "error": ""
     },
     {
@@ -173,7 +173,7 @@
       "employer": "Experian",
       "ats": "smartrecruiters",
       "ok": true,
-      "count": 392,
+      "count": 391,
       "error": ""
     }
   ]
