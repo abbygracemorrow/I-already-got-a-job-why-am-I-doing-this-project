@@ -1,6 +1,6 @@
 {
   "date": "2026-11-12",
-  "run_time": "2026-11-12T20:48:52Z",
+  "run_time": "2026-11-12T21:55:38Z",
   "first_run_time": "2026-11-12T01:35:19Z",
   "sources": [
     {
@@ -9,10 +9,10 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1998,
+      "count": 1999,
       "error": "",
       "note": "board lists 2003 postings; Workday returns at most 2000, so add a search term for this source",
-      "seconds": 91.5
+      "seconds": 79.5
     },
     {
       "name": "capitalone",
@@ -22,7 +22,7 @@
       "ok": true,
       "count": 435,
       "error": "",
-      "seconds": 11.7
+      "seconds": 10.5
     },
     {
       "name": "citi",
@@ -30,9 +30,9 @@
       "ats": "workday",
       "search": "credit",
       "ok": true,
-      "count": 1178,
+      "count": 1180,
       "error": "",
-      "seconds": 73.9
+      "seconds": 83.3
     },
     {
       "name": "wellsfargo",
@@ -40,9 +40,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1539,
+      "count": 1546,
       "error": "",
-      "seconds": 104.4
+      "seconds": 91.6
     },
     {
       "name": "santander",
@@ -50,9 +50,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1098,
+      "count": 1103,
       "error": "",
-      "seconds": 90.5
+      "seconds": 82.2
     },
     {
       "name": "texascapital",
@@ -62,7 +62,7 @@
       "ok": true,
       "count": 103,
       "error": "",
-      "seconds": 3.9
+      "seconds": 3.4
     },
     {
       "name": "frost",
@@ -72,7 +72,7 @@
       "ok": true,
       "count": 180,
       "error": "",
-      "seconds": 8.2
+      "seconds": 15.5
     },
     {
       "name": "pnc",
@@ -80,9 +80,9 @@
       "ats": "workday",
       "search": "credit",
       "ok": true,
-      "count": 411,
+      "count": 410,
       "error": "",
-      "seconds": 28.3
+      "seconds": 30.3
     },
     {
       "name": "truist",
@@ -90,9 +90,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1393,
+      "count": 1389,
       "error": "",
-      "seconds": 96.5
+      "seconds": 77.5
     },
     {
       "name": "usbank",
@@ -100,9 +100,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1242,
+      "count": 1246,
       "error": "",
-      "seconds": 77.9
+      "seconds": 71.4
     },
     {
       "name": "fifththird",
@@ -110,9 +110,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 987,
+      "count": 989,
       "error": "",
-      "seconds": 50.2
+      "seconds": 62.6
     },
     {
       "name": "keybank",
@@ -120,9 +120,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 584,
+      "count": 581,
       "error": "",
-      "seconds": 36.4
+      "seconds": 32.6
     },
     {
       "name": "regions",
@@ -130,9 +130,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 481,
+      "count": 480,
       "error": "",
-      "seconds": 28.7
+      "seconds": 27.0
     },
     {
       "name": "bmo",
@@ -142,7 +142,7 @@
       "ok": true,
       "count": 1075,
       "error": "",
-      "seconds": 73.0
+      "seconds": 66.3
     },
     {
       "name": "mufg",
@@ -150,9 +150,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 678,
+      "count": 679,
       "error": "",
-      "seconds": 48.9
+      "seconds": 44.4
     },
     {
       "name": "jpmorgan",
@@ -160,9 +160,9 @@
       "ats": "oracle",
       "search": "credit",
       "ok": true,
-      "count": 2861,
+      "count": 2863,
       "error": "",
-      "seconds": 44.7
+      "seconds": 39.1
     },
     {
       "name": "goldmansachs",
@@ -172,7 +172,7 @@
       "ok": true,
       "count": 947,
       "error": "",
-      "seconds": 12.7
+      "seconds": 11.4
     },
     {
       "name": "sofi",
@@ -180,9 +180,9 @@
       "ats": "greenhouse",
       "search": "",
       "ok": true,
-      "count": 47,
+      "count": 46,
       "error": "",
-      "seconds": 0.1
+      "seconds": 0.2
     },
     {
       "name": "carvana",
@@ -190,9 +190,9 @@
       "ats": "greenhouse",
       "search": "",
       "ok": true,
-      "count": 1636,
+      "count": 1634,
       "error": "",
-      "seconds": 0.6
+      "seconds": 7.9
     },
     {
       "name": "experian",
@@ -200,9 +200,9 @@
       "ats": "smartrecruiters",
       "search": "",
       "ok": true,
-      "count": 391,
+      "count": 390,
       "error": "",
-      "seconds": 2.1
+      "seconds": 1.7
     }
   ]
 }
