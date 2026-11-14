@@ -1,19 +1,20 @@
 {
-  "run_time": "2026-11-13T21:36:29Z",
-  "run_date": "2026-11-13",
+  "run_time": "2026-11-14T00:23:31Z",
+  "run_date": "2026-11-14",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
-  "days_with_success": 4,
+  "days_with_success": 5,
   "run_days": [
     "2026-11-10",
     "2026-11-11",
     "2026-11-12",
-    "2026-11-13"
+    "2026-11-13",
+    "2026-11-14"
   ],
-  "open": 19078,
-  "new_today": 719,
-  "removed_today": 964,
-  "open_in_role": 450,
+  "open": 19114,
+  "new_today": 95,
+  "removed_today": 80,
+  "open_in_role": 451,
   "open_in_role_dallas": 43,
   "sources": [
     {
@@ -21,32 +22,32 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1998,
+      "count": 1999,
       "error": "",
-      "note": "board lists 2002 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2012 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
       "employer": "Capital One",
       "ats": "workday",
       "ok": true,
-      "count": 438,
+      "count": 439,
       "error": ""
     },
     {
       "name": "citi",
       "employer": "Citi",
       "ats": "workday",
-      "ok": true,
-      "count": 1169,
-      "error": ""
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout"
     },
     {
       "name": "wellsfargo",
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1508,
+      "count": 1534,
       "error": ""
     },
     {
@@ -54,7 +55,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1053,
+      "count": 1044,
       "error": ""
     },
     {
@@ -70,7 +71,7 @@
       "employer": "Frost Bank",
       "ats": "workday",
       "ok": true,
-      "count": 177,
+      "count": 178,
       "error": ""
     },
     {
@@ -78,7 +79,7 @@
       "employer": "PNC",
       "ats": "workday",
       "ok": true,
-      "count": 401,
+      "count": 400,
       "error": ""
     },
     {
@@ -86,7 +87,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1363,
+      "count": 1378,
       "error": ""
     },
     {
@@ -94,7 +95,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1213,
+      "count": 1220,
       "error": ""
     },
     {
@@ -102,31 +103,31 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 991,
+      "count": 993,
       "error": ""
     },
     {
       "name": "keybank",
       "employer": "KeyBank",
       "ats": "workday",
-      "ok": true,
-      "count": 569,
-      "error": ""
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout"
     },
     {
       "name": "regions",
       "employer": "Regions Bank",
       "ats": "workday",
-      "ok": true,
-      "count": 470,
-      "error": ""
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout"
     },
     {
       "name": "bmo",
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1061,
+      "count": 1062,
       "error": ""
     },
     {
@@ -134,7 +135,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 673,
+      "count": 672,
       "error": ""
     },
     {
@@ -142,7 +143,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2837,
+      "count": 2832,
       "error": ""
     },
     {
@@ -166,7 +167,7 @@
       "employer": "Carvana",
       "ats": "greenhouse",
       "ok": true,
-      "count": 1663,
+      "count": 1660,
       "error": ""
     },
     {
@@ -174,7 +175,7 @@
       "employer": "Experian",
       "ats": "smartrecruiters",
       "ok": true,
-      "count": 389,
+      "count": 390,
       "error": ""
     }
   ]

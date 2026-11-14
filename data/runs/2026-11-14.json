@@ -1,0 +1,208 @@
+{
+  "date": "2026-11-14",
+  "run_time": "2026-11-14T00:23:31Z",
+  "first_run_time": "2026-11-14T00:23:31Z",
+  "sources": [
+    {
+      "name": "bankofamerica",
+      "employer": "Bank of America",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1999,
+      "error": "",
+      "note": "board lists 2012 postings; Workday returns at most 2000, so add a search term for this source",
+      "seconds": 78.0
+    },
+    {
+      "name": "capitalone",
+      "employer": "Capital One",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 439,
+      "error": "",
+      "seconds": 10.7
+    },
+    {
+      "name": "citi",
+      "employer": "Citi",
+      "ats": "workday",
+      "search": "credit",
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout",
+      "seconds": 79.1
+    },
+    {
+      "name": "wellsfargo",
+      "employer": "Wells Fargo",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1534,
+      "error": "",
+      "seconds": 84.2
+    },
+    {
+      "name": "santander",
+      "employer": "Santander US",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1044,
+      "error": "",
+      "seconds": 81.0
+    },
+    {
+      "name": "texascapital",
+      "employer": "Texas Capital",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 105,
+      "error": "",
+      "seconds": 3.3
+    },
+    {
+      "name": "frost",
+      "employer": "Frost Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 178,
+      "error": "",
+      "seconds": 15.4
+    },
+    {
+      "name": "pnc",
+      "employer": "PNC",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 400,
+      "error": "",
+      "seconds": 157.2
+    },
+    {
+      "name": "truist",
+      "employer": "Truist",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1378,
+      "error": "",
+      "seconds": 70.4
+    },
+    {
+      "name": "usbank",
+      "employer": "U.S. Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1220,
+      "error": "",
+      "seconds": 68.4
+    },
+    {
+      "name": "fifththird",
+      "employer": "Fifth Third Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 993,
+      "error": "",
+      "seconds": 105.9
+    },
+    {
+      "name": "keybank",
+      "employer": "KeyBank",
+      "ats": "workday",
+      "search": "",
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout",
+      "seconds": 79.2
+    },
+    {
+      "name": "regions",
+      "employer": "Regions Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": false,
+      "count": 0,
+      "error": "HTTPError: HTTP Error 504: Gateway Timeout",
+      "seconds": 78.9
+    },
+    {
+      "name": "bmo",
+      "employer": "BMO",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1062,
+      "error": "",
+      "seconds": 65.5
+    },
+    {
+      "name": "mufg",
+      "employer": "MUFG",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 672,
+      "error": "",
+      "seconds": 46.2
+    },
+    {
+      "name": "jpmorgan",
+      "employer": "JPMorgan Chase",
+      "ats": "oracle",
+      "search": "credit",
+      "ok": true,
+      "count": 2832,
+      "error": "",
+      "seconds": 39.7
+    },
+    {
+      "name": "goldmansachs",
+      "employer": "Goldman Sachs",
+      "ats": "oracle",
+      "search": "",
+      "ok": true,
+      "count": 952,
+      "error": "",
+      "seconds": 11.9
+    },
+    {
+      "name": "sofi",
+      "employer": "SoFi",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 48,
+      "error": "",
+      "seconds": 0.2
+    },
+    {
+      "name": "carvana",
+      "employer": "Carvana",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 1660,
+      "error": "",
+      "seconds": 0.3
+    },
+    {
+      "name": "experian",
+      "employer": "Experian",
+      "ats": "smartrecruiters",
+      "search": "",
+      "ok": true,
+      "count": 390,
+      "error": "",
+      "seconds": 2.1
+    }
+  ]
+}
