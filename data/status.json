@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-14T18:44:05Z",
+  "run_time": "2026-11-14T20:04:28Z",
   "run_date": "2026-11-14",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -11,9 +11,9 @@
     "2026-11-13",
     "2026-11-14"
   ],
-  "open": 18890,
+  "open": 18889,
   "new_today": 109,
-  "removed_today": 320,
+  "removed_today": 321,
   "open_in_role": 446,
   "open_in_role_dallas": 42,
   "sources": [
@@ -22,9 +22,9 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1999,
+      "count": 2000,
       "error": "",
-      "note": "board lists 2010 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2009 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
@@ -47,7 +47,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1423,
+      "count": 1426,
       "error": ""
     },
     {
@@ -87,7 +87,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1378,
+      "count": 1375,
       "error": ""
     },
     {
@@ -111,7 +111,7 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 568,
+      "count": 566,
       "error": ""
     },
     {
