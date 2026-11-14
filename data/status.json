@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-14T20:04:28Z",
+  "run_time": "2026-11-14T23:10:45Z",
   "run_date": "2026-11-14",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -11,9 +11,9 @@
     "2026-11-13",
     "2026-11-14"
   ],
-  "open": 18889,
+  "open": 18882,
   "new_today": 109,
-  "removed_today": 321,
+  "removed_today": 328,
   "open_in_role": 446,
   "open_in_role_dallas": 42,
   "sources": [
@@ -47,7 +47,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1426,
+      "count": 1424,
       "error": ""
     },
     {
@@ -55,7 +55,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1030,
+      "count": 1028,
       "error": ""
     },
     {
@@ -135,7 +135,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 673,
+      "count": 671,
       "error": ""
     },
     {
@@ -151,7 +151,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 951,
+      "count": 950,
       "error": ""
     },
     {
