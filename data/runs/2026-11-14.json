@@ -1,6 +1,6 @@
 {
   "date": "2026-11-14",
-  "run_time": "2026-11-14T17:41:59Z",
+  "run_time": "2026-11-14T18:44:05Z",
   "first_run_time": "2026-11-14T00:23:31Z",
   "sources": [
     {
@@ -12,7 +12,7 @@
       "count": 1999,
       "error": "",
       "note": "board lists 2010 postings; Workday returns at most 2000, so add a search term for this source",
-      "seconds": 84.3
+      "seconds": 73.5
     },
     {
       "name": "capitalone",
@@ -32,7 +32,7 @@
       "ok": true,
       "count": 1162,
       "error": "",
-      "seconds": 73.9
+      "seconds": 69.1
     },
     {
       "name": "wellsfargo",
@@ -40,9 +40,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1427,
+      "count": 1423,
       "error": "",
-      "seconds": 80.7
+      "seconds": 82.9
     },
     {
       "name": "santander",
@@ -52,7 +52,7 @@
       "ok": true,
       "count": 1030,
       "error": "",
-      "seconds": 81.8
+      "seconds": 70.8
     },
     {
       "name": "texascapital",
@@ -72,7 +72,7 @@
       "ok": true,
       "count": 178,
       "error": "",
-      "seconds": 7.3
+      "seconds": 6.9
     },
     {
       "name": "pnc",
@@ -80,19 +80,19 @@
       "ats": "workday",
       "search": "credit",
       "ok": true,
-      "count": 400,
+      "count": 401,
       "error": "",
-      "seconds": 27.0
+      "seconds": 26.9
     },
     {
       "name": "truist",
       "employer": "Truist",
       "ats": "workday",
       "search": "",
-      "ok": false,
-      "count": 0,
-      "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
-      "seconds": 13.3
+      "ok": true,
+      "count": 1378,
+      "error": "",
+      "seconds": 73.3
     },
     {
       "name": "usbank",
@@ -100,9 +100,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1189,
+      "count": 1185,
       "error": "",
-      "seconds": 72.9
+      "seconds": 71.5
     },
     {
       "name": "fifththird",
@@ -112,7 +112,7 @@
       "ok": true,
       "count": 977,
       "error": "",
-      "seconds": 46.4
+      "seconds": 44.4
     },
     {
       "name": "keybank",
@@ -120,9 +120,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 569,
+      "count": 568,
       "error": "",
-      "seconds": 33.0
+      "seconds": 33.5
     },
     {
       "name": "regions",
@@ -132,7 +132,7 @@
       "ok": false,
       "count": 0,
       "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
-      "seconds": 12.8
+      "seconds": 13.0
     },
     {
       "name": "bmo",
@@ -140,9 +140,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1036,
+      "count": 1037,
       "error": "",
-      "seconds": 74.3
+      "seconds": 65.0
     },
     {
       "name": "mufg",
@@ -152,7 +152,7 @@
       "ok": true,
       "count": 673,
       "error": "",
-      "seconds": 49.4
+      "seconds": 42.8
     },
     {
       "name": "jpmorgan",
@@ -160,9 +160,9 @@
       "ats": "oracle",
       "search": "credit",
       "ok": true,
-      "count": 2817,
+      "count": 2816,
       "error": "",
-      "seconds": 32.9
+      "seconds": 36.8
     },
     {
       "name": "goldmansachs",
@@ -172,7 +172,7 @@
       "ok": true,
       "count": 951,
       "error": "",
-      "seconds": 11.7
+      "seconds": 12.2
     },
     {
       "name": "sofi",
@@ -200,9 +200,9 @@
       "ats": "smartrecruiters",
       "search": "",
       "ok": true,
-      "count": 390,
+      "count": 389,
       "error": "",
-      "seconds": 2.2
+      "seconds": 1.8
     }
   ]
 }
