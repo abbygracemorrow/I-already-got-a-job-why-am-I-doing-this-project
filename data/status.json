@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-15T19:22:39Z",
+  "run_time": "2026-11-15T20:33:37Z",
   "run_date": "2026-11-15",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -12,9 +12,9 @@
     "2026-11-14",
     "2026-11-15"
   ],
-  "open": 18752,
-  "new_today": 7,
-  "removed_today": 137,
+  "open": 18749,
+  "new_today": 8,
+  "removed_today": 141,
   "open_in_role": 445,
   "open_in_role_dallas": 42,
   "sources": [
@@ -48,7 +48,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1356,
+      "count": 1352,
       "error": ""
     },
     {
@@ -96,7 +96,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1164,
+      "count": 1165,
       "error": ""
     },
     {
