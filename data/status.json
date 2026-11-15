@@ -1,20 +1,21 @@
 {
-  "run_time": "2026-11-14T23:10:45Z",
-  "run_date": "2026-11-14",
+  "run_time": "2026-11-15T18:30:50Z",
+  "run_date": "2026-11-15",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
-  "days_with_success": 5,
+  "days_with_success": 6,
   "run_days": [
     "2026-11-10",
     "2026-11-11",
     "2026-11-12",
     "2026-11-13",
-    "2026-11-14"
+    "2026-11-14",
+    "2026-11-15"
   ],
-  "open": 18882,
-  "new_today": 109,
-  "removed_today": 328,
-  "open_in_role": 446,
+  "open": 18750,
+  "new_today": 7,
+  "removed_today": 139,
+  "open_in_role": 445,
   "open_in_role_dallas": 42,
   "sources": [
     {
@@ -39,7 +40,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1162,
+      "count": 1154,
       "error": ""
     },
     {
@@ -47,7 +48,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1424,
+      "count": 1354,
       "error": ""
     },
     {
@@ -55,7 +56,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1028,
+      "count": 1022,
       "error": ""
     },
     {
@@ -87,7 +88,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1375,
+      "count": 1374,
       "error": ""
     },
     {
@@ -95,7 +96,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1185,
+      "count": 1164,
       "error": ""
     },
     {
@@ -103,7 +104,7 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 977,
+      "count": 971,
       "error": ""
     },
     {
@@ -111,23 +112,23 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 566,
+      "count": 565,
       "error": ""
     },
     {
       "name": "regions",
       "employer": "Regions Bank",
       "ats": "workday",
-      "ok": false,
-      "count": 0,
-      "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+      "ok": true,
+      "count": 464,
+      "error": ""
     },
     {
       "name": "bmo",
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1037,
+      "count": 1025,
       "error": ""
     },
     {
@@ -143,7 +144,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2816,
+      "count": 2815,
       "error": ""
     },
     {
