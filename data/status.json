@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-15T20:33:37Z",
+  "run_time": "2026-11-15T23:25:42Z",
   "run_date": "2026-11-15",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -12,9 +12,9 @@
     "2026-11-14",
     "2026-11-15"
   ],
-  "open": 18749,
-  "new_today": 8,
-  "removed_today": 141,
+  "open": 18738,
+  "new_today": 16,
+  "removed_today": 162,
   "open_in_role": 445,
   "open_in_role_dallas": 42,
   "sources": [
@@ -25,7 +25,7 @@
       "ok": true,
       "count": 2000,
       "error": "",
-      "note": "board lists 2009 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2007 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
@@ -48,7 +48,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1352,
+      "count": 1349,
       "error": ""
     },
     {
@@ -56,7 +56,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1022,
+      "count": 1023,
       "error": ""
     },
     {
@@ -88,7 +88,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1374,
+      "count": 1375,
       "error": ""
     },
     {
@@ -104,7 +104,7 @@
       "employer": "Fifth Third Bank",
       "ats": "workday",
       "ok": true,
-      "count": 971,
+      "count": 972,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 671,
+      "count": 670,
       "error": ""
     },
     {
@@ -144,7 +144,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2815,
+      "count": 2810,
       "error": ""
     },
     {
@@ -168,7 +168,7 @@
       "employer": "Carvana",
       "ats": "greenhouse",
       "ok": true,
-      "count": 1660,
+      "count": 1655,
       "error": ""
     },
     {

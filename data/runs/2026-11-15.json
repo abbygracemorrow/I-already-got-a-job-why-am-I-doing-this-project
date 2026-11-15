@@ -1,6 +1,6 @@
 {
   "date": "2026-11-15",
-  "run_time": "2026-11-15T20:33:37Z",
+  "run_time": "2026-11-15T23:25:42Z",
   "first_run_time": "2026-11-15T18:30:50Z",
   "sources": [
     {
@@ -11,8 +11,8 @@
       "ok": true,
       "count": 2000,
       "error": "",
-      "note": "board lists 2009 postings; Workday returns at most 2000, so add a search term for this source",
-      "seconds": 71.6
+      "note": "board lists 2007 postings; Workday returns at most 2000, so add a search term for this source",
+      "seconds": 70.3
     },
     {
       "name": "capitalone",
@@ -22,7 +22,7 @@
       "ok": true,
       "count": 440,
       "error": "",
-      "seconds": 11.0
+      "seconds": 10.9
     },
     {
       "name": "citi",
@@ -32,7 +32,7 @@
       "ok": true,
       "count": 1154,
       "error": "",
-      "seconds": 71.7
+      "seconds": 66.0
     },
     {
       "name": "wellsfargo",
@@ -40,9 +40,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1352,
+      "count": 1349,
       "error": "",
-      "seconds": 70.6
+      "seconds": 68.1
     },
     {
       "name": "santander",
@@ -50,9 +50,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1022,
+      "count": 1023,
       "error": "",
-      "seconds": 68.6
+      "seconds": 66.5
     },
     {
       "name": "texascapital",
@@ -62,7 +62,7 @@
       "ok": true,
       "count": 105,
       "error": "",
-      "seconds": 3.5
+      "seconds": 3.6
     },
     {
       "name": "frost",
@@ -72,7 +72,7 @@
       "ok": true,
       "count": 178,
       "error": "",
-      "seconds": 7.1
+      "seconds": 7.0
     },
     {
       "name": "pnc",
@@ -82,7 +82,7 @@
       "ok": true,
       "count": 401,
       "error": "",
-      "seconds": 28.0
+      "seconds": 27.4
     },
     {
       "name": "truist",
@@ -90,9 +90,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 1374,
+      "count": 1375,
       "error": "",
-      "seconds": 73.6
+      "seconds": 70.2
     },
     {
       "name": "usbank",
@@ -102,7 +102,7 @@
       "ok": true,
       "count": 1165,
       "error": "",
-      "seconds": 66.9
+      "seconds": 63.2
     },
     {
       "name": "fifththird",
@@ -110,9 +110,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 971,
+      "count": 972,
       "error": "",
-      "seconds": 44.8
+      "seconds": 44.1
     },
     {
       "name": "keybank",
@@ -122,7 +122,7 @@
       "ok": true,
       "count": 565,
       "error": "",
-      "seconds": 34.0
+      "seconds": 32.9
     },
     {
       "name": "regions",
@@ -132,7 +132,7 @@
       "ok": true,
       "count": 464,
       "error": "",
-      "seconds": 26.5
+      "seconds": 27.2
     },
     {
       "name": "bmo",
@@ -142,7 +142,7 @@
       "ok": true,
       "count": 1025,
       "error": "",
-      "seconds": 63.4
+      "seconds": 64.7
     },
     {
       "name": "mufg",
@@ -150,9 +150,9 @@
       "ats": "workday",
       "search": "",
       "ok": true,
-      "count": 671,
+      "count": 670,
       "error": "",
-      "seconds": 43.2
+      "seconds": 40.5
     },
     {
       "name": "jpmorgan",
@@ -160,9 +160,9 @@
       "ats": "oracle",
       "search": "credit",
       "ok": true,
-      "count": 2815,
+      "count": 2810,
       "error": "",
-      "seconds": 37.9
+      "seconds": 36.7
     },
     {
       "name": "goldmansachs",
@@ -172,7 +172,7 @@
       "ok": true,
       "count": 950,
       "error": "",
-      "seconds": 12.5
+      "seconds": 13.3
     },
     {
       "name": "sofi",
@@ -190,7 +190,7 @@
       "ats": "greenhouse",
       "search": "",
       "ok": true,
-      "count": 1660,
+      "count": 1655,
       "error": "",
       "seconds": 0.3
     },
@@ -202,7 +202,7 @@
       "ok": true,
       "count": 389,
       "error": "",
-      "seconds": 1.8
+      "seconds": 1.7
     }
   ]
 }
