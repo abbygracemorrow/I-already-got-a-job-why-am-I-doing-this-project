@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-16T22:53:21Z",
+  "run_time": "2026-11-16T23:50:17Z",
   "run_date": "2026-11-16",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -13,20 +13,20 @@
     "2026-11-15",
     "2026-11-16"
   ],
-  "open": 18762,
-  "new_today": 842,
-  "removed_today": 934,
-  "open_in_role": 453,
-  "open_in_role_dallas": 44,
+  "open": 18774,
+  "new_today": 877,
+  "removed_today": 961,
+  "open_in_role": 454,
+  "open_in_role_dallas": 45,
   "sources": [
     {
       "name": "bankofamerica",
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 2000,
+      "count": 1999,
       "error": "",
-      "note": "board lists 2007 postings; Workday returns at most 2000, so add a search term for this source"
+      "note": "board lists 2008 postings; Workday returns at most 2000, so add a search term for this source"
     },
     {
       "name": "capitalone",
@@ -49,7 +49,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1340,
+      "count": 1350,
       "error": ""
     },
     {
@@ -73,7 +73,7 @@
       "employer": "Frost Bank",
       "ats": "workday",
       "ok": true,
-      "count": 184,
+      "count": 185,
       "error": ""
     },
     {
@@ -81,7 +81,7 @@
       "employer": "PNC",
       "ats": "workday",
       "ok": true,
-      "count": 371,
+      "count": 372,
       "error": ""
     },
     {
@@ -89,7 +89,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1371,
+      "count": 1374,
       "error": ""
     },
     {
@@ -97,7 +97,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1169,
+      "count": 1167,
       "error": ""
     },
     {
@@ -113,7 +113,7 @@
       "employer": "KeyBank",
       "ats": "workday",
       "ok": true,
-      "count": 563,
+      "count": 566,
       "error": ""
     },
     {
@@ -145,7 +145,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2795,
+      "count": 2794,
       "error": ""
     },
     {
@@ -153,7 +153,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 958,
+      "count": 956,
       "error": ""
     },
     {
