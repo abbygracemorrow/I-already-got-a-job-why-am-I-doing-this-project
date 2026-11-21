@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-21T21:07:59Z",
+  "run_time": "2026-11-21T23:51:15Z",
   "run_date": "2026-11-21",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -18,9 +18,9 @@
     "2026-11-20",
     "2026-11-21"
   ],
-  "open": 19085,
-  "new_today": 107,
-  "removed_today": 284,
+  "open": 19082,
+  "new_today": 110,
+  "removed_today": 290,
   "open_in_role": 446,
   "open_in_role_dallas": 45,
   "sources": [
@@ -29,7 +29,7 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1988,
+      "count": 1989,
       "error": ""
     },
     {
@@ -45,7 +45,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1194,
+      "count": 1195,
       "error": ""
     },
     {
@@ -53,7 +53,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1540,
+      "count": 1537,
       "error": ""
     },
     {
@@ -61,7 +61,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1035,
+      "count": 1033,
       "error": ""
     },
     {
@@ -101,7 +101,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1235,
+      "count": 1234,
       "error": ""
     },
     {
@@ -149,7 +149,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2829,
+      "count": 2830,
       "error": ""
     },
     {
