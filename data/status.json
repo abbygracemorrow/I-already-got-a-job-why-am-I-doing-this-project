@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-21T20:05:46Z",
+  "run_time": "2026-11-21T21:07:59Z",
   "run_date": "2026-11-21",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -19,8 +19,8 @@
     "2026-11-21"
   ],
   "open": 19085,
-  "new_today": 106,
-  "removed_today": 283,
+  "new_today": 107,
+  "removed_today": 284,
   "open_in_role": 446,
   "open_in_role_dallas": 45,
   "sources": [
