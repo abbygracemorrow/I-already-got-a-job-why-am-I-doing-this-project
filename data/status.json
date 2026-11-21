@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-21T18:44:57Z",
+  "run_time": "2026-11-21T20:05:46Z",
   "run_date": "2026-11-21",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -18,9 +18,9 @@
     "2026-11-20",
     "2026-11-21"
   ],
-  "open": 19088,
+  "open": 19085,
   "new_today": 106,
-  "removed_today": 280,
+  "removed_today": 283,
   "open_in_role": 446,
   "open_in_role_dallas": 45,
   "sources": [
@@ -29,7 +29,7 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1989,
+      "count": 1988,
       "error": ""
     },
     {
@@ -53,7 +53,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1542,
+      "count": 1540,
       "error": ""
     },
     {
