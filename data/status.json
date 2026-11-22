@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-22T20:21:09Z",
+  "run_time": "2026-11-22T21:15:25Z",
   "run_date": "2026-11-22",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -19,10 +19,10 @@
     "2026-11-21",
     "2026-11-22"
   ],
-  "open": 18955,
+  "open": 18952,
   "new_today": 11,
-  "removed_today": 142,
-  "open_in_role": 446,
+  "removed_today": 146,
+  "open_in_role": 445,
   "open_in_role_dallas": 45,
   "sources": [
     {
@@ -150,7 +150,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2826,
+      "count": 2823,
       "error": ""
     },
     {
