@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-24T02:34:44Z",
+  "run_time": "2026-11-24T04:20:12Z",
   "run_date": "2026-11-24",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -21,9 +21,9 @@
     "2026-11-23",
     "2026-11-24"
   ],
-  "open": 19028,
-  "new_today": 50,
-  "removed_today": 53,
+  "open": 19026,
+  "new_today": 64,
+  "removed_today": 71,
   "open_in_role": 438,
   "open_in_role_dallas": 44,
   "sources": [
@@ -32,7 +32,7 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1973,
+      "count": 1975,
       "error": ""
     },
     {
@@ -48,7 +48,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1232,
+      "count": 1234,
       "error": ""
     },
     {
@@ -56,7 +56,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1483,
+      "count": 1482,
       "error": ""
     },
     {
@@ -64,7 +64,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1050,
+      "count": 1043,
       "error": ""
     },
     {
@@ -88,7 +88,7 @@
       "employer": "PNC",
       "ats": "workday",
       "ok": true,
-      "count": 369,
+      "count": 370,
       "error": ""
     },
     {
@@ -104,7 +104,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1234,
+      "count": 1237,
       "error": ""
     },
     {
@@ -128,7 +128,7 @@
       "employer": "Regions Bank",
       "ats": "workday",
       "ok": true,
-      "count": 460,
+      "count": 459,
       "error": ""
     },
     {
@@ -136,7 +136,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1029,
+      "count": 1027,
       "error": ""
     },
     {
@@ -144,7 +144,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 698,
+      "count": 699,
       "error": ""
     },
     {
@@ -152,7 +152,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2816,
+      "count": 2818,
       "error": ""
     },
     {
@@ -168,7 +168,7 @@
       "employer": "SoFi",
       "ats": "greenhouse",
       "ok": true,
-      "count": 56,
+      "count": 54,
       "error": ""
     },
     {
