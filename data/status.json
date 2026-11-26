@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-26T20:59:03Z",
+  "run_time": "2026-11-26T22:20:40Z",
   "run_date": "2026-11-26",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -23,9 +23,9 @@
     "2026-11-25",
     "2026-11-26"
   ],
-  "open": 19242,
-  "new_today": 164,
-  "removed_today": 257,
+  "open": 19256,
+  "new_today": 179,
+  "removed_today": 260,
   "open_in_role": 445,
   "open_in_role_dallas": 45,
   "sources": [
@@ -50,7 +50,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1257,
+      "count": 1258,
       "error": ""
     },
     {
@@ -58,7 +58,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1551,
+      "count": 1550,
       "error": ""
     },
     {
@@ -66,7 +66,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1091,
+      "count": 1098,
       "error": ""
     },
     {
@@ -106,7 +106,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1271,
+      "count": 1270,
       "error": ""
     },
     {
@@ -138,7 +138,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1047,
+      "count": 1055,
       "error": ""
     },
     {
