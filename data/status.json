@@ -1,5 +1,5 @@
 {
-  "run_time": "2026-11-27T21:57:47Z",
+  "run_time": "2026-11-27T23:43:42Z",
   "run_date": "2026-11-27",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
@@ -24,9 +24,9 @@
     "2026-11-26",
     "2026-11-27"
   ],
-  "open": 18908,
-  "new_today": 236,
-  "removed_today": 651,
+  "open": 18922,
+  "new_today": 254,
+  "removed_today": 658,
   "open_in_role": 438,
   "open_in_role_dallas": 45,
   "sources": [
@@ -35,7 +35,7 @@
       "employer": "Bank of America",
       "ats": "workday",
       "ok": true,
-      "count": 1977,
+      "count": 1976,
       "error": ""
     },
     {
@@ -51,7 +51,7 @@
       "employer": "Citi",
       "ats": "workday",
       "ok": true,
-      "count": 1256,
+      "count": 1258,
       "error": ""
     },
     {
@@ -59,7 +59,7 @@
       "employer": "Wells Fargo",
       "ats": "workday",
       "ok": true,
-      "count": 1410,
+      "count": 1414,
       "error": ""
     },
     {
@@ -91,7 +91,7 @@
       "employer": "PNC",
       "ats": "workday",
       "ok": true,
-      "count": 365,
+      "count": 370,
       "error": ""
     },
     {
@@ -99,7 +99,7 @@
       "employer": "Truist",
       "ats": "workday",
       "ok": true,
-      "count": 1304,
+      "count": 1305,
       "error": ""
     },
     {
@@ -107,7 +107,7 @@
       "employer": "U.S. Bank",
       "ats": "workday",
       "ok": true,
-      "count": 1220,
+      "count": 1218,
       "error": ""
     },
     {
@@ -139,7 +139,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1028,
+      "count": 1029,
       "error": ""
     },
     {
@@ -155,7 +155,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2802,
+      "count": 2806,
       "error": ""
     },
     {
@@ -163,7 +163,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 963,
+      "count": 962,
       "error": ""
     },
     {
@@ -179,7 +179,7 @@
       "employer": "Carvana",
       "ats": "greenhouse",
       "ok": true,
-      "count": 1552,
+      "count": 1553,
       "error": ""
     },
     {
