@@ -1,9 +1,9 @@
 {
-  "run_time": "2026-11-26T23:59:44Z",
-  "run_date": "2026-11-26",
+  "run_time": "2026-11-27T02:18:23Z",
+  "run_date": "2026-11-27",
   "first_run_date": "2026-11-10",
   "watching_since": "2026-11-10T00:39:12Z",
-  "days_with_success": 17,
+  "days_with_success": 18,
   "run_days": [
     "2026-11-10",
     "2026-11-11",
@@ -21,11 +21,12 @@
     "2026-11-23",
     "2026-11-24",
     "2026-11-25",
-    "2026-11-26"
+    "2026-11-26",
+    "2026-11-27"
   ],
-  "open": 19186,
-  "new_today": 189,
-  "removed_today": 341,
+  "open": 19240,
+  "new_today": 5,
+  "removed_today": 17,
   "open_in_role": 444,
   "open_in_role_dallas": 45,
   "sources": [
@@ -42,7 +43,7 @@
       "employer": "Capital One",
       "ats": "workday",
       "ok": true,
-      "count": 441,
+      "count": 440,
       "error": ""
     },
     {
@@ -66,7 +67,7 @@
       "employer": "Santander US",
       "ats": "workday",
       "ok": true,
-      "count": 1035,
+      "count": 1087,
       "error": ""
     },
     {
@@ -138,7 +139,7 @@
       "employer": "BMO",
       "ats": "workday",
       "ok": true,
-      "count": 1060,
+      "count": 1061,
       "error": ""
     },
     {
@@ -146,7 +147,7 @@
       "employer": "MUFG",
       "ats": "workday",
       "ok": true,
-      "count": 697,
+      "count": 699,
       "error": ""
     },
     {
@@ -154,7 +155,7 @@
       "employer": "JPMorgan Chase",
       "ats": "oracle",
       "ok": true,
-      "count": 2800,
+      "count": 2801,
       "error": ""
     },
     {
@@ -162,7 +163,7 @@
       "employer": "Goldman Sachs",
       "ats": "oracle",
       "ok": true,
-      "count": 965,
+      "count": 964,
       "error": ""
     },
     {
