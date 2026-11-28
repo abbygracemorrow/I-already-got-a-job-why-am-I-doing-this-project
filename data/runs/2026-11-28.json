@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-28",
+  "run_time": "2026-11-28T02:03:43Z",
+  "first_run_time": "2026-11-28T02:03:43Z",
+  "sources": [
+    {
+      "name": "bankofamerica",
+      "employer": "Bank of America",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1975,
+      "error": "",
+      "seconds": 72.4
+    },
+    {
+      "name": "capitalone",
+      "employer": "Capital One",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 438,
+      "error": "",
+      "seconds": 11.7
+    },
+    {
+      "name": "citi",
+      "employer": "Citi",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 1261,
+      "error": "",
+      "seconds": 76.5
+    },
+    {
+      "name": "wellsfargo",
+      "employer": "Wells Fargo",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1413,
+      "error": "",
+      "seconds": 77.5
+    },
+    {
+      "name": "santander",
+      "employer": "Santander US",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1069,
+      "error": "",
+      "seconds": 74.8
+    },
+    {
+      "name": "texascapital",
+      "employer": "Texas Capital",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 109,
+      "error": "",
+      "seconds": 3.7
+    },
+    {
+      "name": "frost",
+      "employer": "Frost Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 186,
+      "error": "",
+      "seconds": 7.9
+    },
+    {
+      "name": "pnc",
+      "employer": "PNC",
+      "ats": "workday",
+      "search": "credit",
+      "ok": true,
+      "count": 370,
+      "error": "",
+      "seconds": 28.2
+    },
+    {
+      "name": "truist",
+      "employer": "Truist",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1304,
+      "error": "",
+      "seconds": 72.0
+    },
+    {
+      "name": "usbank",
+      "employer": "U.S. Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1217,
+      "error": "",
+      "seconds": 65.8
+    },
+    {
+      "name": "fifththird",
+      "employer": "Fifth Third Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 976,
+      "error": "",
+      "seconds": 45.0
+    },
+    {
+      "name": "keybank",
+      "employer": "KeyBank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 614,
+      "error": "",
+      "seconds": 40.1
+    },
+    {
+      "name": "regions",
+      "employer": "Regions Bank",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 477,
+      "error": "",
+      "seconds": 27.2
+    },
+    {
+      "name": "bmo",
+      "employer": "BMO",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 1029,
+      "error": "",
+      "seconds": 65.5
+    },
+    {
+      "name": "mufg",
+      "employer": "MUFG",
+      "ats": "workday",
+      "search": "",
+      "ok": true,
+      "count": 691,
+      "error": "",
+      "seconds": 43.5
+    },
+    {
+      "name": "jpmorgan",
+      "employer": "JPMorgan Chase",
+      "ats": "oracle",
+      "search": "credit",
+      "ok": true,
+      "count": 2806,
+      "error": "",
+      "seconds": 36.7
+    },
+    {
+      "name": "goldmansachs",
+      "employer": "Goldman Sachs",
+      "ats": "oracle",
+      "search": "",
+      "ok": true,
+      "count": 962,
+      "error": "",
+      "seconds": 12.1
+    },
+    {
+      "name": "sofi",
+      "employer": "SoFi",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 57,
+      "error": "",
+      "seconds": 0.1
+    },
+    {
+      "name": "carvana",
+      "employer": "Carvana",
+      "ats": "greenhouse",
+      "search": "",
+      "ok": true,
+      "count": 1553,
+      "error": "",
+      "seconds": 0.3
+    },
+    {
+      "name": "experian",
+      "employer": "Experian",
+      "ats": "smartrecruiters",
+      "search": "",
+      "ok": true,
+      "count": 413,
+      "error": "",
+      "seconds": 1.6
+    }
+  ]
+}
